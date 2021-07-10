@@ -6,7 +6,7 @@ public class LookAt : MonoBehaviour
 {
     private GameObject player;
 
-    [SerializeField] float DistThreshold;
+    [SerializeField] float DistThreshold = 5;
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class LookAt : MonoBehaviour
     void Update()
     {
         if(Vector3.Distance(player.transform.position, transform.position) <= DistThreshold) {
-            transform.LookAt(player.transform);
+            transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
         }
     }
 }
