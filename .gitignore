@@ -63,3 +63,6 @@ crashlytics-build.properties
 
 #Wwise
 MovementFPS_WwiseProject/.cache/
+
+# Henry's stupid IDE
+.idea/
