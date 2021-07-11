@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity.Example;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,13 +16,22 @@ public class PlayerController : MonoBehaviour
     CharacterController m_Controller;
     
     public Vector3 CharacterVelocity { get; set; }
-    
-    
+
+    [SerializeField] float interactionRadius = 5;
+
+    private Yarn.Unity.DialogueRunner Dialogue;
+    private Yarn.Unity.DialogueUI DialogueUI;
+    private List<NPC> allParticipants;
+
+
     // Start is called before the first frame update
     void Start()
     {
         m_InputHandler = GetComponent<PlayerInput>();
         m_Controller = GetComponent<CharacterController>();
+        Dialogue = FindObjectOfType<Yarn.Unity.DialogueRunner>();
+        DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
+        allParticipants = new List<NPC>(FindObjectsOfType<NPC>());
     }
 
     // Update is called once per frame
@@ -62,6 +72,30 @@ public class PlayerController : MonoBehaviour
 
     void PlayerInteraction()
     {
-        if (m_InputHandler.GetSpaceBarDown()) Debug.Log("Space Bar Pressed");
+        if (m_InputHandler.GetSpaceBarDown()) {
+            Debug.Log("Space Bar Pressed");
+            if (Dialogue.IsDialogueRunning)
+            {
+                DialogueUI.MarkLineComplete();
+                return;
+            } else {
+                CheckForNearbyNPC();
+            }
+        }
+    }
+
+    public void CheckForNearbyNPC()
+    {
+        NPC target = allParticipants.Find(delegate (NPC p) {
+            return string.IsNullOrEmpty(p.talkToNode) == false && // has a conversation node?
+            (p.transform.position - this.transform.position).magnitude <= interactionRadius && // is in range?
+            true;
+        });
+        if (target != null)
+        {
+            Debug.Log("target not null");
+            // Kick off the dialogue at this node.
+            Dialogue.StartDialogue(target.talkToNode);
+        }
     }
 }
