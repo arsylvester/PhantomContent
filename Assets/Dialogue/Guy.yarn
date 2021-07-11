@@ -1,0 +1,32 @@
+title: Guy
+tags: 
+colorID: 0
+position: 594,-149
+---
+<<if visited("Guy") is false>>
+    Guy: Hey you, can you do me a favor?
+    Guy: Great, so my family is having a big cookout this weekend. We’d love to roll the dice on some sushi. Think you can bring us 5 fish?
+    Guy: Wonderful! 
+    [[GuyExplains]]
+<<elseif $has_all_fish is false>>
+    [[GuyExplains]]
+<<endif>>
+
+<<if $has_all_fish is true>>
+    [[GuyHappy]]
+<<endif>>
+===
+title: GuyExplains
+tags: 
+colorID: 0
+position: 722,129
+---
+Guy: Fish don’t just appear out of thin air, so you’ll have to go to the lake northwest of town and catch them yourself. Good luck! #line:065f5f1
+===
+title: GuyHappy
+tags: 
+colorID: 0
+position: 467,126
+---
+Guy: You brought the fish! Thank you!
+===
