@@ -33,16 +33,4 @@ public class NodeVisitedTracker : MonoBehaviour
         // Log that the node has been run.
         _visitedNodes.Add(nodeName);
     }
-
-
-	// Called by the Dialogue Runner to notify us that a new node 
-	// started running. 
-	public void NodeStart(string nodeName) {
-		// Log that the node has been run.
-
-        var tags = new List<string>(dialogueRunner.GetTagsForNode(nodeName));
-        
-		Debug.Log($"Starting the execution of node {nodeName} with {tags.Count} tags.");
-	}
-
 }
