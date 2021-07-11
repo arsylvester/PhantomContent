@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7c00900535b51d94db7d07eed608af4a
+guid: 785939280201fd6419d759b2997c6c77
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -8,11 +8,11 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
-  baseLanguageID: 
-  stringIDs:
-  - Guy-Start-0
-  compilationStatus: 1
-  isSuccesfullyCompiled: 1
-  compilationErrorMessage: 
+  baseLanguageID: en-US
+  stringIDs: []
+  compilationStatus: 0
+  isSuccesfullyCompiled: 0
+  compilationErrorMessage: "Error on line 11 at position 8:\nmismatched input 'if
+    ' expecting COMMAND_END\r\n<<else if $has_all_fish is false>>\r\n       ^^^"
   baseLanguage: {instanceID: 0}
   localizations: []
