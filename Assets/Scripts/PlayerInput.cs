@@ -31,4 +31,9 @@ public class PlayerInput : MonoBehaviour
     {
         return Input.GetKeyDown(KeyCode.Space);
     }
+
+    public bool GetCarModeDown()
+    {
+        return Input.GetKeyDown(KeyCode.C);
+    }
 }
