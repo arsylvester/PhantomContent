@@ -9,13 +9,17 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 1f;
     public float maxSpeedOnGround = 10f;
     public float movementSharpnessOnGround = 15;
+    public float GravityModifier = 1000;
     float footstepDistanceCounter;
     public float footStepInterval = 1;
     
     PlayerInput m_InputHandler;
     CharacterController m_Controller;
+    Camera playerCam;
+    private ConsoleManager m_Console;
     
     public Vector3 CharacterVelocity { get; set; }
+    public bool IsGrounded { get; private set; }
 
     [SerializeField] float interactionRadius = 5;
 
@@ -27,17 +31,25 @@ public class PlayerController : MonoBehaviour
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
     private List<NPC> allParticipants;
+    private List<InteractableObject> allInteractable;
+    private List<GameObject> lookingAt;
     private bool carMode = false;
+    public bool isNoclip = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        playerCam = GetComponent<Camera>();
         m_InputHandler = GetComponent<PlayerInput>();
         m_Controller = GetComponent<CharacterController>();
+        m_Console = FindObjectOfType<ConsoleManager>();
         Dialogue = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
         allParticipants = new List<NPC>(FindObjectsOfType<NPC>());
+        allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
+        m_Console.toggleVisable();
+        m_Console.toggleFocus();
     }
 
     // Update is called once per frame
@@ -55,29 +67,41 @@ public class PlayerController : MonoBehaviour
     {
         // rotate the player
         transform.Rotate(new Vector3(0f, (m_InputHandler.GetRotationInput() * rotationSpeed * Time.deltaTime), 0f), Space.Self);
-
-        // converts move input to a worldspace vector based on our character's transform orientation
-        Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
         
-        // calculate the desired velocity from inputs, max speed, and current slope
-        Vector3 targetVelocity = worldspaceMoveInput * maxSpeedOnGround;
-         
-        // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
-        CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
-        
-        // keep track of distance traveled for footsteps sound
-        footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
-        
-        // footsteps sound
-        if (footstepDistanceCounter >= 1f / footStepInterval)
+        if (isNoclip)
         {
-            footstepDistanceCounter = 0f;
-            //AkSoundEngine.PostEvent("FootStep", gameObject); // Play footstep sound
+            transform.position += transform.TransformVector(m_InputHandler.GetMoveInput()) * (maxSpeedOnGround * Time.deltaTime);
         }
-        
-        //TODO: add head bobbing
-        
-        m_Controller.Move(CharacterVelocity * Time.deltaTime);
+
+        else
+        {
+            // converts move input to a worldspace vector based on our character's transform orientation
+            Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
+
+            // calculate the desired velocity from inputs, max speed, and current slope
+            Vector3 targetVelocity = worldspaceMoveInput * maxSpeedOnGround;
+
+            // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
+            CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
+
+            // keep track of distance traveled for footsteps sound
+            footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
+            
+            if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
+
+            // footsteps sound
+            if (footstepDistanceCounter >= 1f / footStepInterval)
+            {
+                footstepDistanceCounter = 0f;
+                //AkSoundEngine.PostEvent("FootStep", gameObject); // Play footstep sound
+            }
+            
+            m_Controller.Move(CharacterVelocity * Time.deltaTime);
+            
+            //TODO: add head bobbing
+
+            
+        }
     }
 
     void CarMovement()
@@ -118,8 +142,16 @@ public class PlayerController : MonoBehaviour
                 DialogueUI.MarkLineComplete();
                 return;
             } else {
-                CheckForNearbyNPC();
+                InteractableObject lookingAt = GetLookingAt();
+                if (lookingAt != null && lookingAt.isNPC)
+                    Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().talkToNode);
             }
+        }
+        
+        if (m_InputHandler.GetTildeDown())
+        {
+            m_Console.toggleVisable();
+            m_Console.toggleFocus();
         }
     }
 
@@ -138,9 +170,36 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public InteractableObject GetLookingAt()
+    {
+        InteractableObject target = null;
+        float distance = 0;
+        for (int i = 0; i < allInteractable.Count; i++)
+        {
+            Vector3 viewPos = playerCam.WorldToViewportPoint(allInteractable[i].transform.position);
+            if (viewPos.z > 0 && viewPos.x > 0 && viewPos.x < 1) // if camera is looking at object
+            {
+                if ((target == null && (allInteractable[i].transform.position - this.transform.position).magnitude < interactionRadius) || // get target within range
+                    (target != null && (allInteractable[i].transform.position - this.transform.position).magnitude < distance)) // get closest target
+                {
+                    target = allInteractable[i];
+                    distance = (allInteractable[i].transform.position - this.transform.position).magnitude;
+                }
+            }
+        }
+
+        if (target != null)
+        {
+            Debug.Log("Looking at " + target.name);
+            return target;
+        }
+        else
+            return null;
+    }
+
     public void SwapCar()
     {
-        if(m_InputHandler.GetCarModeDown())
+        if(m_InputHandler.GetCarModeDown() && !m_Console.isActive)
         {
             if(carMode)
             {
@@ -153,5 +212,26 @@ public class PlayerController : MonoBehaviour
                 carOverlay.SetActive(true);
             }
         }
+    }
+
+    public bool toggleNoclip()
+    {
+        isNoclip = !isNoclip;
+        m_Controller.detectCollisions = !isNoclip; // disable/enable collisions
+        IsGrounded = false;
+        return isNoclip;
+    }
+
+    public void Teleport(Vector3 v3)
+    {
+        // This is not at all stupid or redundant.
+        StartCoroutine(Warp(v3));
+    }
+    
+    private IEnumerator Warp(Vector3 v3)
+    {
+        yield return new WaitForEndOfFrame();
+        transform.position = v3;
+        m_Console.UpdateLog("teleporting to [" + v3.x + ", " + v3.y + ", " + v3.z + "]");
     }
 }
