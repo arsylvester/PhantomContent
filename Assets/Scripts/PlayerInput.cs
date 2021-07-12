@@ -36,4 +36,9 @@ public class PlayerInput : MonoBehaviour
     {
         return Input.GetKeyDown(KeyCode.C);
     }
+
+    public bool GetTildeDown()
+    {
+        return Input.GetKeyDown(KeyCode.BackQuote);
+    }
 }
