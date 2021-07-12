@@ -8,8 +8,8 @@ using UnityEngine.UIElements;
 
 public class ConsoleManager : MonoBehaviour
 {
-    private bool isActive = true;
-    private int printedLines = 0;
+    public bool isActive = false;
+    private bool wasActive = false;
     
     [Header("UI")]
     [SerializeField] private InputField entryField;
@@ -28,6 +28,32 @@ public class ConsoleManager : MonoBehaviour
             entryField.text = string.Empty;
             entryField.ActivateInputField();
         }
+        
+        else if (wasActive == !entryField.isFocused) // I'm really not sure what I wrote here lmao
+        {
+            isActive = !isActive;
+        }
+
+        wasActive = isActive;
+    }
+
+    public void toggleFocus()
+    {
+        isActive = !isActive;
+        if (isActive) entryField.ActivateInputField();
+        else
+        {
+            entryField.text = string.Empty;
+            entryField.DeactivateInputField();
+        }
+    }
+
+    public void toggleVisable()
+    {
+        GameObject o;
+        (o = gameObject).SetActive(!gameObject.activeSelf);
+        isActive = !o.activeSelf;
+        if (!isActive) StartCoroutine(ScrollToBottom()); //I'm not sure why this is the way it is. Something is surely wrong.
     }
 
     private void ParseCommand(string input)
@@ -53,7 +79,6 @@ public class ConsoleManager : MonoBehaviour
 
     public void UpdateLog(string line)
     {
-        printedLines++;
         consoleLog.text += "\n" + line;
         StartCoroutine("ScrollToBottom");
     }
