@@ -20,11 +20,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float interactionRadius = 5;
 
+    [Header("Car")]
+    [SerializeField] GameObject carOverlay; //Move this later
+    [SerializeField] float carSpeed = 20f;
+    public float carMovementSharpnessOnGround = 3;
+
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
     private List<NPC> allParticipants;
     private List<InteractableObject> allInteractable;
     private List<GameObject> lookingAt;
+    private bool carMode = false;
 
 
     // Start is called before the first frame update
@@ -42,8 +48,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMovement();
+        if (carMode)
+            CarMovement();
+        else
+            PlayerMovement();
         PlayerInteraction();
+        SwapCar();
     }
 
     void PlayerMovement()
@@ -72,6 +82,35 @@ public class PlayerController : MonoBehaviour
         
         //TODO: add head bobbing
         
+        m_Controller.Move(CharacterVelocity * Time.deltaTime);
+    }
+
+    void CarMovement()
+    {
+        // rotate the player
+        transform.Rotate(new Vector3(0f, (m_InputHandler.GetRotationInput() * rotationSpeed * Time.deltaTime), 0f), Space.Self);
+
+        // converts move input to a worldspace vector based on our character's transform orientation
+        Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
+
+        // calculate the desired velocity from inputs, max speed, and current slope
+        Vector3 targetVelocity = worldspaceMoveInput * carSpeed;
+
+        // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
+        CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, carMovementSharpnessOnGround * Time.deltaTime);
+
+        // keep track of distance traveled for footsteps sound
+        footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
+
+        // footsteps sound
+        if (footstepDistanceCounter >= 1f / footStepInterval)
+        {
+            footstepDistanceCounter = 0f;
+            //AkSoundEngine.PostEvent("FootStep", gameObject); // Play footstep sound
+        }
+
+        //TODO: add head bobbing
+
         m_Controller.Move(CharacterVelocity * Time.deltaTime);
     }
 
@@ -131,5 +170,22 @@ public class PlayerController : MonoBehaviour
         }
         else
             return null;
+    }
+
+    public void SwapCar()
+    {
+        if(m_InputHandler.GetCarModeDown())
+        {
+            if(carMode)
+            {
+                carMode = false;
+                carOverlay.SetActive(false);
+            }
+            else
+            {
+                carMode = true;
+                carOverlay.SetActive(true);
+            }
+        }
     }
 }
