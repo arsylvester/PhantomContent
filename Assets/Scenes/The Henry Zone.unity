@@ -452,6 +452,9 @@ MonoBehaviour:
   movementSharpnessOnGround: 15
   footStepInterval: 1
   interactionRadius: 5
+  carOverlay: {fileID: 0}
+  carSpeed: 20
+  carMovementSharpnessOnGround: 3
 --- !u!143 &1398368143
 CharacterController:
   m_ObjectHideFlags: 0
@@ -636,26 +639,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 646455957}
     m_Modifications:
-    - target: {fileID: 231095202836836550, guid: 4a65283221806744c981265ef527ee52, type: 3}
-      propertyPath: cmds.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 231095202836836550, guid: 4a65283221806744c981265ef527ee52, type: 3}
-      propertyPath: cmds.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: dcc3fc21c3e7e1944ae195e432b87977, type: 2}
-    - target: {fileID: 231095202836836550, guid: 4a65283221806744c981265ef527ee52, type: 3}
-      propertyPath: cmds.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: dad51ddd939fd8340a6be1d339b922e9, type: 2}
-    - target: {fileID: 231095202836836550, guid: 4a65283221806744c981265ef527ee52, type: 3}
-      propertyPath: cmds.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 4715110ef240cae4a9c2aa5e6fe71a42, type: 2}
-    - target: {fileID: 231095202836836550, guid: 4a65283221806744c981265ef527ee52, type: 3}
-      propertyPath: cmds.Array.data[3]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 231095202836836554, guid: 4a65283221806744c981265ef527ee52, type: 3}
       propertyPath: m_Name
       value: Console Pannel
@@ -742,18 +725,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 231095202836836555, guid: 4a65283221806744c981265ef527ee52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 231095203048898044, guid: 4a65283221806744c981265ef527ee52, type: 3}
-      propertyPath: m_ChildControlHeight
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 231095203292550544, guid: 4a65283221806744c981265ef527ee52, type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 231095203292550544, guid: 4a65283221806744c981265ef527ee52, type: 3}
-      propertyPath: m_FontData.m_Alignment
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 231095203292550547, guid: 4a65283221806744c981265ef527ee52, type: 3}
