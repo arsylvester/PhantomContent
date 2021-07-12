@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     
     PlayerInput m_InputHandler;
     CharacterController m_Controller;
+    Camera playerCam;
     
     public Vector3 CharacterVelocity { get; set; }
 
@@ -27,17 +28,21 @@ public class PlayerController : MonoBehaviour
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
     private List<NPC> allParticipants;
+    private List<InteractableObject> allInteractable;
+    private List<GameObject> lookingAt;
     private bool carMode = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        playerCam = GetComponent<Camera>();
         m_InputHandler = GetComponent<PlayerInput>();
         m_Controller = GetComponent<CharacterController>();
         Dialogue = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
         allParticipants = new List<NPC>(FindObjectsOfType<NPC>());
+        allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
     }
 
     // Update is called once per frame
@@ -118,7 +123,9 @@ public class PlayerController : MonoBehaviour
                 DialogueUI.MarkLineComplete();
                 return;
             } else {
-                CheckForNearbyNPC();
+                InteractableObject lookingAt = GetLookingAt();
+                if (lookingAt != null && lookingAt.isNPC)
+                    Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().talkToNode);
             }
         }
     }
@@ -136,6 +143,33 @@ public class PlayerController : MonoBehaviour
             // Kick off the dialogue at this node.
             Dialogue.StartDialogue(target.talkToNode);
         }
+    }
+
+    public InteractableObject GetLookingAt()
+    {
+        InteractableObject target = null;
+        float distance = 0;
+        for (int i = 0; i < allInteractable.Count; i++)
+        {
+            Vector3 viewPos = playerCam.WorldToViewportPoint(allInteractable[i].transform.position);
+            if (viewPos.z > 0 && viewPos.x > 0 && viewPos.x < 1) // if camera is looking at object
+            {
+                if ((target == null && (allInteractable[i].transform.position - this.transform.position).magnitude < interactionRadius) || // get target within range
+                    (target != null && (allInteractable[i].transform.position - this.transform.position).magnitude < distance)) // get closest target
+                {
+                    target = allInteractable[i];
+                    distance = (allInteractable[i].transform.position - this.transform.position).magnitude;
+                }
+            }
+        }
+
+        if (target != null)
+        {
+            Debug.Log("Looking at " + target.name);
+            return target;
+        }
+        else
+            return null;
     }
 
     public void SwapCar()
