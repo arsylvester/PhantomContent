@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     CharacterController m_Controller;
     Camera playerCam;
     private ConsoleManager m_Console;
+    AudioSource m_audioSource;
     
     public Vector3 CharacterVelocity { get; set; }
     public bool IsGrounded { get; private set; }
@@ -26,7 +27,10 @@ public class PlayerController : MonoBehaviour
     [Header("Car")]
     [SerializeField] GameObject carOverlay; //Move this later
     [SerializeField] float carSpeed = 20f;
-    public float carMovementSharpnessOnGround = 3;
+    [SerializeField] float carMovementSharpnessOnGround = 3;
+    [SerializeField] AudioClip carAudioClip;
+    [SerializeField] AudioClip carStartupAudioClip;
+    [SerializeField] float carPitchMod = 500;
 
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
@@ -43,6 +47,7 @@ public class PlayerController : MonoBehaviour
         playerCam = GetComponent<Camera>();
         m_InputHandler = GetComponent<PlayerInput>();
         m_Controller = GetComponent<CharacterController>();
+        m_audioSource = GetComponent<AudioSource>();
         m_Console = FindObjectOfType<ConsoleManager>();
         Dialogue = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
@@ -121,11 +126,23 @@ public class PlayerController : MonoBehaviour
         // keep track of distance traveled for footsteps sound
         footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
 
-        // footsteps sound
-        if (footstepDistanceCounter >= 1f / footStepInterval)
+        if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
+
+        // Car sounds
+        if(CharacterVelocity.magnitude > .1f)
         {
-            footstepDistanceCounter = 0f;
-            //AkSoundEngine.PostEvent("FootStep", gameObject); // Play footstep sound
+            if (m_audioSource.clip != carAudioClip || !m_audioSource.isPlaying)
+            {
+                m_audioSource.clip = carAudioClip;
+                m_audioSource.Play();
+            }
+            //var temp = CharacterVelocity * Time.deltaTime;
+            //print(temp.magnitude);
+            //m_audioSource.pitch = temp.magnitude / carPitchMod;
+        }
+        else
+        {
+            m_audioSource.Stop();
         }
 
         //TODO: add head bobbing
@@ -205,11 +222,13 @@ public class PlayerController : MonoBehaviour
             {
                 carMode = false;
                 carOverlay.SetActive(false);
+                m_audioSource.Stop();
             }
             else
             {
                 carMode = true;
                 carOverlay.SetActive(true);
+                m_audioSource.PlayOneShot(carStartupAudioClip);
             }
         }
     }
