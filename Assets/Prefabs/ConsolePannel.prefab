@@ -513,7 +513,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 231095203491881522}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9916667
+  m_Size: 0.99166673
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -608,6 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c644afd0400788f438b5d3ad32515023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   entryField: {fileID: 231095203268993069}
   consoleLog: {fileID: 231095203292550544}
   cScrollRect: {fileID: 231095202556568942}
@@ -616,6 +617,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dcc3fc21c3e7e1944ae195e432b87977, type: 2}
   - {fileID: 11400000, guid: dad51ddd939fd8340a6be1d339b922e9, type: 2}
   - {fileID: 11400000, guid: 4715110ef240cae4a9c2aa5e6fe71a42, type: 2}
+  - {fileID: 11400000, guid: dae6b50cc7e9d0a4f9b13f6849f2e35c, type: 2}
+  - {fileID: 11400000, guid: e46726193d229dd47848af78d18df00b, type: 2}
 --- !u!1 &231095203048898046
 GameObject:
   m_ObjectHideFlags: 0
