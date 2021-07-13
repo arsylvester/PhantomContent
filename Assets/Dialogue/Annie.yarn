@@ -1,0 +1,32 @@
+title: Annie
+tags: 
+colorID: 0
+position: 594,-150
+---
+<<if visited("Annie") is false>>
+	Annie: Hello! Please help me out here. My apple supply has run out, and I need them for self defense. 
+	Annie: I knew you'd understand. 
+    [[AnnieExplains]]
+<<elseif $has_all_annie is false>>
+	[[AnnieExplains]]
+<<endif>>
+
+<<if $has_all_apples is true>>
+    [[AnnieHappy]]
+<<endif>>
+===
+title: AnnieExplains
+tags: 
+colorID: 0
+position: 455,174
+---
+Annie: You can find apples in the forest northeast of town. Please bring me 7 of them!
+===
+title: AnnieHappy
+tags: 
+colorID: 0
+position: 768,171
+---
+Annie: YES! APPLES!
+Annie: Now these good-for-nothing doctors can't find me for another week...
+===
