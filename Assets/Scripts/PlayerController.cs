@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private List<NPC> allParticipants;
     private List<InteractableObject> allInteractable;
     private List<GameObject> lookingAt;
+    private Camera camera;
     private bool carMode = false;
     public bool isNoclip = false;
 
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
         allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
         m_Console.toggleVisable();
         m_Console.toggleFocus();
+        camera = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -164,6 +166,18 @@ public class PlayerController : MonoBehaviour
                     Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().talkToNode);
             }
         }
+
+        if (m_InputHandler.GetFireInputDown())
+        {
+            RaycastHit hit;
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        
+            if (Physics.Raycast(ray, out hit)) {
+                Transform objectHit = hit.transform;
+                var position = hit.transform.position;
+                m_Console.UpdateLog(objectHit.name + " [" + position.x + ", " + position.y + ", " + position.z + "]");
+            }
+        }
         
         if (m_InputHandler.GetTildeDown())
         {
@@ -218,6 +232,7 @@ public class PlayerController : MonoBehaviour
     {
         if(m_InputHandler.GetCarModeDown() && !m_Console.isActive)
         {
+            CharacterVelocity = Vector3.zero;
             if(carMode)
             {
                 carMode = false;
@@ -237,20 +252,16 @@ public class PlayerController : MonoBehaviour
     {
         isNoclip = !isNoclip;
         m_Controller.detectCollisions = !isNoclip; // disable/enable collisions
+        m_Controller.enabled = !isNoclip;
         IsGrounded = false;
         return isNoclip;
     }
 
     public void Teleport(Vector3 v3)
     {
-        // This is not at all stupid or redundant.
-        StartCoroutine(Warp(v3));
-    }
-    
-    private IEnumerator Warp(Vector3 v3)
-    {
-        yield return new WaitForEndOfFrame();
-        transform.position = v3;
+        m_Controller.enabled = false;
+        transform.position = v3; // teleport the player
+        m_Controller.enabled = true;
         m_Console.UpdateLog("teleporting to [" + v3.x + ", " + v3.y + ", " + v3.z + "]");
     }
 }
