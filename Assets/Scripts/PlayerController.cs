@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity.Example;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,12 +26,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float interactionRadius = 5;
 
     [Header("Car")]
-    [SerializeField] GameObject carOverlay; //Move this later
+    [SerializeField] Image carOverlay; //Move this later
     [SerializeField] float carSpeed = 20f;
     [SerializeField] float carMovementSharpnessOnGround = 3;
     [SerializeField] AudioClip carAudioClip;
     [SerializeField] AudioClip carStartupAudioClip;
     [SerializeField] float carPitchMod = 500;
+    [SerializeField] Sprite straightCarSprite;
+    [SerializeField] Sprite leftCarSprite;
+    [SerializeField] Sprite rightCarSprite;
 
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
@@ -145,6 +149,20 @@ public class PlayerController : MonoBehaviour
             m_audioSource.Stop();
         }
 
+        //Car image
+        if(m_InputHandler.GetRotationInput() < 0)
+        {
+            carOverlay.sprite = leftCarSprite;
+        }
+        else if(m_InputHandler.GetRotationInput() > 0)
+        {
+            carOverlay.sprite = rightCarSprite;
+        }
+        else
+        {
+            carOverlay.sprite = straightCarSprite;
+        }
+
         //TODO: add head bobbing
 
         m_Controller.Move(CharacterVelocity * Time.deltaTime);
@@ -221,13 +239,13 @@ public class PlayerController : MonoBehaviour
             if(carMode)
             {
                 carMode = false;
-                carOverlay.SetActive(false);
+                carOverlay.gameObject.SetActive(false);
                 m_audioSource.Stop();
             }
             else
             {
                 carMode = true;
-                carOverlay.SetActive(true);
+                carOverlay.gameObject.SetActive(true);
                 m_audioSource.PlayOneShot(carStartupAudioClip);
             }
         }
