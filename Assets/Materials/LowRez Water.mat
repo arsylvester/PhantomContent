@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: 46a4b563ba7a8764b978e414cdd9c9f5, type: 3}
+  m_Name: LowRez Water
+  m_Shader: {fileID: -6465566751694194690, guid: 9b22b056dde3ab4448f9e38094f45221, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -59,6 +59,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_10dacdae434c444bac112aa26d6baa57_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 0f905748f9cbb724eb55767cfadd8127, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_83c4c21db55445a796d2d1f70e8a7e35_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 56b688cf497ee4c48b7af5b3e1944294, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -78,19 +86,19 @@ Material:
     m_Floats:
     - Vector1_0ff08e7075c244c0928288453d6648f2: 16
     - Vector1_1d47467ba7ab45e68a265d66bf54dbbc: 0.5
-    - Vector1_25cf505a7ab64802a77d2a03706c077f: -0.59
+    - Vector1_25cf505a7ab64802a77d2a03706c077f: 0.1
     - Vector1_2cd20642a5a848bab1340d22e0796f4b: 0.989
-    - Vector1_39e7f601036046cd893ef7dfacdef1c3: 1.07
+    - Vector1_39e7f601036046cd893ef7dfacdef1c3: 0.005
     - Vector1_3fd5e00df1804f7285206beb4811a4dc: 0.93
     - Vector1_54b61ffe184e40588fb34279f1c092bc: 0.416
     - Vector1_54e4d540f0fe4a3ea8ed6d6d08a0494f: 4.46
     - Vector1_73d6f0deacf543c996fd5830f5e48a2c: 0.129
-    - Vector1_782e98c1cc0943168692042f2f0f6c71: 4.68
-    - Vector1_79bc3cfb9593470e81d981555ebb4657: 0.24
-    - Vector1_871b219424ae4fccb834f8b7c035a0fe: 0.13
+    - Vector1_782e98c1cc0943168692042f2f0f6c71: 1
+    - Vector1_79bc3cfb9593470e81d981555ebb4657: 0.3
+    - Vector1_871b219424ae4fccb834f8b7c035a0fe: 0.03
     - Vector1_b33afefe328445639ff12a80b180184c: 0.46
     - Vector1_d0bf176cc7164b69992505e698b7b352: 0.2
-    - Vector1_fa9c81b8c8b64382bccaf18a5718e663: -8
+    - Vector1_fa9c81b8c8b64382bccaf18a5718e663: -0.15
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
