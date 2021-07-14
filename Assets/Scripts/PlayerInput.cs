@@ -26,6 +26,12 @@ public class PlayerInput : MonoBehaviour
 
         return rotataion;
     }
+    
+    public bool GetFireInputDown()
+    {
+        return Input.GetButtonDown("Fire1");
+    }
+
 
     public bool GetSpaceBarDown()
     {

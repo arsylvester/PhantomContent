@@ -34,16 +34,28 @@ namespace Yarn.Unity.Example {
 
         public string characterName = "";
 
-        public string talkToNode = "";
+        [SerializeField] string talkToNode = "";
 
         [Header("Optional")]
         public YarnProgram scriptToLoad;
+
+        [Header("Other")]
+        public AudioClip[] speakToClips;
+        private AudioSource audio;
 
         void Start () {
             if (scriptToLoad != null) {
                 DialogueRunner dialogueRunner = FindObjectOfType<Yarn.Unity.DialogueRunner>();
                 dialogueRunner.Add(scriptToLoad);                
             }
+
+            audio = GetComponent<AudioSource>();
+        }
+
+        public string GetTalkToNode()
+        {
+            audio.PlayOneShot(speakToClips[Random.Range(0, speakToClips.Length - 1)]);
+            return talkToNode;
         }
     }
 

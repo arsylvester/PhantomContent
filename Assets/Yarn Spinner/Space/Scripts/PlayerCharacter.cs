@@ -85,13 +85,13 @@ namespace Yarn.Unity.Example {
         {
             var allParticipants = new List<NPC> (FindObjectsOfType<NPC> ());
             var target = allParticipants.Find (delegate (NPC p) {
-                return string.IsNullOrEmpty (p.talkToNode) == false && // has a conversation node?
+                return string.IsNullOrEmpty (p.GetTalkToNode()) == false && // has a conversation node?
                 (p.transform.position - this.transform.position)// is in range?
                 .magnitude <= interactionRadius;
             });
             if (target != null) {
                 // Kick off the dialogue at this node.
-                FindObjectOfType<DialogueRunner> ().StartDialogue (target.talkToNode);
+                FindObjectOfType<DialogueRunner> ().StartDialogue (target.GetTalkToNode());
             }
         }
     }
