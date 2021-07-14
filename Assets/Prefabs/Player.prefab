@@ -162,6 +162,9 @@ MonoBehaviour:
   carAudioClip: {fileID: 8300000, guid: a093a5e5bc724ad499c151fa6113d972, type: 3}
   carStartupAudioClip: {fileID: 8300000, guid: 2c711c61961213f458e138145883b98a, type: 3}
   carPitchMod: 1000
+  straightCarSprite: {fileID: 21300000, guid: 8c00e580747fd2e4c91596dec6df30fe, type: 3}
+  leftCarSprite: {fileID: 21300000, guid: a24c8c0bbe830514598a83f1d453099c, type: 3}
+  rightCarSprite: {fileID: 21300000, guid: e0c3437d6728886458815a16bd9dbe1e, type: 3}
   isNoclip: 0
 --- !u!114 &3152265378839446375
 MonoBehaviour:
@@ -187,7 +190,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.75
   m_Pitch: 1
   Loop: 1
   Mute: 0
