@@ -12,11 +12,16 @@ public class PlayerController : MonoBehaviour
     public float movementSharpnessOnGround = 15;
     public float GravityModifier = 1000;
     float footstepDistanceCounter;
-    public float footStepInterval = 1;
-    
+
+    [Header("Footsteps")]
+    [SerializeField] float footStepInterval = 1;
+    [SerializeField] float cameraBobAmplitude = 0.02f;
+
+    [SerializeField] Camera playerCam;
+
     PlayerInput m_InputHandler;
     CharacterController m_Controller;
-    Camera playerCam;
+    
     private ConsoleManager m_Console;
     AudioSource m_audioSource;
     
@@ -41,7 +46,6 @@ public class PlayerController : MonoBehaviour
     private List<NPC> allParticipants;
     private List<InteractableObject> allInteractable;
     private List<GameObject> lookingAt;
-    private Camera camera;
     private bool carMode = false;
     public bool isNoclip = false;
 
@@ -49,7 +53,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerCam = GetComponent<Camera>();
+        //playerCam = GetComponent<Camera>();
         m_InputHandler = GetComponent<PlayerInput>();
         m_Controller = GetComponent<CharacterController>();
         m_audioSource = GetComponent<AudioSource>();
@@ -60,7 +64,11 @@ public class PlayerController : MonoBehaviour
         allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
         m_Console.toggleVisable();
         m_Console.toggleFocus();
-        camera = GetComponent<Camera>();
+        
+
+
+        //TODO: REMOVE THIS LATER!! FIX THE GRAVITY FOR REAL
+        IsGrounded = true;
     }
 
     // Update is called once per frame
@@ -83,7 +91,6 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += transform.TransformVector(m_InputHandler.GetMoveInput()) * (maxSpeedOnGround * Time.deltaTime);
         }
-
         else
         {
             // converts move input to a worldspace vector based on our character's transform orientation
@@ -101,17 +108,17 @@ public class PlayerController : MonoBehaviour
             if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
 
             // footsteps sound
-            if (footstepDistanceCounter >= 1f / footStepInterval)
+            if (footstepDistanceCounter / footStepInterval >= 1f)
             {
                 footstepDistanceCounter = 0f;
                 //AkSoundEngine.PostEvent("FootStep", gameObject); // Play footstep sound
             }
             
             m_Controller.Move(CharacterVelocity * Time.deltaTime);
-            
-            //TODO: add head bobbing
 
-            
+            playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, -Mathf.Cos(2 * Mathf.PI * footstepDistanceCounter / footStepInterval) / (2 * cameraBobAmplitude), playerCam.transform.localPosition.z);
+
+            //if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
         }
     }
 
@@ -128,9 +135,6 @@ public class PlayerController : MonoBehaviour
 
         // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
         CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, carMovementSharpnessOnGround * Time.deltaTime);
-
-        // keep track of distance traveled for footsteps sound
-        footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
 
         if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
 
@@ -193,7 +197,7 @@ public class PlayerController : MonoBehaviour
         if (m_InputHandler.GetFireInputDown())
         {
             RaycastHit hit;
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = playerCam.ScreenPointToRay(Input.mousePosition);
         
             if (Physics.Raycast(ray, out hit)) {
                 Transform objectHit = hit.transform;
