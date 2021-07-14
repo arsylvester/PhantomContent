@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour
             } else {
                 InteractableObject lookingAt = GetLookingAt();
                 if (lookingAt != null && lookingAt.isNPC)
-                    Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().talkToNode);
+                    Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
                 else if(lookingAt != null && lookingAt.isPickUp)
                 {
                     lookingAt.pickUpItem();
