@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private List<NPC> allParticipants;
     private List<InteractableObject> allInteractable;
     private List<GameObject> lookingAt;
+    private Camera camera;
     private bool carMode = false;
     public bool isNoclip = false;
 
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
         allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
         m_Console.toggleVisable();
         m_Console.toggleFocus();
+        camera = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -180,6 +182,23 @@ public class PlayerController : MonoBehaviour
                 InteractableObject lookingAt = GetLookingAt();
                 if (lookingAt != null && lookingAt.isNPC)
                     Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().talkToNode);
+                else if(lookingAt != null && lookingAt.isPickUp)
+                {
+                    lookingAt.pickUpItem();
+                    allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
+                }
+            }
+        }
+
+        if (m_InputHandler.GetFireInputDown())
+        {
+            RaycastHit hit;
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        
+            if (Physics.Raycast(ray, out hit)) {
+                Transform objectHit = hit.transform;
+                var position = hit.transform.position;
+                m_Console.UpdateLog(objectHit.name + " [" + position.x + ", " + position.y + ", " + position.z + "]");
             }
         }
         
@@ -189,7 +208,7 @@ public class PlayerController : MonoBehaviour
             m_Console.toggleFocus();
         }
     }
-
+    /*
     public void CheckForNearbyNPC()
     {
         NPC target = allParticipants.Find(delegate (NPC p) {
@@ -204,6 +223,7 @@ public class PlayerController : MonoBehaviour
             Dialogue.StartDialogue(target.talkToNode);
         }
     }
+    */
 
     public InteractableObject GetLookingAt()
     {
@@ -211,31 +231,30 @@ public class PlayerController : MonoBehaviour
         float distance = 0;
         for (int i = 0; i < allInteractable.Count; i++)
         {
-            Vector3 viewPos = playerCam.WorldToViewportPoint(allInteractable[i].transform.position);
-            if (viewPos.z > 0 && viewPos.x > 0 && viewPos.x < 1) // if camera is looking at object
+            if (allInteractable[i].isAvailable)
             {
-                if ((target == null && (allInteractable[i].transform.position - this.transform.position).magnitude < interactionRadius) || // get target within range
-                    (target != null && (allInteractable[i].transform.position - this.transform.position).magnitude < distance)) // get closest target
+                Vector3 viewPos = playerCam.WorldToViewportPoint(allInteractable[i].transform.position);
+                if (viewPos.z > 0 && viewPos.x > 0 && viewPos.x < 1) // if camera is looking at object
                 {
-                    target = allInteractable[i];
-                    distance = (allInteractable[i].transform.position - this.transform.position).magnitude;
+                    if ((target == null && (allInteractable[i].transform.position - this.transform.position).magnitude < interactionRadius) || // get target within range
+                        (target != null && (allInteractable[i].transform.position - this.transform.position).magnitude < distance)) // get closest target
+                    {
+                        target = allInteractable[i];
+                        distance = (allInteractable[i].transform.position - this.transform.position).magnitude;
+                    }
                 }
             }
         }
 
-        if (target != null)
-        {
-            Debug.Log("Looking at " + target.name);
-            return target;
-        }
-        else
-            return null;
+        Debug.Log("Looking at " + target.name);
+        return target;
     }
 
     public void SwapCar()
     {
         if(m_InputHandler.GetCarModeDown() && !m_Console.isActive)
         {
+            CharacterVelocity = Vector3.zero;
             if(carMode)
             {
                 carMode = false;
@@ -255,20 +274,16 @@ public class PlayerController : MonoBehaviour
     {
         isNoclip = !isNoclip;
         m_Controller.detectCollisions = !isNoclip; // disable/enable collisions
+        m_Controller.enabled = !isNoclip;
         IsGrounded = false;
         return isNoclip;
     }
 
     public void Teleport(Vector3 v3)
     {
-        // This is not at all stupid or redundant.
-        StartCoroutine(Warp(v3));
-    }
-    
-    private IEnumerator Warp(Vector3 v3)
-    {
-        yield return new WaitForEndOfFrame();
-        transform.position = v3;
+        m_Controller.enabled = false;
+        transform.position = v3; // teleport the player
+        m_Controller.enabled = true;
         m_Console.UpdateLog("teleporting to [" + v3.x + ", " + v3.y + ", " + v3.z + "]");
     }
 }
