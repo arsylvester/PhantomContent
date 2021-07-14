@@ -245,7 +245,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Debug.Log("Looking at " + target.name);
+        if (target != null)
+        {
+            Debug.Log("Looking at " + target.name);
+        }
         return target;
     }
 
