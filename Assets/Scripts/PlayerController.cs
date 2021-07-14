@@ -185,7 +185,6 @@ public class PlayerController : MonoBehaviour
                 else if(lookingAt != null && lookingAt.isPickUp)
                 {
                     lookingAt.pickUpItem();
-                    allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
                 }
             }
         }
