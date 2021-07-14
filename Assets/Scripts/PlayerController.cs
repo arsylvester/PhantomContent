@@ -185,7 +185,6 @@ public class PlayerController : MonoBehaviour
                 else if(lookingAt != null && lookingAt.isPickUp)
                 {
                     lookingAt.pickUpItem();
-                    allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
                 }
             }
         }
@@ -246,7 +245,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Debug.Log("Looking at " + target.name);
+        if (target != null)
+        {
+            Debug.Log("Looking at " + target.name);
+        }
         return target;
     }
 
