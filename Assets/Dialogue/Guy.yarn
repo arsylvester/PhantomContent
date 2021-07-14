@@ -5,6 +5,7 @@ position: 594,-149
 ---
 <<if visited("Guy") is false>>
     Guy: Hey you, can you do me a favor?
+    <<get_player_response>>
     Guy: Great, so my family is having a big cookout this weekend. We’d love to roll the dice on some sushi. Think you can bring us 5 fish?
     Guy: Wonderful! 
     [[GuyExplains]]

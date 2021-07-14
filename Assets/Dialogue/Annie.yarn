@@ -7,7 +7,7 @@ position: 594,-150
 	Annie: Hello! Please help me out here. My apple supply has run out, and I need them for self defense. 
 	Annie: I knew you'd understand. 
     [[AnnieExplains]]
-<<elseif $has_all_annie is false>>
+<<elseif $has_all_apples is false>>
 	[[AnnieExplains]]
 <<endif>>
 
