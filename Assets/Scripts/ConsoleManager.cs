@@ -83,6 +83,11 @@ public class ConsoleManager : MonoBehaviour
         StartCoroutine("ScrollToBottom");
     }
 
+    public void UpdateLogNoScroll(string line)
+    {
+        consoleLog.text += "\n" + line;
+    }
+
     //forces console to scroll to the most recent line
     private IEnumerator ScrollToBottom()
     {

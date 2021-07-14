@@ -28,15 +28,14 @@ public class cmd_teleport : ConsoleCommand
         else
         {
             RaycastHit[] hits;
-            hits = Physics.RaycastAll(player.transform.position, player.transform.forward, Mathf.Infinity, -1,
-                QueryTriggerInteraction.Ignore);
-
-            if (hits.Length != 0)
+            
+            RaycastHit hit;
+            
+            if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, Mathf.Infinity, -1,
+                QueryTriggerInteraction.Ignore))
             {
-                System.Array.Sort(hits, (x, y) => x.distance.CompareTo(y.distance));
-                RaycastHit h = hits[0];
-                
-                var hpos = h.transform.position;
+                var hpos = hit.transform.position;
+                hpos.y += hit.transform.localScale.y;
                 //player.transform.position = hpos;
                 player.Teleport(hpos);
             }

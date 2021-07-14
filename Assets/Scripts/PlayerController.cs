@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity.Example;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,17 +26,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float interactionRadius = 5;
 
     [Header("Car")]
-    [SerializeField] GameObject carOverlay; //Move this later
+    [SerializeField] Image carOverlay; //Move this later
     [SerializeField] float carSpeed = 20f;
     [SerializeField] float carMovementSharpnessOnGround = 3;
     [SerializeField] AudioClip carAudioClip;
     [SerializeField] AudioClip carStartupAudioClip;
     [SerializeField] float carPitchMod = 500;
+    [SerializeField] Sprite straightCarSprite;
+    [SerializeField] Sprite leftCarSprite;
+    [SerializeField] Sprite rightCarSprite;
 
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
     private List<NPC> allParticipants;
     private List<InteractableObject> allInteractable;
+    private List<GameObject> lookingAt;
+    private Camera camera;
     private bool carMode = false;
     public bool isNoclip = false;
 
@@ -54,6 +60,7 @@ public class PlayerController : MonoBehaviour
         allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
         m_Console.toggleVisable();
         m_Console.toggleFocus();
+        camera = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -144,6 +151,20 @@ public class PlayerController : MonoBehaviour
             m_audioSource.Stop();
         }
 
+        //Car image
+        if(m_InputHandler.GetRotationInput() < 0)
+        {
+            carOverlay.sprite = leftCarSprite;
+        }
+        else if(m_InputHandler.GetRotationInput() > 0)
+        {
+            carOverlay.sprite = rightCarSprite;
+        }
+        else
+        {
+            carOverlay.sprite = straightCarSprite;
+        }
+
         //TODO: add head bobbing
 
         m_Controller.Move(CharacterVelocity * Time.deltaTime);
@@ -160,12 +181,24 @@ public class PlayerController : MonoBehaviour
             } else {
                 InteractableObject lookingAt = GetLookingAt();
                 if (lookingAt != null && lookingAt.isNPC)
-                    Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().talkToNode);
+                    Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
                 else if(lookingAt != null && lookingAt.isPickUp)
                 {
                     lookingAt.pickUpItem();
                     allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
                 }
+            }
+        }
+
+        if (m_InputHandler.GetFireInputDown())
+        {
+            RaycastHit hit;
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        
+            if (Physics.Raycast(ray, out hit)) {
+                Transform objectHit = hit.transform;
+                var position = hit.transform.position;
+                m_Console.UpdateLog(objectHit.name + " [" + position.x + ", " + position.y + ", " + position.z + "]");
             }
         }
         
@@ -221,16 +254,17 @@ public class PlayerController : MonoBehaviour
     {
         if(m_InputHandler.GetCarModeDown() && !m_Console.isActive)
         {
+            CharacterVelocity = Vector3.zero;
             if(carMode)
             {
                 carMode = false;
-                carOverlay.SetActive(false);
+                carOverlay.gameObject.SetActive(false);
                 m_audioSource.Stop();
             }
             else
             {
                 carMode = true;
-                carOverlay.SetActive(true);
+                carOverlay.gameObject.SetActive(true);
                 m_audioSource.PlayOneShot(carStartupAudioClip);
             }
         }
@@ -240,20 +274,16 @@ public class PlayerController : MonoBehaviour
     {
         isNoclip = !isNoclip;
         m_Controller.detectCollisions = !isNoclip; // disable/enable collisions
+        m_Controller.enabled = !isNoclip;
         IsGrounded = false;
         return isNoclip;
     }
 
     public void Teleport(Vector3 v3)
     {
-        // This is not at all stupid or redundant.
-        StartCoroutine(Warp(v3));
-    }
-    
-    private IEnumerator Warp(Vector3 v3)
-    {
-        yield return new WaitForEndOfFrame();
-        transform.position = v3;
+        m_Controller.enabled = false;
+        transform.position = v3; // teleport the player
+        m_Controller.enabled = true;
         m_Console.UpdateLog("teleporting to [" + v3.x + ", " + v3.y + ", " + v3.z + "]");
     }
 }
