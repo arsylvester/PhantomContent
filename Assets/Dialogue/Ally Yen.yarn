@@ -1,0 +1,29 @@
+title: Ally
+tags: 
+colorID: 0
+position: 702,-143
+---
+<<if visited("Ally") is false>>
+    Ally: Greetings, fellow human! I need assistance, as I am lost.
+    Ally: Will you escort me to coordinates (230, 27, 745)? I am in search of the most beautiful corn maize. 
+    Ally: My sincere gratitude to you. You lead the way. 
+<<elseif $onTrip is true>>
+    [[AllyExplains]]
+<<else>>
+    [[AllyHappy]]
+<<endif>>
+===
+title: AllyExplains
+tags: 
+colorID: 0
+position: 525,149
+---
+Ally: Do you remember the way, comrade? We are looking for the corn located at world coordinates (230, 27, 745).
+===
+title: AllyHappy
+tags: 
+colorID: 0
+position: 883,147
+---
+Ally: My sincerest gratitude to you. This will be the location of my next major art project, and I am looking forward to starting on it.
+===

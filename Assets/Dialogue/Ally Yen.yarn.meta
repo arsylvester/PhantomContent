@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 8485bc247ea97634cacd258077f53b9e
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: 
+  stringIDs:
+  - Ally Yen-Ally-0
+  - Ally Yen-Ally-1
+  - Ally Yen-Ally-2
+  - Ally Yen-AllyExplains-3
+  - Ally Yen-AllyHappy-4
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
+  compilationErrorMessage: 
+  baseLanguage: {instanceID: 0}
+  localizations: []
