@@ -1401,23 +1401,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b2c7f530381d4439f80c8d7f74b8fa, type: 3}
---- !u!1 &1051743607 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3152265378839446370, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
-  m_PrefabInstance: {fileID: 1605435398}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1051743616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051743607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b472f658cf2694fabf608fc8bbb1fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1150150001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1906,7 +1889,7 @@ PrefabInstance:
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: carOverlay
       value: 
-      objectReference: {fileID: 578198844}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
 --- !u!4 &1607815399 stripped
@@ -1965,9 +1948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cf99398ac79ec429b4f34ee01628c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isNPC: 1
-  isPickUp: 0
-  itemType: 0
+  type: 0
   isAvailable: 1
 --- !u!1 &1650750233 stripped
 GameObject:
@@ -2020,9 +2001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cf99398ac79ec429b4f34ee01628c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isNPC: 1
-  isPickUp: 0
-  itemType: 0
+  type: 0
   isAvailable: 1
 --- !u!1 &1658017704
 GameObject:
