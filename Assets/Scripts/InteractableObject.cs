@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    public enum ItemTypes {NPC, APPLE, FISH};
-    public static int[] inventory = new int[3];
+    public const int NUM_ITEM_TYPES = 3;
+    public enum InteractableTypes {NPC, APPLE, FISH};
+    
 
     [Header ("Type")]
-    public bool isNPC;
-    public bool isPickUp;
-    public ItemTypes itemType;
+    public InteractableTypes type;
 
     [Header ("Status")]
     public bool isAvailable = true; //if this is false, the player will not be able to interact with this object
@@ -20,18 +19,14 @@ public class InteractableObject : MonoBehaviour
         isAvailable = true;
     }
 
+
     public void pickUpItem()
     {
         Debug.Log("Destroying item");
         isAvailable = false;
         this.gameObject.SetActive(false);
 
-        inventory[(int)itemType]++;
-        //Debug.Log("Apple = " + inventory[(int)itemType]);
-    }
-
-    public static void removeFromInvetory(ItemTypes removeType, int quantity)
-    {
-        inventory[(int)removeType] -= quantity;
+        InventoryManager.inventoryUpdate(type, 1);
+        Debug.Log("Item picked up: " + type + " = " + InventoryManager.inventory[(int)type]);
     }
 }
