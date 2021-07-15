@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
         inventory = new int[InteractableObject.NUM_ITEM_TYPES];
     }
 
-    public static void inventoryUpdate(InteractableObject.ItemTypes item, int quantity)
+    public static void inventoryUpdate(InteractableObject.InteractableTypes item, int quantity)
     {
         inventory[(int)item] += quantity;
     }
