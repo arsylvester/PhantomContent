@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [Header("Footsteps")]
     [SerializeField] float footStepInterval = 1;
     [SerializeField] float cameraBobAmplitude = 0.02f;
+    [SerializeField] float stepMinVel = 2.5f;
+    [SerializeField] AudioClip[] footStepsClips;
+    int lastStep = 0;
 
     [SerializeField] Camera playerCam;
 
@@ -74,6 +77,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        IsGrounded = m_Controller.isGrounded;
+
         if (carMode)
             CarMovement();
         else
@@ -102,16 +107,23 @@ public class PlayerController : MonoBehaviour
             // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
             CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
 
+            print(CharacterVelocity.magnitude);
             // keep track of distance traveled for footsteps sound
-            footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
+            if (CharacterVelocity.magnitude > stepMinVel)
+                footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
             
             if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
+
 
             // footsteps sound
             if (footstepDistanceCounter / footStepInterval >= 1f)
             {
                 footstepDistanceCounter = 0f;
-                //AkSoundEngine.PostEvent("FootStep", gameObject); // Play footstep sound
+                int stepSound = UnityEngine.Random.Range(0, footStepsClips.Length - 1);
+                if (stepSound == lastStep)
+                    stepSound = UnityEngine.Random.Range(0, footStepsClips.Length - 1);
+                lastStep = stepSound;
+                m_audioSource.PlayOneShot(footStepsClips[stepSound]); // Play footstep sound
             }
             
             m_Controller.Move(CharacterVelocity * Time.deltaTime);
