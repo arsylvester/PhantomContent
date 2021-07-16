@@ -1889,7 +1889,7 @@ PrefabInstance:
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: carOverlay
       value: 
-      objectReference: {fileID: 578198844}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
 --- !u!4 &1607815399 stripped
@@ -1948,9 +1948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cf99398ac79ec429b4f34ee01628c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isNPC: 1
-  isPickUp: 0
-  itemType: 0
+  type: 0
   isAvailable: 1
 --- !u!1 &1650750233 stripped
 GameObject:
@@ -2003,9 +2001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cf99398ac79ec429b4f34ee01628c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isNPC: 1
-  isPickUp: 0
-  itemType: 0
+  type: 0
   isAvailable: 1
 --- !u!1 &1658017704
 GameObject:
@@ -2570,6 +2566,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 231095203491881522, guid: 4a65283221806744c981265ef527ee52, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231095203491881522, guid: 4a65283221806744c981265ef527ee52, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
