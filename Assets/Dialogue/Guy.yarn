@@ -8,6 +8,7 @@ position: 594,-149
     <<get_player_response>>
     Guy: Great, so my family is having a big cookout this weekend. We’d love to roll the dice on some sushi. Think you can bring us 5 fish?
     Guy: Wonderful! 
+    <<start_quest fish>>
     [[GuyExplains]]
 <<elseif $has_all_fish is false>>
     [[GuyExplains]]
@@ -30,4 +31,5 @@ colorID: 0
 position: 467,126
 ---
 Guy: You brought the fish! Thank you!
+<<complete_quest fish>>
 ===

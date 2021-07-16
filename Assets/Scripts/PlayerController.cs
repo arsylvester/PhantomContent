@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
     void PlayerInteraction()
     {
         if (m_InputHandler.GetSpaceBarDown()) {
-            Debug.Log("Space Bar Pressed");
+            //Debug.Log("Space Bar Pressed");
             if (Dialogue.IsDialogueRunning)
             {
                 DialogueUI.MarkLineComplete();
