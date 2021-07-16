@@ -27,8 +27,6 @@ public class cmd_teleport : ConsoleCommand
         
         else
         {
-            RaycastHit[] hits;
-            
             RaycastHit hit;
             
             if (Physics.Raycast(player.transform.position, player.transform.forward, out hit, Mathf.Infinity, -1,

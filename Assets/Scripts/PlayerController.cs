@@ -107,9 +107,9 @@ public class PlayerController : MonoBehaviour
             // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
             CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
 
-            print(CharacterVelocity.magnitude);
+            //print(CharacterVelocity.magnitude);
             // keep track of distance traveled for footsteps sound
-            if (CharacterVelocity.magnitude > stepMinVel)
+            if (CharacterVelocity.magnitude > stepMinVel && IsGrounded)
                 footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
             
             if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
     void PlayerInteraction()
     {
         if (m_InputHandler.GetSpaceBarDown()) {
-            Debug.Log("Space Bar Pressed");
+            //Debug.Log("Space Bar Pressed");
             if (Dialogue.IsDialogueRunning)
             {
                 DialogueUI.MarkLineComplete();
