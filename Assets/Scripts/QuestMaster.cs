@@ -36,6 +36,8 @@ public class QuestMaster : MonoBehaviour
         escortQuestStep = (QuestStep)PlayerPrefs.GetInt("EscortStep");
         deliveryQuestStep = (QuestStep)PlayerPrefs.GetInt("DeliveryStep");
 
+        questsComplete = PlayerPrefs.GetInt("QuestsComplete");
+
         storage = GetComponent<InMemoryVariableStorage>();
 
         dialogueRunner.AddCommandHandler(
@@ -56,6 +58,11 @@ public class QuestMaster : MonoBehaviour
         {
             PlayerPrefs.DeleteAll();
             Debug.LogWarning("Player Pref Reset");
+        }
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            UpdateQuestsComplete();
+            Debug.Log("Quest Complete");
         }
     }
 
@@ -173,8 +180,10 @@ public class QuestMaster : MonoBehaviour
     private void UpdateQuestsComplete()
     {
         questsComplete++;
-        if(questsComplete >= questsTotal)
+        print("Storage has: " + storage.GetValue("all_quests_complete").AsBool);
+        if (questsComplete >= questsTotal)
         {
+            print("ALL QUESTS COMPLETED!");
             storage.SetValue("all_quests_complete", true);
         }
         PlayerPrefs.SetInt("QuestsComplete", questsComplete);
