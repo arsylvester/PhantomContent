@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour
     public float GravityModifier = 1000;
     float footstepDistanceCounter;
 
-    [Header("Footsteps")]
-    [SerializeField] float footStepInterval = 1;
+    [Header("Footsteps")] [SerializeField] float footStepInterval = 1;
     [SerializeField] float cameraBobAmplitude = 0.02f;
     [SerializeField] float stepMinVel = 2.5f;
     [SerializeField] AudioClip[] footStepsClips;
@@ -24,17 +23,16 @@ public class PlayerController : MonoBehaviour
 
     PlayerInput m_InputHandler;
     CharacterController m_Controller;
-    
+
     private ConsoleManager m_Console;
     AudioSource m_audioSource;
-    
+
     public Vector3 CharacterVelocity { get; set; }
     public bool IsGrounded { get; private set; }
 
     [SerializeField] float interactionRadius = 5;
 
-    [Header("Car")]
-    [SerializeField] Image carOverlay; //Move this later
+    [Header("Car")] [SerializeField] Image carOverlay; //Move this later
     [SerializeField] float carSpeed = 20f;
     [SerializeField] float carMovementSharpnessOnGround = 3;
     [SerializeField] AudioClip carAudioClip;
@@ -67,7 +65,6 @@ public class PlayerController : MonoBehaviour
         allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
         m_Console.toggleVisable();
         m_Console.toggleFocus();
-        
 
 
         //TODO: REMOVE THIS LATER!! FIX THE GRAVITY FOR REAL
@@ -90,11 +87,13 @@ public class PlayerController : MonoBehaviour
     void PlayerMovement()
     {
         // rotate the player
-        transform.Rotate(new Vector3(0f, (m_InputHandler.GetRotationInput() * rotationSpeed * Time.deltaTime), 0f), Space.Self);
-        
+        transform.Rotate(new Vector3(0f, (m_InputHandler.GetRotationInput() * rotationSpeed * Time.deltaTime), 0f),
+            Space.Self);
+
         if (isNoclip)
         {
-            transform.position += transform.TransformVector(m_InputHandler.GetMoveInput()) * (maxSpeedOnGround * Time.deltaTime);
+            transform.position += transform.TransformVector(m_InputHandler.GetMoveInput()) *
+                                  (maxSpeedOnGround * Time.deltaTime);
         }
         else
         {
@@ -105,13 +104,14 @@ public class PlayerController : MonoBehaviour
             Vector3 targetVelocity = worldspaceMoveInput * maxSpeedOnGround;
 
             // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
-            CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
+            CharacterVelocity =
+                Vector3.Lerp(CharacterVelocity, targetVelocity, movementSharpnessOnGround * Time.deltaTime);
 
             //print(CharacterVelocity.magnitude);
             // keep track of distance traveled for footsteps sound
             if (CharacterVelocity.magnitude > stepMinVel && IsGrounded)
                 footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
-            
+
             if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
 
 
@@ -125,10 +125,12 @@ public class PlayerController : MonoBehaviour
                 lastStep = stepSound;
                 m_audioSource.PlayOneShot(footStepsClips[stepSound]); // Play footstep sound
             }
-            
+
             m_Controller.Move(CharacterVelocity * Time.deltaTime);
 
-            playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x, -Mathf.Cos(2 * Mathf.PI * footstepDistanceCounter / footStepInterval) / (2 * cameraBobAmplitude), playerCam.transform.localPosition.z);
+            playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x,
+                -Mathf.Cos(2 * Mathf.PI * footstepDistanceCounter / footStepInterval) / (2 * cameraBobAmplitude),
+                playerCam.transform.localPosition.z);
 
             //if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
         }
@@ -137,7 +139,8 @@ public class PlayerController : MonoBehaviour
     void CarMovement()
     {
         // rotate the player
-        transform.Rotate(new Vector3(0f, (m_InputHandler.GetRotationInput() * rotationSpeed * Time.deltaTime), 0f), Space.Self);
+        transform.Rotate(new Vector3(0f, (m_InputHandler.GetRotationInput() * rotationSpeed * Time.deltaTime), 0f),
+            Space.Self);
 
         // converts move input to a worldspace vector based on our character's transform orientation
         Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
@@ -146,12 +149,13 @@ public class PlayerController : MonoBehaviour
         Vector3 targetVelocity = worldspaceMoveInput * carSpeed;
 
         // smoothly interpolate between our current velocity and the target velocity based on acceleration speed
-        CharacterVelocity = Vector3.Lerp(CharacterVelocity, targetVelocity, carMovementSharpnessOnGround * Time.deltaTime);
+        CharacterVelocity =
+            Vector3.Lerp(CharacterVelocity, targetVelocity, carMovementSharpnessOnGround * Time.deltaTime);
 
         if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
 
         // Car sounds
-        if(CharacterVelocity.magnitude > .1f)
+        if (CharacterVelocity.magnitude > .1f)
         {
             if (m_audioSource.clip != carAudioClip || !m_audioSource.isPlaying)
             {
@@ -168,11 +172,11 @@ public class PlayerController : MonoBehaviour
         }
 
         //Car image
-        if(m_InputHandler.GetRotationInput() < 0)
+        if (m_InputHandler.GetRotationInput() < 0)
         {
             carOverlay.sprite = leftCarSprite;
         }
-        else if(m_InputHandler.GetRotationInput() > 0)
+        else if (m_InputHandler.GetRotationInput() > 0)
         {
             carOverlay.sprite = rightCarSprite;
         }
@@ -188,33 +192,37 @@ public class PlayerController : MonoBehaviour
 
     void PlayerInteraction()
     {
-        if (m_InputHandler.GetSpaceBarDown()) {
-            //Debug.Log("Space Bar Pressed");
+        if (m_InputHandler.GetSpaceBarDown())
+        {
+            Debug.Log("Space Bar Pressed");
             if (Dialogue.IsDialogueRunning)
             {
                 DialogueUI.MarkLineComplete();
                 return;
-            } else if (lookingAt != null) {
-                InteractableObject lookingAt = GetLookingAt();
-                if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
-                    Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
-                else
-                    lookingAt.pickUpItem();
+            }
+            InteractableObject lookingAt = GetLookingAt();
+            if (lookingAt != null && lookingAt.type == InteractableObject.InteractableTypes.NPC)
+                Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
+            else if (lookingAt != null)
+            {
+                lookingAt.pickUpItem();
             }
         }
+        
 
         if (m_InputHandler.GetFireInputDown())
         {
             RaycastHit hit;
             Ray ray = playerCam.ScreenPointToRay(Input.mousePosition);
-        
-            if (Physics.Raycast(ray, out hit)) {
+
+            if (Physics.Raycast(ray, out hit))
+            {
                 Transform objectHit = hit.transform;
                 var position = hit.transform.position;
                 m_Console.UpdateLog(objectHit.name + " [" + position.x + ", " + position.y + ", " + position.z + "]");
             }
         }
-        
+
         if (m_InputHandler.GetTildeDown())
         {
             m_Console.toggleVisable();
@@ -249,8 +257,10 @@ public class PlayerController : MonoBehaviour
                 Vector3 viewPos = playerCam.WorldToViewportPoint(allInteractable[i].transform.position);
                 if (viewPos.z > 0 && viewPos.x > 0 && viewPos.x < 1) // if camera is looking at object
                 {
-                    if ((target == null && (allInteractable[i].transform.position - this.transform.position).magnitude < interactionRadius) || // get target within range
-                        (target != null && (allInteractable[i].transform.position - this.transform.position).magnitude < distance)) // get closest target
+                    if ((target == null && (allInteractable[i].transform.position - this.transform.position).magnitude <
+                            interactionRadius) || // get target within range
+                        (target != null && (allInteractable[i].transform.position - this.transform.position).magnitude <
+                            distance)) // get closest target
                     {
                         target = allInteractable[i];
                         distance = (allInteractable[i].transform.position - this.transform.position).magnitude;
@@ -263,15 +273,16 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Looking at " + target.name);
         }
+
         return target;
     }
 
     public void SwapCar()
     {
-        if(m_InputHandler.GetCarModeDown() && !m_Console.isActive)
+        if (m_InputHandler.GetCarModeDown() && !m_Console.isActive)
         {
             CharacterVelocity = Vector3.zero;
-            if(carMode)
+            if (carMode)
             {
                 carMode = false;
                 carOverlay.gameObject.SetActive(false);

@@ -109,8 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cf99398ac79ec429b4f34ee01628c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isNPC: 0
-  isPickUp: 1
+  type: 1
   isAvailable: 1
 --- !u!54 &5360129034355713175
 Rigidbody:
