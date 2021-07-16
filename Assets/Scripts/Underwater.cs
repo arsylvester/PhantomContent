@@ -9,12 +9,14 @@ public class Underwater : MonoBehaviour
     private bool isUnderwater;
     private float waterLevel;
     private Color underwaterColor;
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start()
     {
         underwaterColor = new Color(0.1647f, 0.4353f, 0.4235f, 1f);
         waterLevel = waterPlane.transform.position.y;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class Underwater : MonoBehaviour
     void SetNormal()
     {
         RenderSettings.fog = false;
+        audioSource.Stop();
     }
 
     void SetUnderwater()
@@ -38,5 +41,6 @@ public class Underwater : MonoBehaviour
         RenderSettings.fog = true;
         RenderSettings.fogColor = underwaterColor;
         RenderSettings.fogDensity = fogDensity;
+        audioSource.Play();
     }
 }
