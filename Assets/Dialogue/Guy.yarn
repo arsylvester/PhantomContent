@@ -31,4 +31,5 @@ colorID: 0
 position: 467,126
 ---
 Guy: You brought the fish! Thank you!
+<<complete_quest fish>>
 ===

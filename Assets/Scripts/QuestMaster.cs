@@ -6,6 +6,7 @@ using Yarn.Unity;
 public class QuestMaster : MonoBehaviour
 {
     public DialogueRunner dialogueRunner;
+    public InMemoryVariableStorage storage;
 
     QuestStep mainQuestStep;
     QuestStep fishQuestStep;
@@ -13,6 +14,10 @@ public class QuestMaster : MonoBehaviour
     QuestStep raceQuestStep;
     QuestStep escortQuestStep;
     QuestStep deliveryQuestStep;
+
+    //Quest variables
+    [SerializeField] int questsTotal = 5;
+    int questsComplete;
 
     public enum QuestStep
     {
@@ -31,9 +36,15 @@ public class QuestMaster : MonoBehaviour
         escortQuestStep = (QuestStep)PlayerPrefs.GetInt("EscortStep");
         deliveryQuestStep = (QuestStep)PlayerPrefs.GetInt("DeliveryStep");
 
+        storage = GetComponent<InMemoryVariableStorage>();
+
         dialogueRunner.AddCommandHandler(
             "start_quest",
             StartQuest
+        );
+        dialogueRunner.AddCommandHandler(
+            "complete_quest",
+            CompleteQuest
         );
     }
 
@@ -69,6 +80,48 @@ public class QuestMaster : MonoBehaviour
                 break;
             case "delivery":
                 SetDeliveryQuestStep(QuestStep.InProgress);
+                break;
+            default:
+                break;
+        }
+
+        // Call the completion handler
+        onComplete();
+    }
+
+    private void CompleteQuest(string[] parameters, System.Action onComplete)
+    {
+        switch (parameters[0])
+        {
+            case "main":
+                if (mainQuestStep != QuestStep.Completed)
+                    UpdateQuestsComplete();
+                SetMainQuestStep(QuestStep.Completed);
+                break;
+            case "fish":
+                if (fishQuestStep != QuestStep.Completed)
+                    UpdateQuestsComplete();
+                SetFishQuestStep(QuestStep.Completed);
+                break;
+            case "apple":
+                if (appleQuestStep != QuestStep.Completed)
+                    UpdateQuestsComplete();
+                SetAppleQuestStep(QuestStep.Completed);
+                break;
+            case "race":
+                if (raceQuestStep != QuestStep.Completed)
+                    UpdateQuestsComplete();
+                SetRaceQuestStep(QuestStep.Completed);
+                break;
+            case "escort":
+                if (escortQuestStep != QuestStep.Completed)
+                    UpdateQuestsComplete();
+                SetEscortQuestStep(QuestStep.Completed);
+                break;
+            case "delivery":
+                if (deliveryQuestStep != QuestStep.Completed)
+                    UpdateQuestsComplete();
+                SetDeliveryQuestStep(QuestStep.Completed);
                 break;
             default:
                 break;
@@ -114,6 +167,17 @@ public class QuestMaster : MonoBehaviour
     {
         deliveryQuestStep = step;
         PlayerPrefs.SetInt("DeliveryStep", (int)step);
+        PlayerPrefs.Save();
+    }
+
+    private void UpdateQuestsComplete()
+    {
+        questsComplete++;
+        if(questsComplete >= questsTotal)
+        {
+            storage.SetValue("all_quests_complete", true);
+        }
+        PlayerPrefs.SetInt("QuestsComplete", questsComplete);
         PlayerPrefs.Save();
     }
 }
