@@ -196,9 +196,9 @@ public class PlayerController : MonoBehaviour
                 return;
             } else {
                 InteractableObject lookingAt = GetLookingAt();
-                if (lookingAt != null && lookingAt.isNPC)
+                if (lookingAt != null && lookingAt.type == InteractableObject.InteractableTypes.NPC)
                     Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
-                else if(lookingAt != null && lookingAt.isPickUp)
+                else if(lookingAt != null)
                 {
                     lookingAt.pickUpItem();
                 }
