@@ -1,0 +1,31 @@
+title: Postman
+tags: 
+colorID: 0
+position: 594,-149
+---
+Postman: Hi. Welcome to the Post Office. If you have a package we can deliver it.
+<<if $isDelivering is true>>
+    <<if $delivery_failed is true>>
+        [[DeliveryFailed]]
+    <<else>>
+        [[DeliveryComplete]]
+    <<endif>>
+<<endif>>
+===
+title: DeliveryFailed
+tags: 
+colorID: 0
+position: 467,126
+---
+Postman: Sorry this package is all wet. We can't deliver that.
+===
+title: DeliveryComplete
+tags: 
+colorID: 0
+position: 467,126
+---
+Postman: Great we can deliver that for Del.
+<<set $isDelivering to false>>
+<<set $delivery_complete to true>>
+<<complete_quest delivery>>
+===

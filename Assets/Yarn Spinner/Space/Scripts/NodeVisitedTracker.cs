@@ -22,7 +22,9 @@ public class NodeVisitedTracker : MonoBehaviour
         dialogueRunner.AddFunction("visited", 1, delegate (Yarn.Value[] parameters)
         {
             var nodeName = parameters[0];
-            return _visitedNodes.Contains(nodeName.AsString);
+            bool contains = _visitedNodes.Contains(nodeName.AsString) || PlayerPrefs.HasKey(nodeName.AsString);
+            print(contains);
+            return contains;
         });
 
     }
@@ -32,5 +34,6 @@ public class NodeVisitedTracker : MonoBehaviour
     public void NodeComplete(string nodeName) {
         // Log that the node has been run.
         _visitedNodes.Add(nodeName);
+        PlayerPrefs.SetString(nodeName, nodeName);
     }
 }

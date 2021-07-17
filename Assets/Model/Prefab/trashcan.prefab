@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7276508437476742706}
   - component: {fileID: 6056245406186882471}
   - component: {fileID: 7686269776357648752}
-  - component: {fileID: 4665704127020600842}
   m_Layer: 0
   m_Name: Plane.055
   m_TagString: Untagged
@@ -60,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: c25a4d9ef4cb3434f94f373126c04679, type: 3}
+  - {fileID: 2100000, guid: 8a88e49d9b833974bae29da05dd1ecdf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,20 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4665704127020600842
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3096088868452574255}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7794139723600247275, guid: c25a4d9ef4cb3434f94f373126c04679, type: 3}
 --- !u!1 &4029976661854438378
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +91,6 @@ GameObject:
   m_Component:
   - component: {fileID: 488354156491488068}
   - component: {fileID: 25314127891660679}
-  - component: {fileID: 7626564888942864412}
   m_Layer: 0
   m_Name: Plane.062
   m_TagString: Untagged
@@ -137,20 +121,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4029976661854438378}
   m_Mesh: {fileID: 1020839030400639849, guid: c25a4d9ef4cb3434f94f373126c04679, type: 3}
---- !u!64 &7626564888942864412
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4029976661854438378}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 1020839030400639849, guid: c25a4d9ef4cb3434f94f373126c04679, type: 3}
 --- !u!1 &7489530897619819437
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +130,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7835128686029390103}
+  - component: {fileID: -8090025967490293998}
+  - component: {fileID: 8308964243180148590}
   m_Layer: 0
   m_Name: trashcan
   m_TagString: Untagged
@@ -183,6 +155,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -62.354, z: 0}
+--- !u!54 &-8090025967490293998
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489530897619819437}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &8308964243180148590
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489530897619819437}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.3500001, z: 1.1698313}
+  m_Center: {x: -3.7588954e-10, y: 1.05, z: 0.033103477}
 --- !u!1 &7521393444765000207
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +243,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: c25a4d9ef4cb3434f94f373126c04679, type: 3}
+  - {fileID: 2100000, guid: 8a88e49d9b833974bae29da05dd1ecdf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
