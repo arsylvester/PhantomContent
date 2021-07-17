@@ -1,0 +1,32 @@
+title: Race
+tags: 
+colorID: 0
+position: 594,-149
+---
+<<if visited("Race") is false>>
+    NPC: This is the Quest intro dialogue.
+    <<start_quest race>>
+    [[RaceExplained]]
+<<endif>>
+<<if $quest_var is false>>
+    [[RaceExplained]]
+<<endif>>
+<<if $quest_var is true>>
+    [[RaceComplete]]
+<<endif>>
+===
+title: RaceExplained
+tags: 
+colorID: 0
+position: 722,129
+---
+NPC: This is the quest objective!
+===
+title: RaceComplete
+tags: 
+colorID: 0
+position: 467,126
+---
+NPC: Great! You completed the quest!
+<<complete_quest race>>
+===
