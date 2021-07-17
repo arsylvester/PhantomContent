@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     int lastStep = 0;
 
     [SerializeField] Camera playerCam;
+    [SerializeField] float CarCamHeightDif;
 
     PlayerInput m_InputHandler;
     CharacterController m_Controller;
@@ -52,12 +53,18 @@ public class PlayerController : MonoBehaviour
     private List<GameObject> lookingAt;
     private bool carMode = false;
     public bool isNoclip = false;
+    
 
+    [Header("Clock")]
+    public int hours = 0;
+    public double minutes = 0;
+    public int day = 0;
+    [SerializeField] private Text clock;
+    [SerializeField] private Text dayText;
 
     // Start is called before the first frame update
     void Start()
     {
-        //playerCam = GetComponent<Camera>();
         m_InputHandler = GetComponent<PlayerInput>();
         m_Controller = GetComponent<CharacterController>();
         m_audioSource = GetComponent<AudioSource>();
@@ -73,6 +80,11 @@ public class PlayerController : MonoBehaviour
 
         //TODO: REMOVE THIS LATER!! FIX THE GRAVITY FOR REAL
         IsGrounded = true;
+
+        hours = 6;
+        minutes = 0;
+        day = 1;
+        dayText.text = "day 1";
     }
 
     // Update is called once per frame
@@ -86,6 +98,7 @@ public class PlayerController : MonoBehaviour
             PlayerMovement();
         PlayerInteraction();
         SwapCar();
+        updateTime();
     }
 
     void PlayerMovement()
@@ -197,21 +210,7 @@ public class PlayerController : MonoBehaviour
     void PlayerInteraction()
     {
         InteractableObject lookingAt = GetLookingAt();
-        
 
-        if (lookingAt != null)
-        {
-            interactionText.enabled = true;
-            interactionText.SetText(lookingAt.name);
-            wasLookingAt = true;
-        }
-        else if (wasLookingAt)
-        {
-            interactionText.SetText("");
-            interactionText.enabled = false;
-            wasLookingAt = false;
-        }
-        
         if (m_InputHandler.GetSpaceBarDown())
         {
             Debug.Log("Space Bar Pressed");
@@ -223,12 +222,29 @@ public class PlayerController : MonoBehaviour
             if (lookingAt != null)
             {
                 if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
+                {
                     Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
+                    interactionText.SetText("");
+                    interactionText.enabled = false;
+                }
                 else
                 {
                     lookingAt.pickUpItem();
                 }
             }
+        }
+        
+        if (lookingAt != null && !Dialogue.IsDialogueRunning)
+        {
+            interactionText.enabled = true;
+            interactionText.SetText(lookingAt.name);
+            wasLookingAt = true;
+        }
+        else if (wasLookingAt)
+        {
+            interactionText.SetText("");
+            interactionText.enabled = false;
+            wasLookingAt = false;
         }
         
 
@@ -307,12 +323,14 @@ public class PlayerController : MonoBehaviour
             if (carMode)
             {
                 carMode = false;
+                playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y + CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(false);
                 m_audioSource.Stop();
             }
             else
             {
                 carMode = true;
+                playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y - CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(true);
                 m_audioSource.PlayOneShot(carStartupAudioClip);
             }
@@ -334,5 +352,38 @@ public class PlayerController : MonoBehaviour
         transform.position = v3; // teleport the player
         m_Controller.enabled = true;
         m_Console.UpdateLog("teleporting to [" + v3.x + ", " + v3.y + ", " + v3.z + "]");
+    }
+
+    private void updateTime()
+    {
+        minutes += 5 * Time.deltaTime;
+        if (minutes >= 60)
+        {
+            hours += 1;
+            minutes = 0;
+        }
+
+        if (hours == 24)
+        {
+            //trigger end of day
+            hours = 0;
+            minutes = 0;
+            day++;
+            dayText.text = "day " + day;
+        }
+
+        string h = (hours < 10) ? "0" + hours : "" + hours;
+        string m = (minutes < 10) ? "0" + Math.Floor(minutes) : "" + Math.Floor(minutes);
+
+
+        clock.text = h + ":" + m;
+    }
+
+    public void MoveToSpeed(NPC TalkTo)
+    {
+        Teleport(new Vector3(193, 24, 602));
+        Dialogue.StartDialogue(TalkTo.GetTalkToNode());
+        interactionText.SetText("");
+        interactionText.enabled = false;
     }
 }
