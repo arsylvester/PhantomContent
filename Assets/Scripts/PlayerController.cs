@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     private ConsoleManager m_Console;
     AudioSource m_audioSource;
 
+    private InteractText interactionText;
+    private bool wasLookingAt;
+    
     public Vector3 CharacterVelocity { get; set; }
     public bool IsGrounded { get; private set; }
 
@@ -66,6 +69,7 @@ public class PlayerController : MonoBehaviour
         m_Console.toggleVisable();
         m_Console.toggleFocus();
 
+        interactionText = FindObjectOfType<InteractText>();
 
         //TODO: REMOVE THIS LATER!! FIX THE GRAVITY FOR REAL
         IsGrounded = true;
@@ -192,6 +196,22 @@ public class PlayerController : MonoBehaviour
 
     void PlayerInteraction()
     {
+        InteractableObject lookingAt = GetLookingAt();
+        
+
+        if (lookingAt != null)
+        {
+            interactionText.enabled = true;
+            interactionText.SetText(lookingAt.name);
+            wasLookingAt = true;
+        }
+        else if (wasLookingAt)
+        {
+            interactionText.SetText("");
+            interactionText.enabled = false;
+            wasLookingAt = false;
+        }
+        
         if (m_InputHandler.GetSpaceBarDown())
         {
             Debug.Log("Space Bar Pressed");
@@ -200,12 +220,14 @@ public class PlayerController : MonoBehaviour
                 DialogueUI.MarkLineComplete();
                 return;
             }
-            InteractableObject lookingAt = GetLookingAt();
-            if (lookingAt != null && lookingAt.type == InteractableObject.InteractableTypes.NPC)
-                Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
-            else if (lookingAt != null)
+            if (lookingAt != null)
             {
-                lookingAt.pickUpItem();
+                if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
+                    Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
+                else
+                {
+                    lookingAt.pickUpItem();
+                }
             }
         }
         
@@ -269,10 +291,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (target != null)
+        /*if (target != null)
         {
             Debug.Log("Looking at " + target.name);
-        }
+        }*/
 
         return target;
     }

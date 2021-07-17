@@ -1,0 +1,32 @@
+title: Escort
+tags: 
+colorID: 0
+position: 594,-149
+---
+<<if visited("Escort") is false>>
+    NPC: This is the Quest intro dialogue.
+    <<start_quest escort>>
+    [[EscortExplained]]
+<<endif>>
+<<if $quest_var is false>>
+    [[EscortExplained]]
+<<endif>>
+<<if $quest_var is true>>
+    [[EscortComplete]]
+<<endif>>
+===
+title: EscortExplained
+tags: 
+colorID: 0
+position: 722,129
+---
+NPC: This is the quest objective!
+===
+title: EscortComplete
+tags: 
+colorID: 0
+position: 467,126
+---
+NPC: Great! You completed the quest!
+<<complete_quest escort>>
+===
