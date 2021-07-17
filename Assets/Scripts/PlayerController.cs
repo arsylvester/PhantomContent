@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     int lastStep = 0;
 
     [SerializeField] Camera playerCam;
+    [SerializeField] float CarCamHeightDif;
 
     PlayerInput m_InputHandler;
     CharacterController m_Controller;
@@ -52,12 +53,11 @@ public class PlayerController : MonoBehaviour
     private List<GameObject> lookingAt;
     private bool carMode = false;
     public bool isNoclip = false;
-
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        //playerCam = GetComponent<Camera>();
         m_InputHandler = GetComponent<PlayerInput>();
         m_Controller = GetComponent<CharacterController>();
         m_audioSource = GetComponent<AudioSource>();
@@ -307,12 +307,14 @@ public class PlayerController : MonoBehaviour
             if (carMode)
             {
                 carMode = false;
+                playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y + CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(false);
                 m_audioSource.Stop();
             }
             else
             {
                 carMode = true;
+                playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y - CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(true);
                 m_audioSource.PlayOneShot(carStartupAudioClip);
             }
