@@ -9,11 +9,17 @@ public class MenuManager : MonoBehaviour
     private bool isEndOfDay = false;
     private bool isPaused = false;
 
+    private QuoteManager m_QuoteManager;
+    private PlayerController m_PlayerController;
+
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject dayEndScreen;
     [SerializeField] private Text fovText;
     [SerializeField] private Text volumeText;
+    [SerializeField] private Text quote;
+    [SerializeField] private Text dayCount;
+    [SerializeField] private Text questCount;
     [SerializeField] private Camera camera;
 
     private readonly float[] fovOptions = {46, 60, 73};
@@ -27,8 +33,12 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
+        m_QuoteManager = GameObject.FindObjectOfType<QuoteManager>();
+        m_PlayerController = GameObject.FindObjectOfType<PlayerController>();
+        
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
+        dayEndScreen.SetActive(false);
         
         if (!PlayerPrefs.HasKey("Volume"))
             SetVolume(0);
@@ -45,6 +55,16 @@ public class MenuManager : MonoBehaviour
         volumeText.text = "volume: " + volumeLabels[currentVolume];
         fovText.text = "fov: " + fovLabels[currentFOV];
     }
+
+    /*
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            RunDayEndSequence();
+        }
+    }
+    */
 
     public void ToggleGamePaused()
     {
@@ -74,6 +94,18 @@ public class MenuManager : MonoBehaviour
     public void RunDayEndSequence()
     {
         isEndOfDay = true;
+        dayEndScreen.SetActive(true);
+        dayCount.text = "END OF DAY " + m_PlayerController.day;
+        string todaysQuote = m_QuoteManager.getQuote();
+        quote.text = todaysQuote;
+        StartCoroutine(completeDayEndSequence(3f));
+    }
+
+    public IEnumerator completeDayEndSequence(float f)
+    {
+        yield return new WaitForSecondsRealtime(f);
+        isEndOfDay = false;
+        dayEndScreen.SetActive(false);
     }
 
     public void QuitGame()
