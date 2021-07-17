@@ -26,7 +26,11 @@ public class InteractableObject : MonoBehaviour
         isAvailable = false;
         this.gameObject.SetActive(false);
 
-        InventoryManager.inventoryUpdate(type, 1);
-        Debug.Log("Item picked up: " + type + " = " + InventoryManager.inventory[(int)type]);
+        if (type == InteractableTypes.FISH)
+            QuestMaster.instance.FishUpdated();
+        if (type == InteractableTypes.APPLE)
+            QuestMaster.instance.AppleUpdated();
+        //InventoryManager.inventoryUpdate(type, 1);
+        //Debug.Log("Item picked up: " + type + " = " + InventoryManager.inventory[(int)type]);
     }
 }
