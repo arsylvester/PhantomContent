@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9074123490857719218, guid: 67311833c73ac9143b5493f77d6ab914, type: 3}
       propertyPath: m_Name
-      value: Apple NPC Variant
+      value: AppleNPC
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67311833c73ac9143b5493f77d6ab914, type: 3}
@@ -152,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1836031449753395162, guid: 0f7abfa383438a943bd5b9d351791fba, type: 3}
       propertyPath: m_Name
-      value: Del Variant
+      value: Del
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f7abfa383438a943bd5b9d351791fba, type: 3}
@@ -170,7 +170,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8161563763380405537, guid: d2a735b6295034c48b7a196e4798f3b0, type: 3}
       propertyPath: m_Name
-      value: Speed Variant
+      value: Speed
       objectReference: {fileID: 0}
     - target: {fileID: 8163746745221836697, guid: d2a735b6295034c48b7a196e4798f3b0, type: 3}
       propertyPath: m_RootOrder
@@ -276,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7983708038358914968, guid: 3a8828dc1448f1640a3cc1c43b7941ab, type: 3}
       propertyPath: m_Name
-      value: Fish NPC Variant
+      value: FishNPC
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a8828dc1448f1640a3cc1c43b7941ab, type: 3}
@@ -338,7 +338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1602672291427159900, guid: 31673bb51f6d7a64c80eada8793a8269, type: 3}
       propertyPath: m_Name
-      value: Alley En Variant
+      value: Alley
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31673bb51f6d7a64c80eada8793a8269, type: 3}
@@ -356,7 +356,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4004404112047584912, guid: 7ff9bc0aba3b1c743bdcf360fbfbdbf4, type: 3}
       propertyPath: m_Name
-      value: Postman Variant
+      value: Postman
       objectReference: {fileID: 0}
     - target: {fileID: 4006593140272798760, guid: 7ff9bc0aba3b1c743bdcf360fbfbdbf4, type: 3}
       propertyPath: m_RootOrder

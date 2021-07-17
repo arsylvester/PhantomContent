@@ -4,29 +4,47 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("Race") is false>>
-    NPC: This is the Quest intro dialogue.
+    Speed: I'm the fastest racer around! There is no one who can beat my time!
+    <<get_player_response>>
+    Speed: Oh really? You think you can beat me? Fine, race to the top of the mountain with the post office and beat my time of <i>{$time_to_beat}</i> seconds!
+    Speed: Ready. Set. GO!
     <<start_quest race>>
-    [[RaceExplained]]
 <<endif>>
-<<if $quest_var is false>>
-    [[RaceExplained]]
+
+<<if $race_win is true>>
+    [[RaceWin]]
 <<endif>>
-<<if $quest_var is true>>
-    [[RaceComplete]]
+
+<<if $tryAgain is true>>
+    [[RaceTryAgain]]
+<<else>>
+    [[RaceFailed]]
 <<endif>>
 ===
-title: RaceExplained
+title: RaceWin
 tags: 
 colorID: 0
 position: 722,129
 ---
-NPC: This is the quest objective!
+Speed: I can't believe you beat my time!
 ===
-title: RaceComplete
+title: RaceFailed
 tags: 
 colorID: 0
 position: 467,126
 ---
-NPC: Great! You completed the quest!
-<<complete_quest race>>
+Speed: I told you I was the best! Come talk to me again if you want to try again.
+<<set $tryAgain to true>>
+===
+title: RaceTryAgain
+tags: 
+colorID: 0
+position: 467,126
+---
+Speed: You couldn't beat my time. Want to try again?
+<<get_player_response>>
+Speed: Race to the top of the mountain with the post office and beat my time of <i>{$time_to_beat}</i>!
+Speed: Ready. Set. GO!
+<<set $tryAgain to false>>
+<<start_quest race>>
 ===

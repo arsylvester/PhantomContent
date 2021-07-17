@@ -12,7 +12,8 @@ public class FishMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("swim", 0f, 0.25f);
+        float randomDelay = Random.value * 0.25f;
+        InvokeRepeating("swim", randomDelay, 0.25f);
     }
 
     private void swim()

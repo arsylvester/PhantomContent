@@ -28,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943743011}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3152265378839446369}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!20 &943743012
 Camera:
   m_ObjectHideFlags: 0
@@ -364,7 +364,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.6
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -385,8 +385,8 @@ MonoBehaviour:
   movementSharpnessOnGround: 15
   GravityModifier: 2
   footStepInterval: 4.5
-  cameraBobAmplitude: 5
-  stepMinVel: 2.5
+  cameraBobAmplitude: 10
+  stepMinVel: 8
   footStepsClips:
   - {fileID: 8300000, guid: f9a5ed812d0b971449daef3784fcac84, type: 3}
   - {fileID: 8300000, guid: 5dcd8c22bb3aa8146a4302db7394e7ea, type: 3}
@@ -399,10 +399,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 025da00d73bac074db4cde188bad14fb, type: 3}
   - {fileID: 8300000, guid: d210634c175107d4b82019587298a1c9, type: 3}
   playerCam: {fileID: 943743012}
+  CarCamHeightDif: 0
   interactionRadius: 5
   carOverlay: {fileID: 0}
-  carSpeed: 30
-  carMovementSharpnessOnGround: 1
+  carSpeed: 35
+  carMovementSharpnessOnGround: 1.5
   carAudioClip: {fileID: 8300000, guid: b990f53edc0cbbe4ab4c95200bbdd64d, type: 3}
   carStartupAudioClip: {fileID: 8300000, guid: 3de91fe6a66aefb439af339b579c0527, type: 3}
   carPitchMod: 1000
@@ -410,6 +411,11 @@ MonoBehaviour:
   leftCarSprite: {fileID: 21300000, guid: a24c8c0bbe830514598a83f1d453099c, type: 3}
   rightCarSprite: {fileID: 21300000, guid: e0c3437d6728886458815a16bd9dbe1e, type: 3}
   isNoclip: 0
+  hours: 0
+  minutes: 0
+  day: 0
+  clock: {fileID: 0}
+  dayText: {fileID: 0}
 --- !u!114 &3152265378839446375
 MonoBehaviour:
   m_ObjectHideFlags: 0

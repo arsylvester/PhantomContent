@@ -4,7 +4,11 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("May") is false>>
-    May: This is the main quest! We need to write actual dialogue 
+    May N.: Hey there, I really need some help here.
+	May N.: The town is in disarray. Several townspeople can't complete basic tasks on their own. 
+	May N.: Can you please check in on your neighbors around the area and see what they need?
+	<<get_player_response>>
+	May N.: Amazing, I knew I could count on you!
     <<start_quest main>>
     [[MayExplains]]
 <<endif>>
@@ -21,13 +25,16 @@ tags:
 colorID: 0
 position: 722,129
 ---
-May: Go talk to everyone!
+May N.: Go chat with everyone in need, and help them out! You can report back to me then.
 ===
 title: MayHappy
 tags: 
 colorID: 0
 position: 467,126
 ---
-May: Great! You completed all quests.
+May N.: Superb! I'm so proud of you!!
+May N.: Don't you feel pleased with yourself for helping your community?
+<<get_player_response>>
+May N.: I'm glad you feel accomplished. You've done us a great service. 
 <<complete_quest main>>
 ===
