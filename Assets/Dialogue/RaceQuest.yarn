@@ -11,14 +11,14 @@ position: 594,-149
     <<start_quest race>>
 <<endif>>
 
+<<if $race_win is true>>
+    [[RaceWin]]
+<<endif>>
+
 <<if $tryAgain is true>>
     [[RaceTryAgain]]
 <<else>>
     [[RaceFailed]]
-<<endif>>
-
-<<if $race_win is true>>
-    [[RaceWin]]
 <<endif>>
 ===
 title: RaceWin
