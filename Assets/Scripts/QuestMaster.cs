@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
+using UnityEngine.UI;
+using Yarn.Unity.Example;
 
 public class QuestMaster : MonoBehaviour
 {
+    public static QuestMaster instance;
     public DialogueRunner dialogueRunner;
     public InMemoryVariableStorage storage;
+    PlayerController player;
 
     QuestStep mainQuestStep;
     QuestStep fishQuestStep;
@@ -16,8 +20,16 @@ public class QuestMaster : MonoBehaviour
     QuestStep deliveryQuestStep;
 
     //Quest variables
+    //Main
     [SerializeField] int questsTotal = 5;
     int questsComplete;
+    //Race
+    [SerializeField] float raceTimeLimit = 30f;
+    float currentRaceTime;
+    [SerializeField] Text raceTimeText;
+    public bool isInRace = false;
+    [SerializeField] GameObject RaceFinishLine;
+    [SerializeField] NPC RaceNPC;
 
     public enum QuestStep
     {
@@ -29,6 +41,9 @@ public class QuestMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+        player = FindObjectOfType<PlayerController>();
+
         mainQuestStep = (QuestStep)PlayerPrefs.GetInt("MainStep");
         fishQuestStep = (QuestStep)PlayerPrefs.GetInt("FishStep");
         appleQuestStep = (QuestStep)PlayerPrefs.GetInt("AppleStep");
@@ -83,6 +98,7 @@ public class QuestMaster : MonoBehaviour
                 break;
             case "race":
                 SetRaceQuestStep(QuestStep.InProgress);
+                StartRace();
                 break;
             case "escort":
                 SetEscortQuestStep(QuestStep.InProgress);
@@ -197,10 +213,53 @@ public class QuestMaster : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         if (questsComplete >= questsTotal)
             storage.SetValue("$all_quests_complete", true);
+        storage.SetValue("$time_to_beat", raceTimeLimit);
     }
 
     public void FailDeliveryQuest()
     {
         storage.SetValue("$delivery_failed", true);
+    }
+
+    public void StartRace()
+    {
+        currentRaceTime = raceTimeLimit;
+        raceTimeText.gameObject.SetActive(true);
+        isInRace = true;
+        storage.SetValue("$race_failed", false);
+        RaceFinishLine.SetActive(true);
+        StartCoroutine(RaceCountDown());
+    }
+
+    IEnumerator RaceCountDown()
+    {
+        while (currentRaceTime > 0)
+        {
+            currentRaceTime -= Time.deltaTime;
+            raceTimeText.text = "" + Mathf.Floor(currentRaceTime);
+            yield return new WaitForEndOfFrame();
+        }
+        raceTimeText.gameObject.SetActive(false);
+        storage.SetValue("$race_failed", true);
+        isInRace = false;
+        player.MoveToSpeed(RaceNPC);
+    }
+
+    public void RaceWin()
+    {
+        if (raceQuestStep != QuestStep.Completed)
+            UpdateQuestsComplete();
+        SetRaceQuestStep(QuestStep.Completed);
+        StopAllCoroutines();
+        storage.SetValue("$race_win", true);
+        raceTimeText.color = Color.green;
+        RaceFinishLine.SetActive(false);
+        StartCoroutine(DelayTextDisappear());
+    }
+
+    IEnumerator DelayTextDisappear()
+    {
+        yield return new WaitForSeconds(5);
+        raceTimeText.gameObject.SetActive(false);
     }
 }
