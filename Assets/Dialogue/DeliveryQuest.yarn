@@ -1,0 +1,40 @@
+title: Del
+tags: 
+colorID: 0
+position: 594,-149
+---
+<<if visited("Del") is false>>
+    Del: This is the delivery quest. Go deliver this package.
+    <<start_quest delivery>>
+    <<set $isDelivering to true>>
+    [[DelExplains]]
+<<elseif $delivery_failed is true>>
+    [[DelFailed]]
+<<elseif $delivery_complete is true>>
+    [[DelHappy]]
+<<else>>
+    [[DelExplains]]
+<<endif>>
+===
+title: DelExplains
+tags: 
+colorID: 0
+position: 722,129
+---
+Del: Deliver it to the post office in the mountains. Remember don't get it wet.
+===
+title: DelFailed
+tags: 
+colorID: 0
+position: 722,129
+---
+Del: You got it wet?? It's fine, I have another. Don't get it wet this time.
+<<set $delivery_failed to false>>
+===
+title: DelHappy
+tags: 
+colorID: 0
+position: 467,126
+---
+Del: Thanks for delivering that!
+===
