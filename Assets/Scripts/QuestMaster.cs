@@ -37,8 +37,10 @@ public class QuestMaster : MonoBehaviour
         deliveryQuestStep = (QuestStep)PlayerPrefs.GetInt("DeliveryStep");
 
         questsComplete = PlayerPrefs.GetInt("QuestsComplete");
+        print("Quests completed: " + questsComplete);
 
         storage = GetComponent<InMemoryVariableStorage>();
+        StartCoroutine(DelaySetYarnVars());
 
         dialogueRunner.AddCommandHandler(
             "start_quest",
@@ -180,13 +182,20 @@ public class QuestMaster : MonoBehaviour
     private void UpdateQuestsComplete()
     {
         questsComplete++;
-        print("Storage has: " + storage.GetValue("all_quests_complete").AsBool);
         if (questsComplete >= questsTotal)
         {
             print("ALL QUESTS COMPLETED!");
-            storage.SetValue("all_quests_complete", true);
+            storage.SetValue("$all_quests_complete", true);
         }
+        //print("Storage has: " + storage.GetValue("$all_quests_complete").AsBool);
         PlayerPrefs.SetInt("QuestsComplete", questsComplete);
         PlayerPrefs.Save();
+    }
+
+    IEnumerator DelaySetYarnVars()
+    {
+        yield return new WaitForSeconds(.1f);
+        if (questsComplete >= questsTotal)
+            storage.SetValue("$all_quests_complete", true);
     }
 }
