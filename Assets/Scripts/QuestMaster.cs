@@ -30,6 +30,11 @@ public class QuestMaster : MonoBehaviour
     public bool isInRace = false;
     [SerializeField] GameObject RaceFinishLine;
     [SerializeField] NPC RaceNPC;
+    //Apple
+    [SerializeField] int applesNeeded = 7;
+    int apples;
+    [SerializeField] int fishNeeded = 5;
+    int fish;
 
     public enum QuestStep
     {
@@ -52,7 +57,8 @@ public class QuestMaster : MonoBehaviour
         deliveryQuestStep = (QuestStep)PlayerPrefs.GetInt("DeliveryStep");
 
         questsComplete = PlayerPrefs.GetInt("QuestsComplete");
-        print("Quests completed: " + questsComplete);
+        fish = PlayerPrefs.GetInt("fish");
+        apples = PlayerPrefs.GetInt("apples");
 
         storage = GetComponent<InMemoryVariableStorage>();
         StartCoroutine(DelaySetYarnVars());
@@ -211,9 +217,22 @@ public class QuestMaster : MonoBehaviour
     IEnumerator DelaySetYarnVars()
     {
         yield return new WaitForSeconds(.1f);
+        //Main
         if (questsComplete >= questsTotal)
             storage.SetValue("$all_quests_complete", true);
+        //Race
         storage.SetValue("$time_to_beat", raceTimeLimit);
+        //Fish
+        if (fish >= fishNeeded)
+        {
+            storage.SetValue("$fish_completed", true);
+        }
+        //apple
+        if (apples >= applesNeeded)
+        {
+            storage.SetValue("$apple_completed", true);
+            print("Apples: " + storage.GetValue("$apple_completed").AsBool);
+        }
     }
 
     public void FailDeliveryQuest()
@@ -261,5 +280,28 @@ public class QuestMaster : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         raceTimeText.gameObject.SetActive(false);
+    }
+
+    public void FishUpdated()
+    {
+        //int fish = InventoryManager.inventory[(int)InteractableObject.InteractableTypes.FISH];
+        fish++;
+        PlayerPrefs.SetInt("fish", fish);
+        PlayerPrefs.Save();
+        if (fish >= fishNeeded)
+        {
+            storage.SetValue("$fish_completed", true);
+        }
+    }
+
+    public void AppleUpdated()
+    {
+        apples++;
+        PlayerPrefs.SetInt("apples", apples);
+        PlayerPrefs.Save();
+        if (apples >= applesNeeded)
+        {
+            storage.SetValue("$apple_completed", true);
+        }
     }
 }

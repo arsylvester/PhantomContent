@@ -10,6 +10,7 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         inventory = new int[InteractableObject.NUM_ITEM_TYPES];
+        //inventory[(int)InteractableObject.InteractableTypes.FISH] = PlayerPrefs.GetInt("fish");
     }
 
     public static void inventoryUpdate(InteractableObject.InteractableTypes item, int quantity)
