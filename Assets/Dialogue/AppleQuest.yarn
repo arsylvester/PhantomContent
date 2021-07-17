@@ -3,8 +3,9 @@ tags:
 colorID: 0
 position: 594,-149
 ---
-<<if visited("Fish") is false>>
-    NPC: This is the Quest intro dialogue.
+<<if visited("Apple") is false>>
+    Clementine: Hello! Please help me out here. My apple supply has run out, and I need them for self defense. 
+	Clementine: I knew you'd understand. 
     <<start_quest apple>>
     [[AppleExplained]]
 <<endif>>
@@ -20,13 +21,14 @@ tags:
 colorID: 0
 position: 722,129
 ---
-NPC: This is the quest objective!
+Clementine: You can find apples in the forest northeast of town. Please bring me 7 of them!
 ===
 title: AppleComplete
 tags: 
 colorID: 0
 position: 467,126
 ---
-NPC: Great! You completed the quest!
+Clementine: YES! APPLES!
+Clementine: Now these good-for-nothing doctors can't find me for another week...
 <<complete_quest apple>>
 ===
