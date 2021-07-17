@@ -1,0 +1,32 @@
+title: Fish
+tags: 
+colorID: 0
+position: 594,-149
+---
+<<if visited("Fish") is false>>
+    NPC: This is the Quest intro dialogue.
+    <<start_quest fish>>
+    [[FishExplained]]
+<<endif>>
+<<if $quest_var is false>>
+    [[FishExplained]]
+<<endif>>
+<<if $quest_var is true>>
+    [[FishComplete]]
+<<endif>>
+===
+title: FishExplained
+tags: 
+colorID: 0
+position: 722,129
+---
+NPC: This is the quest objective!
+===
+title: FishComplete
+tags: 
+colorID: 0
+position: 467,126
+---
+NPC: Great! You completed the quest!
+<<complete_quest fish>>
+===
