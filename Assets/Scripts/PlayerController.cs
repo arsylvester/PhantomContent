@@ -375,4 +375,12 @@ public class PlayerController : MonoBehaviour
 
         clock.text = h + ":" + m;
     }
+
+    public void MoveToSpeed(NPC TalkTo)
+    {
+        Teleport(new Vector3(193, 24, 602));
+        Dialogue.StartDialogue(TalkTo.GetTalkToNode());
+        interactionText.SetText("");
+        interactionText.enabled = false;
+    }
 }
