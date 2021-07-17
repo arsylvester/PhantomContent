@@ -10,6 +10,7 @@ public class Underwater : MonoBehaviour
     private float waterLevel;
     private Color underwaterColor;
     private AudioSource audioSource;
+    private QuestMaster questMaster;
 
     // Use this for initialization
     void Start()
@@ -17,6 +18,7 @@ public class Underwater : MonoBehaviour
         underwaterColor = new Color(0.1647f, 0.4353f, 0.4235f, 1f);
         waterLevel = waterPlane.transform.position.y;
         audioSource = GetComponent<AudioSource>();
+        questMaster = FindObjectOfType<QuestMaster>();
     }
 
     // Update is called once per frame
@@ -42,5 +44,7 @@ public class Underwater : MonoBehaviour
         RenderSettings.fogColor = underwaterColor;
         RenderSettings.fogDensity = fogDensity;
         audioSource.Play();
+        //Fail quest
+        questMaster.FailDeliveryQuest();
     }
 }

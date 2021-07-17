@@ -198,4 +198,9 @@ public class QuestMaster : MonoBehaviour
         if (questsComplete >= questsTotal)
             storage.SetValue("$all_quests_complete", true);
     }
+
+    public void FailDeliveryQuest()
+    {
+        storage.SetValue("$delivery_failed", true);
+    }
 }
