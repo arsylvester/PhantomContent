@@ -4,11 +4,11 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("Escort") is false>>
-    NPC: This is the Quest intro dialogue.
+    Ally Yen: Greetings, fellow human! I need assistance.
+    Ally Yen: Will you escort me to coordinates (230, 27, 745)? I am on my way to the most beautiful corn maize. 
+    Ally Yen: My sincere gratitude to you. I will lead the way.
     <<start_quest escort>>
-    [[EscortExplained]]
-<<endif>>
-<<if $quest_var is false>>
+<<elseif $quest_var is false>>
     [[EscortExplained]]
 <<endif>>
 <<if $quest_var is true>>
@@ -20,13 +20,13 @@ tags:
 colorID: 0
 position: 722,129
 ---
-NPC: This is the quest objective!
+Ally Yen: Is all well, comrade? We are heading to the corn located at world coordinates (230, 27, 745).
 ===
 title: EscortComplete
 tags: 
 colorID: 0
 position: 467,126
 ---
-NPC: Great! You completed the quest!
+Ally: My sincerest gratitude to you for joining me. This will be the location of my next major art project, and I am looking forward to starting on it.
 <<complete_quest escort>>
 ===

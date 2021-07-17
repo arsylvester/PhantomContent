@@ -4,7 +4,10 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("Fish") is false>>
-    NPC: This is the Quest intro dialogue.
+    River: Hey you, can you do me a favor?
+	<<get_player_response>>
+	River: Great, so my family is having a big cookout this weekend. We’d love to roll the dice on some sushi. Think you can bring us 5 fish?
+    River: Wonderful! 
     <<start_quest fish>>
     [[FishExplained]]
 <<endif>>
@@ -20,13 +23,13 @@ tags:
 colorID: 0
 position: 722,129
 ---
-NPC: This is the quest objective!
+River: Fish don’t just appear out of thin air, so you’ll have to go to the lake northwest of town and catch 5 of them yourself. Good luck!
 ===
 title: FishComplete
 tags: 
 colorID: 0
 position: 467,126
 ---
-NPC: Great! You completed the quest!
+River: You brought the fish! Thank you!
 <<complete_quest fish>>
 ===
