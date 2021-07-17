@@ -36,7 +36,11 @@ public class QuestMaster : MonoBehaviour
         escortQuestStep = (QuestStep)PlayerPrefs.GetInt("EscortStep");
         deliveryQuestStep = (QuestStep)PlayerPrefs.GetInt("DeliveryStep");
 
+        questsComplete = PlayerPrefs.GetInt("QuestsComplete");
+        print("Quests completed: " + questsComplete);
+
         storage = GetComponent<InMemoryVariableStorage>();
+        StartCoroutine(DelaySetYarnVars());
 
         dialogueRunner.AddCommandHandler(
             "start_quest",
@@ -56,6 +60,11 @@ public class QuestMaster : MonoBehaviour
         {
             PlayerPrefs.DeleteAll();
             Debug.LogWarning("Player Pref Reset");
+        }
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            UpdateQuestsComplete();
+            Debug.Log("Quest Complete");
         }
     }
 
@@ -173,11 +182,25 @@ public class QuestMaster : MonoBehaviour
     private void UpdateQuestsComplete()
     {
         questsComplete++;
-        if(questsComplete >= questsTotal)
+        if (questsComplete >= questsTotal)
         {
-            storage.SetValue("all_quests_complete", true);
+            print("ALL QUESTS COMPLETED!");
+            storage.SetValue("$all_quests_complete", true);
         }
+        //print("Storage has: " + storage.GetValue("$all_quests_complete").AsBool);
         PlayerPrefs.SetInt("QuestsComplete", questsComplete);
         PlayerPrefs.Save();
+    }
+
+    IEnumerator DelaySetYarnVars()
+    {
+        yield return new WaitForSeconds(.1f);
+        if (questsComplete >= questsTotal)
+            storage.SetValue("$all_quests_complete", true);
+    }
+
+    public void FailDeliveryQuest()
+    {
+        storage.SetValue("$delivery_failed", true);
     }
 }

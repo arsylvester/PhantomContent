@@ -1,0 +1,33 @@
+title: May
+tags: 
+colorID: 0
+position: 594,-149
+---
+<<if visited("May") is false>>
+    May: This is the main quest! We need to write actual dialogue 
+    <<start_quest main>>
+    [[MayExplains]]
+<<endif>>
+<<if $all_quests_complete is false>>
+    [[MayExplains]]
+<<endif>>
+
+<<if $all_quests_complete is true>>
+    [[MayHappy]]
+<<endif>>
+===
+title: MayExplains
+tags: 
+colorID: 0
+position: 722,129
+---
+May: Go talk to everyone!
+===
+title: MayHappy
+tags: 
+colorID: 0
+position: 467,126
+---
+May: Great! You completed all quests.
+<<complete_quest main>>
+===
