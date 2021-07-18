@@ -13,6 +13,13 @@ public class PlayerController : MonoBehaviour
     public float GravityModifier = 1000;
     float footstepDistanceCounter;
 
+    [Header("Skybox")] [SerializeField] private Material skyboxDay;
+    [SerializeField] private Material skyboxNight;
+    [SerializeField] private Material skyboxDawn;
+    [SerializeField] private Material skyboxDusk;
+    [SerializeField] Light directionalLight;
+
+
     [Header("Footsteps")] [SerializeField] float footStepInterval = 1;
     [SerializeField] float cameraBobAmplitude = 0.02f;
     [SerializeField] float stepMinVel = 2.5f;
@@ -53,14 +60,14 @@ public class PlayerController : MonoBehaviour
     public String characterName;
     private bool carMode = false;
     public bool isNoclip = false;
+    public bool hasKeys = false;
     
 
     [Header("Clock")]
     public int hours = 0;
     public double minutes = 0;
-    public int day = 0;
     [SerializeField] private Text clock;
-    [SerializeField] private Text dayText;
+    [SerializeField] public Text dayText;
 
     // Start is called before the first frame update
     void Start()
@@ -82,8 +89,10 @@ public class PlayerController : MonoBehaviour
 
         hours = 6;
         minutes = 0;
-        day = 1;
-        dayText.text = "day 1";
+        RenderSettings.skybox = skyboxDawn;
+        directionalLight.color = new Vector4(0.9339623f, 0.790913f, 0.5771182f, 1);
+        directionalLight.transform.rotation = Quaternion.Euler(53.584f, 11.114f, 176.684f);
+        directionalLight.intensity = 0.75f;
     }
 
     // Update is called once per frame
@@ -96,7 +105,8 @@ public class PlayerController : MonoBehaviour
         else
             PlayerMovement();
         PlayerInteraction();
-        SwapCar();
+        if(hasKeys)
+            SwapCar();
         updateTime();
         
         if (m_InputHandler.GetEscDown())
@@ -368,17 +378,45 @@ public class PlayerController : MonoBehaviour
         {
             hours += 1;
             minutes = 0;
+            
+            switch (hours) // change the skybox at certain hours
+            {
+                case 6:
+                    RenderSettings.skybox = skyboxDawn;
+                    directionalLight.color = new Vector4(0.9339623f, 0.790913f, 0.5771182f, 1);
+                    directionalLight.transform.rotation = Quaternion.Euler(53.584f, 11.114f, 176.684f);
+                    directionalLight.intensity = 0.75f;
+                    break;
+                case 10:
+                    RenderSettings.skybox = skyboxDay;
+                    directionalLight.color = new Vector4(1, 0.9568627f, 0.8392157f, 1);
+                    directionalLight.transform.rotation = Quaternion.Euler(62.242f, -162.474f, 4.228f);
+                    directionalLight.intensity = 1;
+                    break;
+                case 18:
+                    RenderSettings.skybox = skyboxDusk;
+                    directionalLight.color = new Vector4(0.9716981f, 0.706511f, 0.6004361f, 1);
+                    directionalLight.transform.rotation = Quaternion.Euler(35.589f, -164.808f, 2.42f);
+                    directionalLight.intensity = 0.65f;
+                    break;
+                case 22:
+                    RenderSettings.skybox = skyboxNight;
+                    directionalLight.color = new Vector4(0.8470589f, 0.7882354f, 0.6705883f, 1);
+                    directionalLight.transform.rotation = Quaternion.Euler(42.407f, -183.328f, -8.39f);
+                    directionalLight.intensity = 0.2f;
+                    break;
+            }
+            
+            if (hours == 24)
+            {
+                // trigger end of day
+                hours = 0;
+                minutes = 0;
+                m_MenuManager.NextDay();
+                m_MenuManager.RunDayEndSequence();
+            }
         }
-
-        if (hours == 24)
-        {
-            //trigger end of day
-            hours = 0;
-            minutes = 0;
-            day++;
-            dayText.text = "day " + day;
-        }
-
+        
         string h = (hours < 10) ? "0" + hours : "" + hours;
         string m = (minutes < 10) ? "0" + Math.Floor(minutes) : "" + Math.Floor(minutes);
 

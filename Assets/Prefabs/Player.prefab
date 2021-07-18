@@ -383,6 +383,10 @@ MonoBehaviour:
   maxSpeedOnGround: 10
   movementSharpnessOnGround: 15
   GravityModifier: 2
+  skyboxDay: {fileID: 2100000, guid: 7167d6d87b26e0c42a618d8d2d5665b7, type: 2}
+  skyboxNight: {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
+  skyboxDawn: {fileID: 2100000, guid: 351dcfe340c8d0e4cbcb89c4ec80f061, type: 2}
+  skyboxDusk: {fileID: 2100000, guid: e391f00234292cc4f935308c11cf0e54, type: 2}
   footStepInterval: 4.5
   cameraBobAmplitude: 10
   stepMinVel: 8
@@ -409,10 +413,11 @@ MonoBehaviour:
   straightCarSprite: {fileID: 21300000, guid: 8c00e580747fd2e4c91596dec6df30fe, type: 3}
   leftCarSprite: {fileID: 21300000, guid: a24c8c0bbe830514598a83f1d453099c, type: 3}
   rightCarSprite: {fileID: 21300000, guid: e0c3437d6728886458815a16bd9dbe1e, type: 3}
+  characterName: 
   isNoclip: 0
+  hasKeys: 0
   hours: 0
   minutes: 0
-  day: 0
   clock: {fileID: 0}
   dayText: {fileID: 0}
 --- !u!114 &3152265378839446375
@@ -436,7 +441,7 @@ AudioSource:
   m_GameObject: {fileID: 3152265378839446370}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 2421e64602561c6469a4c1ce9b351153, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.75
