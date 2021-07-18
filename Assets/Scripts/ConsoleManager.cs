@@ -23,8 +23,16 @@ public class ConsoleManager : MonoBehaviour
 
     [Header("Commands")] [SerializeField] public ConsoleCommand[] cmds;
 
+    private string currentEntry;
+
     void Update()
     {
+        if(currentEntry != entryField.text)
+        {
+            currentEntry = entryField.text;
+            Debug.Log(getCommandAutofill(currentEntry));
+        }
+
         if (isActive && Input.GetKeyDown(KeyCode.Return))
         {
             UpdateLog("> " + entryField.text);
@@ -111,5 +119,57 @@ public class ConsoleManager : MonoBehaviour
         cScrollRect.verticalNormalizedPosition = 0f;
         Canvas.ForceUpdateCanvases();
         cScrollBar.value = 0;
+    }
+
+    private string getCommandAutofill(string input)
+    {
+        if (input == "")
+        {
+            return "help";
+        }
+
+        string[] commandItems = input.Split(' ');
+        string autoFill = "";
+
+        if (commandItems.Length == 1)
+        {
+            foreach (var x in cmds)
+            {
+                // check if command key word matches any existing commands
+                if (x.CommandStr.IndexOf(input.ToLower()) != 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    autoFill = x.CommandStr;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            string command = commandItems[0];
+            string[] arguments = commandItems.Skip(1).ToArray();
+
+            if(command == "spawn")
+            {
+                foreach (string x in SpawnDictionaryBuilder.objectDictionary.Keys)
+                {
+                    // check if command key word matches any existing commands
+                    if (x.IndexOf(arguments[0].ToLower()) != 0)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        autoFill = command + " " + x;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return autoFill;
     }
 }

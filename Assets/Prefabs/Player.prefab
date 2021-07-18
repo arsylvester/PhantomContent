@@ -387,6 +387,13 @@ MonoBehaviour:
   skyboxNight: {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
   skyboxDawn: {fileID: 2100000, guid: 351dcfe340c8d0e4cbcb89c4ec80f061, type: 2}
   skyboxDusk: {fileID: 2100000, guid: e391f00234292cc4f935308c11cf0e54, type: 2}
+  directionalLight: {fileID: 0}
+  ambinaceAudio: {fileID: 0}
+  dayClip: {fileID: 8300000, guid: e14f3db02fe64d0479cc3c3e3ad4896c, type: 3}
+  nightClip: {fileID: 8300000, guid: 796b549d39fd37c4bb417b763b039457, type: 3}
+  clockTicks:
+  - {fileID: 8300000, guid: c89c312dff0453146b12b8434680d478, type: 3}
+  - {fileID: 8300000, guid: 5dab354137e4ac242b516fc3d95d0f4e, type: 3}
   footStepInterval: 4.5
   cameraBobAmplitude: 10
   stepMinVel: 8
@@ -413,9 +420,21 @@ MonoBehaviour:
   straightCarSprite: {fileID: 21300000, guid: 8c00e580747fd2e4c91596dec6df30fe, type: 3}
   leftCarSprite: {fileID: 21300000, guid: a24c8c0bbe830514598a83f1d453099c, type: 3}
   rightCarSprite: {fileID: 21300000, guid: e0c3437d6728886458815a16bd9dbe1e, type: 3}
+  playerCar: {fileID: 0}
+  carLockClip: {fileID: 8300000, guid: 486b5487c937db64798f885245cd72c0, type: 3}
+  npcs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   characterName: 
   isNoclip: 0
   hasKeys: 0
+  DEFAULT_TIMESCALE: 1
   hours: 0
   minutes: 0
   clock: {fileID: 0}
@@ -444,7 +463,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 2421e64602561c6469a4c1ce9b351153, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0

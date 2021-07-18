@@ -25,6 +25,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] AudioClip FirstDrumClip;
     [SerializeField] AudioClip YoooClip;
+    [SerializeField] AudioClip ButtonClip;
 
     private readonly float[] fovOptions = {46, 60, 73};
     private readonly string[] fovLabels = {"tight", "normal", "wide"};
@@ -171,5 +172,10 @@ public class MenuManager : MonoBehaviour
         camera.fieldOfView = fovOptions[currentFOV];
         fovText.text = "fov: " + fovLabels[currentFOV];
         SetFOV(fovOptions[currentFOV]);
+    }
+
+    public void PlayButtonSound()
+    {
+        audio.PlayOneShot(ButtonClip);
     }
 }
