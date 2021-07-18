@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
 
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
-    //private List<InteractableObject> allInteractable;
     private List<GameObject> lookingAt;
     public String characterName;
     private bool carMode = false;
@@ -73,8 +72,6 @@ public class PlayerController : MonoBehaviour
         m_MenuManager = FindObjectOfType<MenuManager>();
         Dialogue = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
-        allParticipants = new List<NPC>(FindObjectsOfType<NPC>());
-        allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
         characterName = "";
         m_Console.toggleVisable();
         m_Console.toggleFocus();
@@ -82,9 +79,6 @@ public class PlayerController : MonoBehaviour
         interactionText = FindObjectOfType<InteractText>();
 
         defaultCamHeight = playerCam.transform.localPosition.y;
-
-        //TODO: REMOVE THIS LATER!! FIX THE GRAVITY FOR REAL
-        IsGrounded = true;
 
         hours = 6;
         minutes = 0;
@@ -218,8 +212,6 @@ public class PlayerController : MonoBehaviour
         {
             carOverlay.sprite = straightCarSprite;
         }
-
-        //TODO: add head bobbing
 
         m_Controller.Move(CharacterVelocity * Time.deltaTime);
     }
