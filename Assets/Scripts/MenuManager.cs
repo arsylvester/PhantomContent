@@ -14,11 +14,17 @@ public class MenuManager : MonoBehaviour
     private QuoteManager m_QuoteManager;
     private PlayerController m_PlayerController;
 
+    [Header("Animation Timing")] 
+    [SerializeField] private float delayOne;
+    [SerializeField] private float delayTwo;
+
+    [Header("UI Elements")]
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject dayEndScreen;
     [SerializeField] private Text fovText;
     [SerializeField] private Text volumeText;
+    [SerializeField] private Text quoteHeader;
     [SerializeField] private Text quote;
     [SerializeField] private Text dayCount;
     [SerializeField] private Text questCount;
@@ -27,6 +33,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] AudioClip YoooClip;
     [SerializeField] AudioClip ButtonClip;
 
+    [Header("Player Settings")]
     private readonly float[] fovOptions = {46, 60, 73};
     private readonly string[] fovLabels = {"tight", "normal", "wide"};
     private readonly float[] volumeOptions = {-80, -20, -10, 0, 10, 20}; // volume levels in db
@@ -101,20 +108,30 @@ public class MenuManager : MonoBehaviour
     {
         isEndOfDay = true;
         dayEndScreen.SetActive(true);
+        dayCount.gameObject.SetActive(true);
+        quote.gameObject.SetActive(false); // too lazy to put this in start
+        quoteHeader.gameObject.SetActive(false);
         dayCount.text = "END OF DAY " + (day - 1);
         questCount.text = "Quests Completed: " + QuestMaster.instance.questsComplete + "/" +
                           QuestMaster.instance.questsTotal;
-        string todaysQuote = m_QuoteManager.getQuote();
-        quote.text = todaysQuote;
         audio.PlayOneShot(FirstDrumClip);
-        StartCoroutine(completeDayEndSequence(3f));
+        StartCoroutine(completeDayEndSequence());
     }
 
-    public IEnumerator completeDayEndSequence(float f)
+    public IEnumerator completeDayEndSequence()
     {
-        yield return new WaitForSecondsRealtime(f);
+        yield return new WaitForSecondsRealtime(delayOne);
+        string todaysQuote = m_QuoteManager.getQuote();
+        quote.gameObject.SetActive(true);
+        quoteHeader.gameObject.SetActive(true);
+        quote.text = todaysQuote;
         audio.PlayOneShot(YoooClip);
+        
+        yield return new WaitForSecondsRealtime(delayTwo);
         isEndOfDay = false;
+        dayCount.gameObject.SetActive(false);
+        quote.gameObject.SetActive(false);
+        quoteHeader.gameObject.SetActive(false);
         dayEndScreen.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -149,7 +166,6 @@ public class MenuManager : MonoBehaviour
     public void NextDay()
     {
         SetDay(day + 1);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void ChangeVolume()
