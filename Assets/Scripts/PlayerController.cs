@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite rightCarSprite;
     [SerializeField] GameObject playerCar;
 
+    [Header("Quest Highlight Mode")]
+    [SerializeField] NPC[] npcs;
+    private bool inQuestMode;
+
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
     private List<GameObject> lookingAt;
@@ -109,6 +113,7 @@ public class PlayerController : MonoBehaviour
         if(hasKeys)
             SwapCar();
         updateTime();
+        QuestMode();
         
         if (m_InputHandler.GetEscDown())
             m_MenuManager.ToggleGamePaused();
@@ -438,5 +443,25 @@ public class PlayerController : MonoBehaviour
         Dialogue.StartDialogue(TalkTo.GetTalkToNode());
         interactionText.SetText("");
         interactionText.enabled = false;
+    }
+
+    public void QuestMode()
+    {
+        if (m_InputHandler.GetQuestModeDown() && !m_Console.isActive)
+        {
+            inQuestMode = true;
+            foreach(NPC npc in npcs)
+            {
+                npc.SetExclamationPoint(true);
+            }
+        }
+        else if(m_InputHandler.GetQuestModeUp() && inQuestMode)
+        {
+            inQuestMode = false;
+            foreach (NPC npc in npcs)
+            {
+                npc.SetExclamationPoint(false);
+            }
+        }
     }
 }

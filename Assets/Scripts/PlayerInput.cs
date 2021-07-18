@@ -52,4 +52,14 @@ public class PlayerInput : MonoBehaviour
     {
         return Input.GetKeyDown(KeyCode.Escape);
     }
+
+    public bool GetQuestModeDown()
+    {
+        return Input.GetKeyDown(KeyCode.V);
+    }
+
+    public bool GetQuestModeUp()
+    {
+        return Input.GetKeyUp(KeyCode.V);
+    }
 }

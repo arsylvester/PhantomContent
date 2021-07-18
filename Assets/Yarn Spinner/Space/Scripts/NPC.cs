@@ -42,6 +42,10 @@ namespace Yarn.Unity.Example {
         [Header("Other")]
         public AudioClip[] speakToClips;
         private AudioSource audio;
+        [SerializeField] TextMesh exclamationPoint;
+        [SerializeField] float exclamationSize = 2;
+        private bool hasTalkedTo = false;
+        private Transform player;
 
         void Start () {
             if (scriptToLoad != null) {
@@ -49,13 +53,31 @@ namespace Yarn.Unity.Example {
                 dialogueRunner.Add(scriptToLoad);                
             }
 
+            player = FindObjectOfType<PlayerController>().transform;
             audio = GetComponent<AudioSource>();
+            hasTalkedTo = PlayerPrefs.HasKey(talkToNode);
+        }
+
+        private void Update()
+        {
+            float distance = Vector3.Distance(transform.position, player.position) * exclamationSize;
+            exclamationPoint.fontSize = (int)distance;
         }
 
         public string GetTalkToNode()
         {
             audio.PlayOneShot(speakToClips[Random.Range(0, speakToClips.Length - 1)]);
+            hasTalkedTo = true;
+            PlayerPrefs.SetInt("hasTalkedTo", 1);
+            PlayerPrefs.Save();
+            exclamationPoint.gameObject.SetActive(false);
             return talkToNode;
+        }
+
+        public void SetExclamationPoint(bool value)
+        {
+            if(!hasTalkedTo)
+                exclamationPoint.gameObject.SetActive(value);
         }
     }
 
