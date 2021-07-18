@@ -48,6 +48,7 @@ MonoBehaviour:
   - {fileID: 7054536642615880751, guid: ecd3b5bf61a750d4689e977826a31cb2, type: 3}
   - {fileID: 2618651189053713585, guid: 721fbe3af529e7e4f837ccbd2beaed63, type: 3}
   - {fileID: 4194896250057677086, guid: e4be29d1e6d72c942b5c50b2b03abe1e, type: 3}
+  - {fileID: 4194896250057677086, guid: e4be29d1e6d72c942b5c50b2b03abe1e, type: 3}
   - {fileID: 862080807727618648, guid: d9ee2e4af4a68b441ac871ec98df86d1, type: 3}
   - {fileID: 4405227680135242431, guid: 60c2956b86e54344d8d9765d4369adae, type: 3}
   - {fileID: 5568948223909120431, guid: b631df28fe6a43c4f84dd83ffb066e8b, type: 3}
@@ -69,6 +70,7 @@ MonoBehaviour:
   - {fileID: 3723041143969872506, guid: 4875da9479a69424db8e3c17dfe5ca61, type: 3}
   - {fileID: 3893608116670824193, guid: 658d0d25df81b6047815226ec17c0b21, type: 3}
   - {fileID: 2127490046566862132, guid: 7b7429b6c323cff4f80adc2ca4283145, type: 3}
+  - {fileID: 2127490046566862132, guid: 7b7429b6c323cff4f80adc2ca4283145, type: 3}
   - {fileID: 6185886198797110027, guid: caabd2b1a4f1b34449e6e84a34e45e31, type: 3}
   - {fileID: 3069050246971839102, guid: 20c77d50e29a44a4bbda7af0979d1141, type: 3}
   - {fileID: 7893454764072385613, guid: 89885720af9668d409e1af39128afbd1, type: 3}
@@ -85,18 +87,22 @@ MonoBehaviour:
   - {fileID: 3923644722703071990, guid: 2f5ba7668167eee4d8129246aff978a3, type: 3}
   - {fileID: 2650534465871294426, guid: 31ed57f3faf90ef4196c4084b689ae97, type: 3}
   - {fileID: 5031702684168675729, guid: 6be596bfed158f14684b0fb8ac3f9171, type: 3}
+  - {fileID: 5031702684168675729, guid: 6be596bfed158f14684b0fb8ac3f9171, type: 3}
   - {fileID: 6904101999710442721, guid: b7169959983ba9645bfb5564e9d3d6b4, type: 3}
   - {fileID: 7959406220042010047, guid: ae5f002dea051bb488b865656c3a2aa7, type: 3}
   - {fileID: 2628984531552893869, guid: 340c10c17e29b9640a8cb95474b89ae4, type: 3}
   - {fileID: 933205970424427501, guid: 367dea56ef130c242b325e9f743e1144, type: 3}
   - {fileID: 3939741592892052421, guid: 638bd51ef40e10c48a4496c263799050, type: 3}
   - {fileID: 3437337531264392881, guid: 8f43afa6f90acaf4c9d01e8097a62139, type: 3}
+  - {fileID: 3437337531264392881, guid: 8f43afa6f90acaf4c9d01e8097a62139, type: 3}
+  - {fileID: 4324193646473211036, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
   - {fileID: 4324193646473211036, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
   - {fileID: 7710591300114772388, guid: ed699d0e3fd6b314ea5bb82fe8f65568, type: 3}
   - {fileID: 8574505355565131364, guid: c756e7b60731a8448939e9be13d2caec, type: 3}
   - {fileID: 1642350673443544694, guid: 7a52887a0dfa96b408b317a7a90a6c90, type: 3}
   - {fileID: 5284224109996474721, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
   - {fileID: 3437337531264392881, guid: ae9892c80f1e9454da91da29336bc8c8, type: 3}
+  - {fileID: 1602672291427159900, guid: 31673bb51f6d7a64c80eada8793a8269, type: 3}
   - {fileID: 1602672291427159900, guid: 31673bb51f6d7a64c80eada8793a8269, type: 3}
   - {fileID: 9074123490857719218, guid: 67311833c73ac9143b5493f77d6ab914, type: 3}
   - {fileID: 1836031449753395162, guid: 0f7abfa383438a943bd5b9d351791fba, type: 3}
@@ -106,11 +112,14 @@ MonoBehaviour:
   - {fileID: 4004404112047584912, guid: 7ff9bc0aba3b1c743bdcf360fbfbdbf4, type: 3}
   - {fileID: 8161563763380405537, guid: d2a735b6295034c48b7a196e4798f3b0, type: 3}
   - {fileID: 4005441191958707118, guid: f872ef5931cdc8845b2ccd94197c2259, type: 3}
+  - {fileID: 966227514888949845, guid: 68532779857714c449282653fa1792d5, type: 3}
+  - {fileID: 7810273875295336427, guid: 49f1fbea5cc64dd4eac622eb00372247, type: 3}
   names:
   - trashcan
   - trashbags
   - streetlight
   - tree-1
+  - tree
   - tree-2
   - fire-hydrant
   - barn
@@ -127,11 +136,12 @@ MonoBehaviour:
   - lake-docks
   - lake-house
   - player-home
-  - post-office 1
+  - post-office1
   - post-office
   - wood-cabin
   - npc-trueno
   - player-trueno
+  - car
   - wall1
   - wall2
   - wall3
@@ -148,24 +158,30 @@ MonoBehaviour:
   - straight-long
   - straight-medium-empty
   - straight-medium
+  - road
   - straight-short-empty
   - straight-short
   - Ambiance
   - Apple
   - AppleQuestProps
   - Bass
+  - fish
   - CarKeys
+  - keys
   - Environment
   - FishQuestProps
   - npcs
   - UI
   - Trout
-  - Alley En
-  - Apple NPC
+  - AlleyEn
+  - Alley-En
+  - Clementine
   - Del
-  - Fish NPC
+  - River
   - May
   - NPC
   - Postman
   - Speed
   - FinishLine
+  - Water
+  - bed

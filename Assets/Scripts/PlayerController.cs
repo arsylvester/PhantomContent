@@ -340,6 +340,10 @@ public class PlayerController : MonoBehaviour
 
     public void SwapCar()
     {
+        if(playerCar == null)
+        {
+            playerCar = GameObject.FindGameObjectWithTag("playerCar");
+        }
         if (m_InputHandler.GetCarModeDown() && !m_Console.isActive)
         {
             CharacterVelocity = Vector3.zero;
@@ -356,7 +360,7 @@ public class PlayerController : MonoBehaviour
                 playerCar.transform.localPosition = new Vector3(2, -0.5f, 0);
                 playerCar.transform.parent = null;
             }
-            else
+            else if(playerCar != null)
             {
                 carMode = true;
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y - CarCamHeightDif, playerCam.transform.position.z);
