@@ -18,13 +18,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float stepMinVel = 2.5f;
     [SerializeField] AudioClip[] footStepsClips;
     int lastStep = 0;
+    private float defaultCamHeight;
 
     [SerializeField] Camera playerCam;
     [SerializeField] float CarCamHeightDif;
 
     PlayerInput m_InputHandler;
     CharacterController m_Controller;
-
+    private MenuManager m_MenuManager;
     private ConsoleManager m_Console;
     AudioSource m_audioSource;
 
@@ -48,8 +49,7 @@ public class PlayerController : MonoBehaviour
 
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
-    private List<NPC> allParticipants;
-    private List<InteractableObject> allInteractable;
+    //private List<InteractableObject> allInteractable;
     private List<GameObject> lookingAt;
     private bool carMode = false;
     public bool isNoclip = false;
@@ -69,14 +69,16 @@ public class PlayerController : MonoBehaviour
         m_Controller = GetComponent<CharacterController>();
         m_audioSource = GetComponent<AudioSource>();
         m_Console = FindObjectOfType<ConsoleManager>();
+        m_MenuManager = FindObjectOfType<MenuManager>();
         Dialogue = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
-        allParticipants = new List<NPC>(FindObjectsOfType<NPC>());
-        allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
+        //allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
         m_Console.toggleVisable();
         m_Console.toggleFocus();
 
         interactionText = FindObjectOfType<InteractText>();
+
+        defaultCamHeight = playerCam.transform.localPosition.y;
 
         //TODO: REMOVE THIS LATER!! FIX THE GRAVITY FOR REAL
         IsGrounded = true;
@@ -99,6 +101,9 @@ public class PlayerController : MonoBehaviour
         PlayerInteraction();
         SwapCar();
         updateTime();
+        
+        if (m_InputHandler.GetEscDown())
+            m_MenuManager.ToggleGamePaused();
     }
 
     void PlayerMovement()
@@ -114,6 +119,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            
             // converts move input to a worldspace vector based on our character's transform orientation
             Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
 
@@ -130,25 +136,33 @@ public class PlayerController : MonoBehaviour
                 footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
 
             if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
-
-
-            // footsteps sound
-            if (footstepDistanceCounter / footStepInterval >= 1f)
-            {
-                footstepDistanceCounter = 0f;
-                int stepSound = UnityEngine.Random.Range(0, footStepsClips.Length - 1);
-                if (stepSound == lastStep)
-                    stepSound = UnityEngine.Random.Range(0, footStepsClips.Length - 1);
-                lastStep = stepSound;
-                m_audioSource.PlayOneShot(footStepsClips[stepSound]); // Play footstep sound
-            }
-
+            
             m_Controller.Move(CharacterVelocity * Time.deltaTime);
 
-            playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x,
-                -Mathf.Cos(2 * Mathf.PI * footstepDistanceCounter / footStepInterval) / (2 * cameraBobAmplitude),
-                playerCam.transform.localPosition.z);
-
+            if (worldspaceMoveInput == Vector3.zero)
+            {
+                //footstepDistanceCounter = 0;
+                Vector3 defaultCam = new Vector3(playerCam.transform.localPosition.x, defaultCamHeight,
+                    playerCam.transform.localPosition.z);
+                
+                playerCam.transform.localPosition = Vector3.Lerp(playerCam.transform.localPosition, defaultCam, Time.deltaTime * 2);
+            } else {
+                // footsteps sound
+                if (footstepDistanceCounter / footStepInterval >= 1f)
+                {
+                    footstepDistanceCounter = 0f;
+                    int stepSound = UnityEngine.Random.Range(0, footStepsClips.Length - 1);
+                    if (stepSound == lastStep)
+                        stepSound = UnityEngine.Random.Range(0, footStepsClips.Length - 1);
+                    lastStep = stepSound;
+                    m_audioSource.PlayOneShot(footStepsClips[stepSound]); // Play footstep sound
+                }
+                
+                playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x,
+                    -Mathf.Cos(2 * Mathf.PI * footstepDistanceCounter / footStepInterval) / (2 * cameraBobAmplitude),
+                    playerCam.transform.localPosition.z);
+            }
+            
             //if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
         }
     }
@@ -288,21 +302,18 @@ public class PlayerController : MonoBehaviour
     {
         InteractableObject target = null;
         float distance = 0;
-        for (int i = 0; i < allInteractable.Count; i++)
+        for (int i = 0; i < InteractableObject.allInteractable.Count; i++)
         {
-            if (allInteractable[i].isAvailable)
+            Vector3 viewPos = playerCam.WorldToViewportPoint(InteractableObject.allInteractable[i].transform.position);
+            if (viewPos.z > 0 && viewPos.x > 0 && viewPos.x < 1) // if camera is looking at object
             {
-                Vector3 viewPos = playerCam.WorldToViewportPoint(allInteractable[i].transform.position);
-                if (viewPos.z > 0 && viewPos.x > 0 && viewPos.x < 1) // if camera is looking at object
+                if ((target == null && (InteractableObject.allInteractable[i].transform.position - this.transform.position).magnitude <
+                        interactionRadius) || // get target within range
+                    (target != null && (InteractableObject.allInteractable[i].transform.position - this.transform.position).magnitude <
+                        distance)) // get closest target
                 {
-                    if ((target == null && (allInteractable[i].transform.position - this.transform.position).magnitude <
-                            interactionRadius) || // get target within range
-                        (target != null && (allInteractable[i].transform.position - this.transform.position).magnitude <
-                            distance)) // get closest target
-                    {
-                        target = allInteractable[i];
-                        distance = (allInteractable[i].transform.position - this.transform.position).magnitude;
-                    }
+                    target = InteractableObject.allInteractable[i];
+                    distance = (InteractableObject.allInteractable[i].transform.position - this.transform.position).magnitude;
                 }
             }
         }
