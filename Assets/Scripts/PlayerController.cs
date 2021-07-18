@@ -49,8 +49,8 @@ public class PlayerController : MonoBehaviour
 
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
-    //private List<InteractableObject> allInteractable;
     private List<GameObject> lookingAt;
+    public String characterName;
     private bool carMode = false;
     public bool isNoclip = false;
     
@@ -72,16 +72,13 @@ public class PlayerController : MonoBehaviour
         m_MenuManager = FindObjectOfType<MenuManager>();
         Dialogue = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
-        //allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
+        characterName = "";
         m_Console.toggleVisable();
         m_Console.toggleFocus();
 
         interactionText = FindObjectOfType<InteractText>();
 
         defaultCamHeight = playerCam.transform.localPosition.y;
-
-        //TODO: REMOVE THIS LATER!! FIX THE GRAVITY FOR REAL
-        IsGrounded = true;
 
         hours = 6;
         minutes = 0;
@@ -216,8 +213,6 @@ public class PlayerController : MonoBehaviour
             carOverlay.sprite = straightCarSprite;
         }
 
-        //TODO: add head bobbing
-
         m_Controller.Move(CharacterVelocity * Time.deltaTime);
     }
 
@@ -237,6 +232,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
                 {
+                    characterName = lookingAt.GetComponent<NPC>().characterName;
                     Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
                     interactionText.SetText("");
                     interactionText.enabled = false;
