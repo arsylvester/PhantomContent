@@ -417,7 +417,6 @@ MonoBehaviour:
   isNoclip: 0
   hours: 0
   minutes: 0
-  day: 0
   clock: {fileID: 0}
   dayText: {fileID: 0}
 --- !u!114 &3152265378839446375

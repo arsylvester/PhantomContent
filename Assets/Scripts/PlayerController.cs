@@ -65,9 +65,8 @@ public class PlayerController : MonoBehaviour
     [Header("Clock")]
     public int hours = 0;
     public double minutes = 0;
-    public int day = 0;
     [SerializeField] private Text clock;
-    [SerializeField] private Text dayText;
+    [SerializeField] public Text dayText;
 
     // Start is called before the first frame update
     void Start()
@@ -93,8 +92,6 @@ public class PlayerController : MonoBehaviour
 
         hours = 6;
         minutes = 0;
-        day = 1;
-        dayText.text = "day 1";
     }
 
     // Update is called once per frame
@@ -384,7 +381,7 @@ public class PlayerController : MonoBehaviour
             hours += 1;
             minutes = 0;
             
-            switch (hours)
+            switch (hours) // change the skybox at certain hours
             {
                 case 6:
                     RenderSettings.skybox = skyboxDawn;
@@ -402,12 +399,11 @@ public class PlayerController : MonoBehaviour
             
             if (hours == 24)
             {
+                // trigger end of day
                 hours = 0;
                 minutes = 0;
-                day++;
-                //trigger end of day
+                m_MenuManager.NextDay();
                 m_MenuManager.RunDayEndSequence();
-                dayText.text = "day " + day;
             }
         }
         
