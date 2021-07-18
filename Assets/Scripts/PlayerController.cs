@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour
     public float GravityModifier = 1000;
     float footstepDistanceCounter;
 
+    [Header("Skybox")] [SerializeField] private Material skyboxDay;
+    [SerializeField] private Material skyboxNight;
+    [SerializeField] private Material skyboxDawn;
+    [SerializeField] private Material skyboxDusk;
+
+
     [Header("Footsteps")] [SerializeField] float footStepInterval = 1;
     [SerializeField] float cameraBobAmplitude = 0.02f;
     [SerializeField] float stepMinVel = 2.5f;
@@ -49,8 +55,8 @@ public class PlayerController : MonoBehaviour
 
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
-    //private List<InteractableObject> allInteractable;
     private List<GameObject> lookingAt;
+    public String characterName;
     private bool carMode = false;
     public bool isNoclip = false;
     
@@ -58,9 +64,8 @@ public class PlayerController : MonoBehaviour
     [Header("Clock")]
     public int hours = 0;
     public double minutes = 0;
-    public int day = 0;
     [SerializeField] private Text clock;
-    [SerializeField] private Text dayText;
+    [SerializeField] public Text dayText;
 
     // Start is called before the first frame update
     void Start()
@@ -72,7 +77,7 @@ public class PlayerController : MonoBehaviour
         m_MenuManager = FindObjectOfType<MenuManager>();
         Dialogue = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
-        //allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
+        characterName = "";
         m_Console.toggleVisable();
         m_Console.toggleFocus();
 
@@ -80,13 +85,8 @@ public class PlayerController : MonoBehaviour
 
         defaultCamHeight = playerCam.transform.localPosition.y;
 
-        //TODO: REMOVE THIS LATER!! FIX THE GRAVITY FOR REAL
-        IsGrounded = true;
-
         hours = 6;
         minutes = 0;
-        day = 1;
-        dayText.text = "day 1";
     }
 
     // Update is called once per frame
@@ -216,8 +216,6 @@ public class PlayerController : MonoBehaviour
             carOverlay.sprite = straightCarSprite;
         }
 
-        //TODO: add head bobbing
-
         m_Controller.Move(CharacterVelocity * Time.deltaTime);
     }
 
@@ -237,6 +235,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
                 {
+                    characterName = lookingAt.GetComponent<NPC>().characterName;
                     Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
                     interactionText.SetText("");
                     interactionText.enabled = false;
@@ -372,17 +371,33 @@ public class PlayerController : MonoBehaviour
         {
             hours += 1;
             minutes = 0;
+            
+            switch (hours) // change the skybox at certain hours
+            {
+                case 6:
+                    RenderSettings.skybox = skyboxDawn;
+                    break;
+                case 10:
+                    RenderSettings.skybox = skyboxDay;
+                    break;
+                case 18:
+                    RenderSettings.skybox = skyboxDusk;
+                    break;
+                case 22:
+                    RenderSettings.skybox = skyboxNight;
+                    break;
+            }
+            
+            if (hours == 24)
+            {
+                // trigger end of day
+                hours = 0;
+                minutes = 0;
+                m_MenuManager.NextDay();
+                m_MenuManager.RunDayEndSequence();
+            }
         }
-
-        if (hours == 24)
-        {
-            //trigger end of day
-            hours = 0;
-            minutes = 0;
-            day++;
-            dayText.text = "day " + day;
-        }
-
+        
         string h = (hours < 10) ? "0" + hours : "" + hours;
         string m = (minutes < 10) ? "0" + Math.Floor(minutes) : "" + Math.Floor(minutes);
 

@@ -21,8 +21,8 @@ public class QuestMaster : MonoBehaviour
 
     //Quest variables
     //Main
-    [SerializeField] int questsTotal = 5;
-    int questsComplete;
+    [SerializeField] public int questsTotal = 5;
+    public int questsComplete;
     //Race
     [SerializeField] float raceTimeLimit = 30f;
     float currentRaceTime;
@@ -35,6 +35,9 @@ public class QuestMaster : MonoBehaviour
     int apples;
     [SerializeField] int fishNeeded = 5;
     int fish;
+    //Escort
+    public bool isEscorting = false;
+    [SerializeField] GameObject escortFinishLine;
 
     public enum QuestStep
     {
@@ -108,6 +111,7 @@ public class QuestMaster : MonoBehaviour
                 break;
             case "escort":
                 SetEscortQuestStep(QuestStep.InProgress);
+                StartEscort();
                 break;
             case "delivery":
                 SetDeliveryQuestStep(QuestStep.InProgress);
@@ -303,5 +307,20 @@ public class QuestMaster : MonoBehaviour
         {
             storage.SetValue("$apple_completed", true);
         }
+    }
+
+    public void StartEscort()
+    {
+        isEscorting = true;
+        escortFinishLine.SetActive(true);
+        FindObjectOfType<Escort>().StartMoving();
+    }
+
+    public void FinishEscort()
+    {
+        isEscorting = false;
+        escortFinishLine.SetActive(false);
+        FindObjectOfType<Escort>().StopMoving();
+        storage.SetValue("$trip_finished", true);
     }
 }
