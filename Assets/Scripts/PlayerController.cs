@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     private List<NPC> allParticipants;
     private List<InteractableObject> allInteractable;
     private List<GameObject> lookingAt;
+    public String characterName;
     private bool carMode = false;
     public bool isNoclip = false;
     
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour
         DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
         allParticipants = new List<NPC>(FindObjectsOfType<NPC>());
         allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
+        characterName = "";
         m_Console.toggleVisable();
         m_Console.toggleFocus();
 
@@ -239,6 +241,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
                 {
+                    characterName = lookingAt.GetComponent<NPC>().characterName;
                     Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
                     interactionText.SetText("");
                     interactionText.enabled = false;
