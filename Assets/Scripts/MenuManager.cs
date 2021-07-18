@@ -23,6 +23,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Text dayCount;
     [SerializeField] private Text questCount;
     [SerializeField] private Camera camera;
+    [SerializeField] AudioClip FirstDrumClip;
+    [SerializeField] AudioClip YoooClip;
 
     private readonly float[] fovOptions = {46, 60, 73};
     private readonly string[] fovLabels = {"tight", "normal", "wide"};
@@ -32,6 +34,7 @@ public class MenuManager : MonoBehaviour
     private int currentFOV = 1;
     public int day = 1;
     public AudioMixer mixer;
+    private AudioSource audio;
 
     private float previousTimeScale = 1f;
 
@@ -39,6 +42,7 @@ public class MenuManager : MonoBehaviour
     {
         m_QuoteManager = GameObject.FindObjectOfType<QuoteManager>();
         m_PlayerController = GameObject.FindObjectOfType<PlayerController>();
+        audio = GetComponent<AudioSource>();
         
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
@@ -65,16 +69,6 @@ public class MenuManager : MonoBehaviour
         volumeText.text = "volume: " + volumeLabels[currentVolume];
         fovText.text = "fov: " + fovLabels[currentFOV];
         SetDay(day);
-    }
-    
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            print("cleared day playerpref");
-            PlayerPrefs.DeleteKey("Day");
-            PlayerPrefs.Save();
-        }
     }
 
     public void ToggleGamePaused()
@@ -111,12 +105,14 @@ public class MenuManager : MonoBehaviour
                           QuestMaster.instance.questsTotal;
         string todaysQuote = m_QuoteManager.getQuote();
         quote.text = todaysQuote;
+        audio.PlayOneShot(FirstDrumClip);
         StartCoroutine(completeDayEndSequence(3f));
     }
 
     public IEnumerator completeDayEndSequence(float f)
     {
         yield return new WaitForSecondsRealtime(f);
+        audio.PlayOneShot(YoooClip);
         isEndOfDay = false;
         dayEndScreen.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

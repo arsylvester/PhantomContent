@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: spawn
   m_EditorClassIdentifier: 
   commandStr: spawn
-  commandDesc: spawn [itemName]
+  commandDesc: ' [itemName] [amount] - spawn an entity'

@@ -2,14 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Antlr4.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class ConsoleManager : MonoBehaviour
 {
+    public int HISTORY_LENGTH = 12;
+    
     public bool isActive = false;
     private bool wasActive = false;
+    private ArrayList<string> cmdHistory = new ArrayList<string>();
     
     [Header("UI")]
     [SerializeField] private InputField entryField;
@@ -53,7 +57,7 @@ public class ConsoleManager : MonoBehaviour
         GameObject o;
         (o = gameObject).SetActive(!gameObject.activeSelf);
         isActive = !o.activeSelf;
-        if (!isActive) StartCoroutine(ScrollToBottom()); //I'm not sure why this is the way it is. Something is surely wrong.
+        //if (!isActive) StartCoroutine(ScrollToBottom()); //I'm not sure why this is the way it is. Something is surely wrong.
     }
 
     private void ParseCommand(string input)
@@ -79,8 +83,19 @@ public class ConsoleManager : MonoBehaviour
 
     public void UpdateLog(string line)
     {
-        consoleLog.text += "\n" + line;
-        StartCoroutine("ScrollToBottom");
+        /*consoleLog.text += "\n" + line;
+        StartCoroutine("ScrollToBottom");*/
+        cmdHistory.Add(line);
+        if (cmdHistory.Count > HISTORY_LENGTH)
+            cmdHistory.RemoveAt(0);
+
+        string output = "";
+        foreach (var x in cmdHistory)
+        {
+            output += "\n" + x;
+        }
+
+        consoleLog.text = output;
     }
 
     public void UpdateLogNoScroll(string line)

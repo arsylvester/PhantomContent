@@ -53,6 +53,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite straightCarSprite;
     [SerializeField] Sprite leftCarSprite;
     [SerializeField] Sprite rightCarSprite;
+    [SerializeField] GameObject playerCar;
+
+    [Header("Quest Highlight Mode")]
+    [SerializeField] NPC[] npcs;
+    private bool inQuestMode;
 
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
@@ -61,9 +66,9 @@ public class PlayerController : MonoBehaviour
     private bool carMode = false;
     public bool isNoclip = false;
     public bool hasKeys = false;
-    
 
-    [Header("Clock")]
+
+    [Header("Clock")] public float DEFAULT_TIMESCALE = 1;
     public int hours = 0;
     public double minutes = 0;
     [SerializeField] private Text clock;
@@ -108,6 +113,7 @@ public class PlayerController : MonoBehaviour
         if(hasKeys)
             SwapCar();
         updateTime();
+        QuestMode();
         
         if (m_InputHandler.GetEscDown())
             m_MenuManager.ToggleGamePaused();
@@ -334,6 +340,10 @@ public class PlayerController : MonoBehaviour
 
     public void SwapCar()
     {
+        if(playerCar == null)
+        {
+            playerCar = GameObject.FindGameObjectWithTag("playerCar");
+        }
         if (m_InputHandler.GetCarModeDown() && !m_Console.isActive)
         {
             CharacterVelocity = Vector3.zero;
@@ -343,13 +353,20 @@ public class PlayerController : MonoBehaviour
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y + CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(false);
                 m_audioSource.Stop();
+                
+                playerCar.SetActive(true);
+                playerCar.transform.rotation = this.transform.rotation;
+                playerCar.transform.parent = gameObject.transform;
+                playerCar.transform.localPosition = new Vector3(2, -0.5f, 0);
+                playerCar.transform.parent = null;
             }
-            else
+            else if(playerCar != null)
             {
                 carMode = true;
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y - CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(true);
                 m_audioSource.PlayOneShot(carStartupAudioClip);
+                playerCar.SetActive(false);
             }
         }
     }
@@ -373,7 +390,7 @@ public class PlayerController : MonoBehaviour
 
     private void updateTime()
     {
-        minutes += 5 * Time.deltaTime;
+        minutes += DEFAULT_TIMESCALE * Time.deltaTime;
         if (minutes >= 60)
         {
             hours += 1;
@@ -430,5 +447,25 @@ public class PlayerController : MonoBehaviour
         Dialogue.StartDialogue(TalkTo.GetTalkToNode());
         interactionText.SetText("");
         interactionText.enabled = false;
+    }
+
+    public void QuestMode()
+    {
+        if (m_InputHandler.GetQuestModeDown() && !m_Console.isActive)
+        {
+            inQuestMode = true;
+            foreach(NPC npc in npcs)
+            {
+                npc.SetExclamationPoint(true);
+            }
+        }
+        else if(m_InputHandler.GetQuestModeUp() && inQuestMode)
+        {
+            inQuestMode = false;
+            foreach (NPC npc in npcs)
+            {
+                npc.SetExclamationPoint(false);
+            }
+        }
     }
 }

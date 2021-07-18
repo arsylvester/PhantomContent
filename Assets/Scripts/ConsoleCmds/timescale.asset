@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: timescale
   m_EditorClassIdentifier: 
   commandStr: timescale
-  commandDesc: 'set the rate time passes (default: 1)'
+  commandDesc: ' [speed] - rate time passes (default: 1)'

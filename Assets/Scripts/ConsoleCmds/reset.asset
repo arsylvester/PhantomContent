@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: reset
   m_EditorClassIdentifier: 
   commandStr: reset
-  commandDesc: reloads current scene
+  commandDesc: ' - reloads current scene'

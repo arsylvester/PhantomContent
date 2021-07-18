@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: getcoords command
   m_EditorClassIdentifier: 
   commandStr: getcoords
-  commandDesc: get player coordinates
+  commandDesc: ' - get player coordinates'
