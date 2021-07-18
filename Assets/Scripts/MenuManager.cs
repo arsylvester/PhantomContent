@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class MenuManager : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class MenuManager : MonoBehaviour
     private int currentVolume = 3;
     private int currentFOV = 1;
     public int day = 1;
+    public AudioMixer mixer;
 
     private float previousTimeScale = 1f;
 
@@ -133,6 +135,8 @@ public class MenuManager : MonoBehaviour
 
     public void SetVolume(float x)
     {
+        print("Seting volume to " + x);
+        mixer.SetFloat("Volume", x);
         PlayerPrefs.SetFloat("Volume", x);
         PlayerPrefs.Save();
     }
