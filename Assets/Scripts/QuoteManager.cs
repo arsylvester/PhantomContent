@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Antlr4.Runtime.Misc;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class QuoteManager : MonoBehaviour
 {
@@ -11,6 +14,24 @@ public class QuoteManager : MonoBehaviour
     void Start()
     {
         buildQuoteList();
+    }
+
+    public void buildQuoteOrder()
+    {
+        string order = "";
+        ArrayList<int> indexes = new ArrayList<int>();
+        for (int x = 0; x < horoscopes.Count; x++)
+            indexes.Add(x);
+
+        while (indexes.Count != 0)
+        {
+            int rng = Random.Range(0, indexes.Count);
+            order += indexes[rng] + ",";
+            indexes.RemoveAt(rng);
+        }
+        
+        PlayerPrefs.SetString("QUOTE_ORDER", order);
+        PlayerPrefs.Save();
     }
 
     public void buildQuoteList()
@@ -25,13 +46,25 @@ public class QuoteManager : MonoBehaviour
 
     public string getQuote()
     {
-        if (horoscopes.Count <= 0)
-            buildQuoteList();
+        if (!PlayerPrefs.HasKey("QUOTE_ORDER") || PlayerPrefs.GetString("QUOTE_ORDER") == "")
+            buildQuoteOrder();
 
-        int index = Random.Range(0, horoscopes.Count);
+        string quoteOrder = PlayerPrefs.GetString("QUOTE_ORDER");
+        string[] indexes = quoteOrder.Split(',');
+        string i = quoteOrder.Substring(0, quoteOrder.IndexOf(",", StringComparison.Ordinal));
+        string remainingIndexes = quoteOrder.Substring(quoteOrder.IndexOf(",", StringComparison.Ordinal) + 1);
+
+        int index = int.Parse(i);
         Horoscope q = (Horoscope)horoscopes[index];
-        horoscopes.RemoveAt(index);
-
+        
+        if (remainingIndexes == "")
+            buildQuoteOrder();
+        else
+        {
+            PlayerPrefs.SetString("QUOTE_ORDER", remainingIndexes);
+            PlayerPrefs.Save();
+        }
+        
         return q.quote + "\n\n — " + q.author;
     }
 }
