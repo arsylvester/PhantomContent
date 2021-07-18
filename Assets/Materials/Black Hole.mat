@@ -20,15 +20,14 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Name: Black Hole
+  m_Shader: {fileID: -6465566751694194690, guid: 034219b451efcf642b965a479d324bda, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -90,6 +89,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_1d47467ba7ab45e68a265d66bf54dbbc: 0.5
+    - Vector1_3fd5e00df1804f7285206beb4811a4dc: 1
+    - Vector1_73d6f0deacf543c996fd5830f5e48a2c: 0.222
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -117,6 +119,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_113612f8a954497bb404e8c2a2645a19: {r: 0, g: 0, b: 0, a: 1}
+    - Color_3fce6f61a2624693902d12c6e1936102: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+    - Color_669d12e98359498cb342b2088f2dc7e4: {r: 0.5479708, g: 0.8867924, b: 0.8273569, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
