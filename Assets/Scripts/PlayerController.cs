@@ -49,9 +49,8 @@ public class PlayerController : MonoBehaviour
 
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
-    private List<NPC> allParticipants;
-    private List<InteractableObject> allInteractable;
     private List<GameObject> lookingAt;
+    public String characterName;
     private bool carMode = false;
     public bool isNoclip = false;
     
@@ -73,17 +72,13 @@ public class PlayerController : MonoBehaviour
         m_MenuManager = FindObjectOfType<MenuManager>();
         Dialogue = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
-        allParticipants = new List<NPC>(FindObjectsOfType<NPC>());
-        allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
+        characterName = "";
         m_Console.toggleVisable();
         m_Console.toggleFocus();
 
         interactionText = FindObjectOfType<InteractText>();
 
         defaultCamHeight = playerCam.transform.localPosition.y;
-
-        //TODO: REMOVE THIS LATER!! FIX THE GRAVITY FOR REAL
-        IsGrounded = true;
 
         hours = 6;
         minutes = 0;
@@ -218,8 +213,6 @@ public class PlayerController : MonoBehaviour
             carOverlay.sprite = straightCarSprite;
         }
 
-        //TODO: add head bobbing
-
         m_Controller.Move(CharacterVelocity * Time.deltaTime);
     }
 
@@ -239,6 +232,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
                 {
+                    characterName = lookingAt.GetComponent<NPC>().characterName;
                     Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
                     interactionText.SetText("");
                     interactionText.enabled = false;
@@ -304,21 +298,18 @@ public class PlayerController : MonoBehaviour
     {
         InteractableObject target = null;
         float distance = 0;
-        for (int i = 0; i < allInteractable.Count; i++)
+        for (int i = 0; i < InteractableObject.allInteractable.Count; i++)
         {
-            if (allInteractable[i].isAvailable)
+            Vector3 viewPos = playerCam.WorldToViewportPoint(InteractableObject.allInteractable[i].transform.position);
+            if (viewPos.z > 0 && viewPos.x > 0 && viewPos.x < 1) // if camera is looking at object
             {
-                Vector3 viewPos = playerCam.WorldToViewportPoint(allInteractable[i].transform.position);
-                if (viewPos.z > 0 && viewPos.x > 0 && viewPos.x < 1) // if camera is looking at object
+                if ((target == null && (InteractableObject.allInteractable[i].transform.position - this.transform.position).magnitude <
+                        interactionRadius) || // get target within range
+                    (target != null && (InteractableObject.allInteractable[i].transform.position - this.transform.position).magnitude <
+                        distance)) // get closest target
                 {
-                    if ((target == null && (allInteractable[i].transform.position - this.transform.position).magnitude <
-                            interactionRadius) || // get target within range
-                        (target != null && (allInteractable[i].transform.position - this.transform.position).magnitude <
-                            distance)) // get closest target
-                    {
-                        target = allInteractable[i];
-                        distance = (allInteractable[i].transform.position - this.transform.position).magnitude;
-                    }
+                    target = InteractableObject.allInteractable[i];
+                    distance = (InteractableObject.allInteractable[i].transform.position - this.transform.position).magnitude;
                 }
             }
         }

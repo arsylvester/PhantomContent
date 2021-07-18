@@ -9,12 +9,11 @@ position: 594,-149
     <<start_quest apple>>
     [[AppleExplained]]
 <<endif>>
-<<if $quest_var is false>>
-    [[AppleExplained]]
-<<endif>>
-<<if $quest_var is true>>
+<<if $apple_completed is true>>
     [[AppleComplete]]
 <<endif>>
+
+[[AppleExplained]]
 ===
 title: AppleExplained
 tags: 

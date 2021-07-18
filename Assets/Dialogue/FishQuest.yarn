@@ -11,12 +11,10 @@ position: 594,-149
     <<start_quest fish>>
     [[FishExplained]]
 <<endif>>
-<<if $quest_var is false>>
-    [[FishExplained]]
-<<endif>>
-<<if $quest_var is true>>
+<<if $fish_completed is true>>
     [[FishComplete]]
 <<endif>>
+[[FishExplained]]
 ===
 title: FishExplained
 tags: 
