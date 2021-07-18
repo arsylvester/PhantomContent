@@ -314,6 +314,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7ab6e38484f60ae4693d5d65e46c516a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b7429b6c323cff4f80adc2ca4283145, type: 3}
+--- !u!1 &512809220 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2127490046566862132, guid: 7b7429b6c323cff4f80adc2ca4283145, type: 3}
+  m_PrefabInstance: {fileID: 512809219}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &540436463 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4005441191958707118, guid: f872ef5931cdc8845b2ccd94197c2259, type: 3}
@@ -853,6 +858,10 @@ PrefabInstance:
       propertyPath: dayText
       value: 
       objectReference: {fileID: 425325273}
+    - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
+      propertyPath: playerCar
+      value: 
+      objectReference: {fileID: 512809220}
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: carOverlay
       value: 
