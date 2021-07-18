@@ -17,6 +17,7 @@ public class ConsoleManager : MonoBehaviour
     
     [Header("UI")]
     [SerializeField] private InputField entryField;
+    [SerializeField] private Text autofillText;
     [SerializeField] private Text consoleLog;
     [SerializeField] private ScrollRect cScrollRect;
     [SerializeField] private Scrollbar cScrollBar;
@@ -31,6 +32,7 @@ public class ConsoleManager : MonoBehaviour
         {
             currentEntry = entryField.text;
             Debug.Log(getCommandAutofill(currentEntry));
+            autofillText.text = getCommandAutofill(currentEntry);
         }
 
         if (isActive && Input.GetKeyDown(KeyCode.Return))
@@ -39,6 +41,12 @@ public class ConsoleManager : MonoBehaviour
             ParseCommand(entryField.text);
             entryField.text = string.Empty;
             entryField.ActivateInputField();
+        }
+        
+        else if (isActive && Input.GetKeyDown(KeyCode.Tab))
+        {
+            entryField.text = autofillText.text;
+            entryField.caretPosition = Int32.MaxValue;
         }
         
         else if (wasActive == !entryField.isFocused) // I'm really not sure what I wrote here lmao
@@ -125,7 +133,8 @@ public class ConsoleManager : MonoBehaviour
     {
         if (input == "")
         {
-            return "help";
+            //return "help";
+            return "";
         }
 
         string[] commandItems = input.Split(' ');
