@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity;
+using UnityEngine.UI;
+using Yarn.Unity.Example;
 
 public class QuestMaster : MonoBehaviour
 {
+    public static QuestMaster instance;
     public DialogueRunner dialogueRunner;
     public InMemoryVariableStorage storage;
+    PlayerController player;
 
     QuestStep mainQuestStep;
     QuestStep fishQuestStep;
@@ -16,8 +20,21 @@ public class QuestMaster : MonoBehaviour
     QuestStep deliveryQuestStep;
 
     //Quest variables
+    //Main
     [SerializeField] int questsTotal = 5;
     int questsComplete;
+    //Race
+    [SerializeField] float raceTimeLimit = 30f;
+    float currentRaceTime;
+    [SerializeField] Text raceTimeText;
+    public bool isInRace = false;
+    [SerializeField] GameObject RaceFinishLine;
+    [SerializeField] NPC RaceNPC;
+    //Apple
+    [SerializeField] int applesNeeded = 7;
+    int apples;
+    [SerializeField] int fishNeeded = 5;
+    int fish;
 
     public enum QuestStep
     {
@@ -29,6 +46,9 @@ public class QuestMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
+        player = FindObjectOfType<PlayerController>();
+
         mainQuestStep = (QuestStep)PlayerPrefs.GetInt("MainStep");
         fishQuestStep = (QuestStep)PlayerPrefs.GetInt("FishStep");
         appleQuestStep = (QuestStep)PlayerPrefs.GetInt("AppleStep");
@@ -37,7 +57,8 @@ public class QuestMaster : MonoBehaviour
         deliveryQuestStep = (QuestStep)PlayerPrefs.GetInt("DeliveryStep");
 
         questsComplete = PlayerPrefs.GetInt("QuestsComplete");
-        print("Quests completed: " + questsComplete);
+        fish = PlayerPrefs.GetInt("fish");
+        apples = PlayerPrefs.GetInt("apples");
 
         storage = GetComponent<InMemoryVariableStorage>();
         StartCoroutine(DelaySetYarnVars());
@@ -83,6 +104,7 @@ public class QuestMaster : MonoBehaviour
                 break;
             case "race":
                 SetRaceQuestStep(QuestStep.InProgress);
+                StartRace();
                 break;
             case "escort":
                 SetEscortQuestStep(QuestStep.InProgress);
@@ -195,12 +217,91 @@ public class QuestMaster : MonoBehaviour
     IEnumerator DelaySetYarnVars()
     {
         yield return new WaitForSeconds(.1f);
+        //Main
         if (questsComplete >= questsTotal)
             storage.SetValue("$all_quests_complete", true);
+        //Race
+        storage.SetValue("$time_to_beat", raceTimeLimit);
+        //Fish
+        if (fish >= fishNeeded)
+        {
+            storage.SetValue("$fish_completed", true);
+        }
+        //apple
+        if (apples >= applesNeeded)
+        {
+            storage.SetValue("$apple_completed", true);
+            print("Apples: " + storage.GetValue("$apple_completed").AsBool);
+        }
     }
 
     public void FailDeliveryQuest()
     {
         storage.SetValue("$delivery_failed", true);
+    }
+
+    public void StartRace()
+    {
+        currentRaceTime = raceTimeLimit;
+        raceTimeText.gameObject.SetActive(true);
+        isInRace = true;
+        storage.SetValue("$race_failed", false);
+        RaceFinishLine.SetActive(true);
+        StartCoroutine(RaceCountDown());
+    }
+
+    IEnumerator RaceCountDown()
+    {
+        while (currentRaceTime > 0)
+        {
+            currentRaceTime -= Time.deltaTime;
+            raceTimeText.text = "" + Mathf.Floor(currentRaceTime);
+            yield return new WaitForEndOfFrame();
+        }
+        raceTimeText.gameObject.SetActive(false);
+        storage.SetValue("$race_failed", true);
+        isInRace = false;
+        player.MoveToSpeed(RaceNPC);
+    }
+
+    public void RaceWin()
+    {
+        if (raceQuestStep != QuestStep.Completed)
+            UpdateQuestsComplete();
+        SetRaceQuestStep(QuestStep.Completed);
+        StopAllCoroutines();
+        storage.SetValue("$race_win", true);
+        raceTimeText.color = Color.green;
+        RaceFinishLine.SetActive(false);
+        StartCoroutine(DelayTextDisappear());
+    }
+
+    IEnumerator DelayTextDisappear()
+    {
+        yield return new WaitForSeconds(5);
+        raceTimeText.gameObject.SetActive(false);
+    }
+
+    public void FishUpdated()
+    {
+        //int fish = InventoryManager.inventory[(int)InteractableObject.InteractableTypes.FISH];
+        fish++;
+        PlayerPrefs.SetInt("fish", fish);
+        PlayerPrefs.Save();
+        if (fish >= fishNeeded)
+        {
+            storage.SetValue("$fish_completed", true);
+        }
+    }
+
+    public void AppleUpdated()
+    {
+        apples++;
+        PlayerPrefs.SetInt("apples", apples);
+        PlayerPrefs.Save();
+        if (apples >= applesNeeded)
+        {
+            storage.SetValue("$apple_completed", true);
+        }
     }
 }

@@ -18,13 +18,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float stepMinVel = 2.5f;
     [SerializeField] AudioClip[] footStepsClips;
     int lastStep = 0;
+    private float defaultCamHeight;
 
     [SerializeField] Camera playerCam;
     [SerializeField] float CarCamHeightDif;
 
     PlayerInput m_InputHandler;
     CharacterController m_Controller;
-
+    private MenuManager m_MenuManager;
     private ConsoleManager m_Console;
     AudioSource m_audioSource;
 
@@ -54,6 +55,13 @@ public class PlayerController : MonoBehaviour
     public bool isNoclip = false;
     
 
+    [Header("Clock")]
+    public int hours = 0;
+    public double minutes = 0;
+    public int day = 0;
+    [SerializeField] private Text clock;
+    [SerializeField] private Text dayText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +69,7 @@ public class PlayerController : MonoBehaviour
         m_Controller = GetComponent<CharacterController>();
         m_audioSource = GetComponent<AudioSource>();
         m_Console = FindObjectOfType<ConsoleManager>();
+        m_MenuManager = FindObjectOfType<MenuManager>();
         Dialogue = FindObjectOfType<Yarn.Unity.DialogueRunner>();
         DialogueUI = FindObjectOfType<Yarn.Unity.DialogueUI>();
         //allInteractable = new List<InteractableObject>(FindObjectsOfType<InteractableObject>());
@@ -69,8 +78,15 @@ public class PlayerController : MonoBehaviour
 
         interactionText = FindObjectOfType<InteractText>();
 
+        defaultCamHeight = playerCam.transform.localPosition.y;
+
         //TODO: REMOVE THIS LATER!! FIX THE GRAVITY FOR REAL
         IsGrounded = true;
+
+        hours = 6;
+        minutes = 0;
+        day = 1;
+        dayText.text = "day 1";
     }
 
     // Update is called once per frame
@@ -84,6 +100,10 @@ public class PlayerController : MonoBehaviour
             PlayerMovement();
         PlayerInteraction();
         SwapCar();
+        updateTime();
+        
+        if (m_InputHandler.GetEscDown())
+            m_MenuManager.ToggleGamePaused();
     }
 
     void PlayerMovement()
@@ -99,6 +119,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            
             // converts move input to a worldspace vector based on our character's transform orientation
             Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
 
@@ -115,25 +136,33 @@ public class PlayerController : MonoBehaviour
                 footstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
 
             if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
-
-
-            // footsteps sound
-            if (footstepDistanceCounter / footStepInterval >= 1f)
-            {
-                footstepDistanceCounter = 0f;
-                int stepSound = UnityEngine.Random.Range(0, footStepsClips.Length - 1);
-                if (stepSound == lastStep)
-                    stepSound = UnityEngine.Random.Range(0, footStepsClips.Length - 1);
-                lastStep = stepSound;
-                m_audioSource.PlayOneShot(footStepsClips[stepSound]); // Play footstep sound
-            }
-
+            
             m_Controller.Move(CharacterVelocity * Time.deltaTime);
 
-            playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x,
-                -Mathf.Cos(2 * Mathf.PI * footstepDistanceCounter / footStepInterval) / (2 * cameraBobAmplitude),
-                playerCam.transform.localPosition.z);
-
+            if (worldspaceMoveInput == Vector3.zero)
+            {
+                //footstepDistanceCounter = 0;
+                Vector3 defaultCam = new Vector3(playerCam.transform.localPosition.x, defaultCamHeight,
+                    playerCam.transform.localPosition.z);
+                
+                playerCam.transform.localPosition = Vector3.Lerp(playerCam.transform.localPosition, defaultCam, Time.deltaTime * 2);
+            } else {
+                // footsteps sound
+                if (footstepDistanceCounter / footStepInterval >= 1f)
+                {
+                    footstepDistanceCounter = 0f;
+                    int stepSound = UnityEngine.Random.Range(0, footStepsClips.Length - 1);
+                    if (stepSound == lastStep)
+                        stepSound = UnityEngine.Random.Range(0, footStepsClips.Length - 1);
+                    lastStep = stepSound;
+                    m_audioSource.PlayOneShot(footStepsClips[stepSound]); // Play footstep sound
+                }
+                
+                playerCam.transform.localPosition = new Vector3(playerCam.transform.localPosition.x,
+                    -Mathf.Cos(2 * Mathf.PI * footstepDistanceCounter / footStepInterval) / (2 * cameraBobAmplitude),
+                    playerCam.transform.localPosition.z);
+            }
+            
             //if (!IsGrounded) CharacterVelocity += Vector3.down * GravityModifier;
         }
     }
@@ -195,21 +224,7 @@ public class PlayerController : MonoBehaviour
     void PlayerInteraction()
     {
         InteractableObject lookingAt = GetLookingAt();
-        
 
-        if (lookingAt != null)
-        {
-            interactionText.enabled = true;
-            interactionText.SetText(lookingAt.name);
-            wasLookingAt = true;
-        }
-        else if (wasLookingAt)
-        {
-            interactionText.SetText("");
-            interactionText.enabled = false;
-            wasLookingAt = false;
-        }
-        
         if (m_InputHandler.GetSpaceBarDown())
         {
             Debug.Log("Space Bar Pressed");
@@ -221,12 +236,29 @@ public class PlayerController : MonoBehaviour
             if (lookingAt != null)
             {
                 if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
+                {
                     Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
+                    interactionText.SetText("");
+                    interactionText.enabled = false;
+                }
                 else
                 {
                     lookingAt.pickUpItem();
                 }
             }
+        }
+        
+        if (lookingAt != null && !Dialogue.IsDialogueRunning)
+        {
+            interactionText.enabled = true;
+            interactionText.SetText(lookingAt.name);
+            wasLookingAt = true;
+        }
+        else if (wasLookingAt)
+        {
+            interactionText.SetText("");
+            interactionText.enabled = false;
+            wasLookingAt = false;
         }
         
 
@@ -331,5 +363,38 @@ public class PlayerController : MonoBehaviour
         transform.position = v3; // teleport the player
         m_Controller.enabled = true;
         m_Console.UpdateLog("teleporting to [" + v3.x + ", " + v3.y + ", " + v3.z + "]");
+    }
+
+    private void updateTime()
+    {
+        minutes += 5 * Time.deltaTime;
+        if (minutes >= 60)
+        {
+            hours += 1;
+            minutes = 0;
+        }
+
+        if (hours == 24)
+        {
+            //trigger end of day
+            hours = 0;
+            minutes = 0;
+            day++;
+            dayText.text = "day " + day;
+        }
+
+        string h = (hours < 10) ? "0" + hours : "" + hours;
+        string m = (minutes < 10) ? "0" + Math.Floor(minutes) : "" + Math.Floor(minutes);
+
+
+        clock.text = h + ":" + m;
+    }
+
+    public void MoveToSpeed(NPC TalkTo)
+    {
+        Teleport(new Vector3(193, 24, 602));
+        Dialogue.StartDialogue(TalkTo.GetTalkToNode());
+        interactionText.SetText("");
+        interactionText.enabled = false;
     }
 }

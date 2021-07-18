@@ -24,6 +24,11 @@ public class InteractableObject : MonoBehaviour
         InventoryManager.inventoryUpdate(type, 1);
         Debug.Log("Item picked up: " + type + " = " + InventoryManager.inventory[(int)type]);
 
+        if (type == InteractableTypes.FISH)
+            QuestMaster.instance.FishUpdated();
+        if (type == InteractableTypes.APPLE)
+            QuestMaster.instance.AppleUpdated();
+
         Debug.Log("Destroying item");
         Destroy(this.gameObject);
     }

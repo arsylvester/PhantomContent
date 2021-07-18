@@ -47,4 +47,9 @@ public class PlayerInput : MonoBehaviour
     {
         return Input.GetKeyDown(KeyCode.BackQuote);
     }
+
+    public bool GetEscDown()
+    {
+        return Input.GetKeyDown(KeyCode.Escape);
+    }
 }
