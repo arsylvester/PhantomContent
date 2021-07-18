@@ -66,16 +66,6 @@ public class MenuManager : MonoBehaviour
         fovText.text = "fov: " + fovLabels[currentFOV];
         SetDay(day);
     }
-    
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            print("cleared day playerpref");
-            PlayerPrefs.DeleteKey("Day");
-            PlayerPrefs.Save();
-        }
-    }
 
     public void ToggleGamePaused()
     {

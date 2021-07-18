@@ -9,7 +9,7 @@ public class cmd_help : ConsoleCommand
         
         foreach (var x in console.cmds)
         {
-            console.UpdateLog("  " + x.CommandStr + "\t - " + x.CommandDesc);
+            console.UpdateLog(" " + x.CommandStr + x.CommandDesc);
         }        
         
         return true;
