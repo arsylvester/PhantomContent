@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: help
   m_EditorClassIdentifier: 
   commandStr: help
-  commandDesc: print list of commands
+  commandDesc: ' - print list of commands'

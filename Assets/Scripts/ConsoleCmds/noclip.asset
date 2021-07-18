@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: noclip
   m_EditorClassIdentifier: 
   commandStr: noclip
-  commandDesc: toggle noclip mode
+  commandDesc: ' - toggle noclip mode'
