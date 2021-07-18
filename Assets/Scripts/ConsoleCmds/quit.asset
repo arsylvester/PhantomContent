@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: quit
   m_EditorClassIdentifier: 
   commandStr: quit
-  commandDesc: closes the game
+  commandDesc: ' - closes the game'
