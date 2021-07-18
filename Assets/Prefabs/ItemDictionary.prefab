@@ -1,0 +1,169 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6106624172037190021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6106624172037190023}
+  - component: {fileID: 6106624172037190020}
+  m_Layer: 0
+  m_Name: ItemDictionary
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6106624172037190023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106624172037190021}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 520.8233, y: 15.531336, z: 526.29333}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6106624172037190020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106624172037190021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34898512debafc54f908aca08fddba20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - Assets/Model/Prefab/trashcan.prefab
+  - Assets/Model/Prefab/trashbags.prefab
+  - Assets/Model/Prefab/streetlight.prefab
+  - Assets/Model/Prefab/tree-1.prefab
+  - Assets/Model/Prefab/tree-2.prefab
+  - Assets/Model/Prefab/fire-hydrant.prefab
+  - Assets/Model/Prefab/buildings/barn.prefab
+  - Assets/Model/Prefab/buildings/building1.prefab
+  - Assets/Model/Prefab/buildings/building2.prefab
+  - Assets/Model/Prefab/buildings/building3.prefab
+  - Assets/Model/Prefab/buildings/building4.prefab
+  - Assets/Model/Prefab/buildings/building5.prefab
+  - Assets/Model/Prefab/buildings/building6.prefab
+  - Assets/Model/Prefab/buildings/building7.prefab
+  - Assets/Model/Prefab/buildings/building8.prefab
+  - Assets/Model/Prefab/buildings/building9.prefab
+  - Assets/Model/Prefab/buildings/building10.prefab
+  - Assets/Model/Prefab/buildings/lake-docks.prefab
+  - Assets/Model/Prefab/buildings/lake-house.prefab
+  - Assets/Model/Prefab/buildings/player-home.prefab
+  - Assets/Model/Prefab/buildings/post-office 1.prefab
+  - Assets/Model/Prefab/buildings/post-office.prefab
+  - Assets/Model/Prefab/buildings/wood-cabin.prefab
+  - Assets/Model/Prefab/cars/npc-trueno.prefab
+  - Assets/Model/Prefab/cars/player-trueno.prefab
+  - Assets/Model/Prefab/modular/wall1.prefab
+  - Assets/Model/Prefab/modular/wall2.prefab
+  - Assets/Model/Prefab/modular/wall3.prefab
+  - Assets/Model/Prefab/modular/wall4.prefab
+  - Assets/Model/Prefab/modular/roads/intersection.prefab
+  - Assets/Model/Prefab/modular/roads/T-section.prefab
+  - Assets/Model/Prefab/modular/roads/corner/leftTurn-90Degree.prefab
+  - Assets/Model/Prefab/modular/roads/corner/leftTurn-Big.prefab
+  - Assets/Model/Prefab/modular/roads/corner/leftTurn-small.prefab
+  - Assets/Model/Prefab/modular/roads/corner/rightTurn-90Degree.prefab
+  - Assets/Model/Prefab/modular/roads/corner/rightTurn-Big.prefab
+  - Assets/Model/Prefab/modular/roads/corner/rightTurn-small.prefab
+  - Assets/Model/Prefab/modular/roads/straight/straight-extra-long.prefab
+  - Assets/Model/Prefab/modular/roads/straight/straight-long.prefab
+  - Assets/Model/Prefab/modular/roads/straight/straight-medium-empty.prefab
+  - Assets/Model/Prefab/modular/roads/straight/straight-medium.prefab
+  - Assets/Model/Prefab/modular/roads/straight/straight-short-empty.prefab
+  - Assets/Model/Prefab/modular/roads/straight/straight-short.prefab
+  - Assets/Prefabs/Ambiance.prefab
+  - Assets/Prefabs/Apple.prefab
+  - Assets/Prefabs/AppleQuestProps.prefab
+  - Assets/Prefabs/Bass.prefab
+  - Assets/Prefabs/CarKeys.prefab
+  - Assets/Prefabs/Environment.prefab
+  - Assets/Prefabs/FishQuestProps.prefab
+  - Assets/Prefabs/npcs.prefab
+  - Assets/Prefabs/The UI Prefab.prefab
+  - Assets/Prefabs/Trout.prefab
+  - Assets/Prefabs/NPCs/Alley En Variant.prefab
+  - Assets/Prefabs/NPCs/Apple NPC Variant.prefab
+  - Assets/Prefabs/NPCs/Del Variant.prefab
+  - Assets/Prefabs/NPCs/Fish NPC Variant.prefab
+  - Assets/Prefabs/NPCs/May Variant.prefab
+  - Assets/Prefabs/NPCs/NPC Base.prefab
+  - Assets/Prefabs/NPCs/Postman Variant.prefab
+  - Assets/Prefabs/NPCs/Speed Variant.prefab
+  names:
+  - trashcan
+  - trashbags
+  - streetlight
+  - tree-1
+  - tree-2
+  - fire-hydrant
+  - barn
+  - building1
+  - building2
+  - building3
+  - building4
+  - building5
+  - building6
+  - building7
+  - building8
+  - building9
+  - building10
+  - lake-docks
+  - lake-house
+  - player-home
+  - post-office 1
+  - post-office
+  - wood-cabin
+  - npc-trueno
+  - player-trueno
+  - wall1
+  - wall2
+  - wall3
+  - wall4
+  - intersection
+  - T-section
+  - leftTurn-90Degree
+  - leftTurn-Big
+  - leftTurn-Small
+  - rightTurn-90Degree
+  - rightTurn-Big
+  - rightTurn-Small
+  - straight-extra-long
+  - straight-long
+  - straight-medium-empty
+  - straight-medium
+  - straight-short-empty
+  - straight-short
+  - Ambiance
+  - Apple
+  - AppleQuestProps
+  - Bass
+  - CarKeys
+  - Environment
+  - FishQuestProps
+  - npcs
+  - UI
+  - Trout
+  - Alley En
+  - Apple NPC
+  - Del
+  - Fish NPC
+  - May
+  - NPC
+  - Postman
+  - Speed

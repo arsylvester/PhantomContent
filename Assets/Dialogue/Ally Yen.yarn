@@ -3,6 +3,10 @@ tags:
 colorID: 0
 position: 702,-143
 ---
+<<if $trip_finished is true>>
+    [[AllyHappy]]
+<<endif>>
+
 <<if visited("Ally") is false>>
     Ally: Greetings, fellow human! I need assistance.
     Ally: Will you escort me to coordinates (230, 27, 745)? I am on my way to the most beautiful corn maize. 
@@ -10,7 +14,9 @@ position: 702,-143
 <<elseif $onTrip is true>>
     [[AllyExplains]]
 <<else>>
-    [[AllyHappy]]
+    <<set $onTrip to true>>
+    <<start_quest escort>>
+    [[AllyExplains]]
 <<endif>>
 ===
 title: AllyExplains
@@ -18,6 +24,7 @@ tags:
 colorID: 0
 position: 525,149
 ---
+Ally: {$trip_finished}
 Ally: Is all well, comrade? We are heading to the corn located at world coordinates (230, 27, 745).
 ===
 title: AllyHappy
@@ -26,4 +33,5 @@ colorID: 0
 position: 883,147
 ---
 Ally: My sincerest gratitude to you for joining me. This will be the location of my next major art project, and I am looking forward to starting on it.
+<<complete_quest escort>>
 ===
