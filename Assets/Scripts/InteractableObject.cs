@@ -21,8 +21,8 @@ public class InteractableObject : MonoBehaviour
 
     public void pickUpItem()
     {
-        InventoryManager.inventoryUpdate(type, 1);
-        Debug.Log("Item picked up: " + type + " = " + InventoryManager.inventory[(int)type]);
+        //InventoryManager.inventoryUpdate(type, 1);
+        //Debug.Log("Item picked up: " + type + " = " + InventoryManager.inventory[(int)type]);
 
         if (type == InteractableTypes.FISH)
             QuestMaster.instance.FishUpdated();
