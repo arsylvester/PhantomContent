@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SpawnDictionaryBuilder : MonoBehaviour
 {
-    [SerializeField] List<string> items;
+    [SerializeField] List<GameObject> items;
     [SerializeField] List<string> names;
+    
 
-    public static Dictionary<string, string> objectDictionary = new Dictionary<string, string>();
+    public static Dictionary<string, GameObject> objectDictionary = new Dictionary<string, GameObject>();
 
     // Start is called before the first frame update
     void Start()

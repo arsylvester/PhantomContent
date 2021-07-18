@@ -13,8 +13,9 @@ public class cmd_spawn : ConsoleCommand
         PlayerController player = GameObject.FindObjectOfType<PlayerController>();
         Vector3 position = player.transform.position;
         //string path = "Assets/Model/Prefab/" + args[0] + ".prefab";
-        string path = SpawnDictionaryBuilder.objectDictionary[args[0]];
-        Object prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
+        //string path = SpawnDictionaryBuilder.objectDictionary[args[0]];
+        //Object prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
+        Object prefab = SpawnDictionaryBuilder.objectDictionary[args[0]];
         if (prefab != null)
         {
             int num = 1;

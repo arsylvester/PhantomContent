@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    public const int NUM_ITEM_TYPES = 4;
-    public enum InteractableTypes {NPC, APPLE, FISH, CAR_KEYS};
-
     public static List<InteractableObject> allInteractable = new List<InteractableObject>();
+    public const int NUM_ITEM_TYPES = 5;
+    public enum InteractableTypes {NPC, APPLE, FISH, CAR_KEYS, BED};
     
 
     [Header ("Type")]
@@ -28,6 +27,8 @@ public class InteractableObject : MonoBehaviour
             QuestMaster.instance.FishUpdated();
         if (type == InteractableTypes.APPLE)
             QuestMaster.instance.AppleUpdated();
+        if (type == InteractableTypes.BED)
+            GameObject.FindObjectOfType<MenuManager>().NextDay();
 
         Debug.Log("Destroying item");
         Destroy(this.gameObject);

@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour
     public float GravityModifier = 1000;
     float footstepDistanceCounter;
 
+    [Header("Skybox")] [SerializeField] private Material skyboxDay;
+    [SerializeField] private Material skyboxNight;
+    [SerializeField] private Material skyboxDawn;
+    [SerializeField] private Material skyboxDusk;
+
+
     [Header("Footsteps")] [SerializeField] float footStepInterval = 1;
     [SerializeField] float cameraBobAmplitude = 0.02f;
     [SerializeField] float stepMinVel = 2.5f;
@@ -58,9 +64,8 @@ public class PlayerController : MonoBehaviour
     [Header("Clock")]
     public int hours = 0;
     public double minutes = 0;
-    public int day = 0;
     [SerializeField] private Text clock;
-    [SerializeField] private Text dayText;
+    [SerializeField] public Text dayText;
 
     // Start is called before the first frame update
     void Start()
@@ -82,8 +87,6 @@ public class PlayerController : MonoBehaviour
 
         hours = 6;
         minutes = 0;
-        day = 1;
-        dayText.text = "day 1";
     }
 
     // Update is called once per frame
@@ -368,17 +371,33 @@ public class PlayerController : MonoBehaviour
         {
             hours += 1;
             minutes = 0;
+            
+            switch (hours) // change the skybox at certain hours
+            {
+                case 6:
+                    RenderSettings.skybox = skyboxDawn;
+                    break;
+                case 10:
+                    RenderSettings.skybox = skyboxDay;
+                    break;
+                case 18:
+                    RenderSettings.skybox = skyboxDusk;
+                    break;
+                case 22:
+                    RenderSettings.skybox = skyboxNight;
+                    break;
+            }
+            
+            if (hours == 24)
+            {
+                // trigger end of day
+                hours = 0;
+                minutes = 0;
+                m_MenuManager.NextDay();
+                m_MenuManager.RunDayEndSequence();
+            }
         }
-
-        if (hours == 24)
-        {
-            //trigger end of day
-            hours = 0;
-            minutes = 0;
-            day++;
-            dayText.text = "day " + day;
-        }
-
+        
         string h = (hours < 10) ? "0" + hours : "" + hours;
         string m = (minutes < 10) ? "0" + Math.Floor(minutes) : "" + Math.Floor(minutes);
 
