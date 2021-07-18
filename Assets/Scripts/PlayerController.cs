@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite rightCarSprite;
     [SerializeField] GameObject playerCar;
 
+    [Header("Quest Highlight Mode")]
+    [SerializeField] NPC[] npcs;
+    private bool inQuestMode;
+
     private Yarn.Unity.DialogueRunner Dialogue;
     private Yarn.Unity.DialogueUI DialogueUI;
     private List<GameObject> lookingAt;
@@ -62,9 +66,9 @@ public class PlayerController : MonoBehaviour
     private bool carMode = false;
     public bool isNoclip = false;
     public bool hasKeys = false;
-    
 
-    [Header("Clock")]
+
+    [Header("Clock")] public float DEFAULT_TIMESCALE = 1;
     public int hours = 0;
     public double minutes = 0;
     [SerializeField] private Text clock;
@@ -109,6 +113,7 @@ public class PlayerController : MonoBehaviour
         if(hasKeys)
             SwapCar();
         updateTime();
+        QuestMode();
         
         if (m_InputHandler.GetEscDown())
             m_MenuManager.ToggleGamePaused();
@@ -385,7 +390,7 @@ public class PlayerController : MonoBehaviour
 
     private void updateTime()
     {
-        minutes += 5 * Time.deltaTime;
+        minutes += DEFAULT_TIMESCALE * Time.deltaTime;
         if (minutes >= 60)
         {
             hours += 1;
@@ -442,5 +447,25 @@ public class PlayerController : MonoBehaviour
         Dialogue.StartDialogue(TalkTo.GetTalkToNode());
         interactionText.SetText("");
         interactionText.enabled = false;
+    }
+
+    public void QuestMode()
+    {
+        if (m_InputHandler.GetQuestModeDown() && !m_Console.isActive)
+        {
+            inQuestMode = true;
+            foreach(NPC npc in npcs)
+            {
+                npc.SetExclamationPoint(true);
+            }
+        }
+        else if(m_InputHandler.GetQuestModeUp() && inQuestMode)
+        {
+            inQuestMode = false;
+            foreach (NPC npc in npcs)
+            {
+                npc.SetExclamationPoint(false);
+            }
+        }
     }
 }

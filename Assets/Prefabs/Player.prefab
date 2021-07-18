@@ -387,6 +387,7 @@ MonoBehaviour:
   skyboxNight: {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
   skyboxDawn: {fileID: 2100000, guid: 351dcfe340c8d0e4cbcb89c4ec80f061, type: 2}
   skyboxDusk: {fileID: 2100000, guid: e391f00234292cc4f935308c11cf0e54, type: 2}
+  directionalLight: {fileID: 0}
   footStepInterval: 4.5
   cameraBobAmplitude: 10
   stepMinVel: 8
@@ -413,9 +414,11 @@ MonoBehaviour:
   straightCarSprite: {fileID: 21300000, guid: 8c00e580747fd2e4c91596dec6df30fe, type: 3}
   leftCarSprite: {fileID: 21300000, guid: a24c8c0bbe830514598a83f1d453099c, type: 3}
   rightCarSprite: {fileID: 21300000, guid: e0c3437d6728886458815a16bd9dbe1e, type: 3}
+  playerCar: {fileID: 0}
   characterName: 
   isNoclip: 0
   hasKeys: 0
+  DEFAULT_TIMESCALE: 1
   hours: 0
   minutes: 0
   clock: {fileID: 0}

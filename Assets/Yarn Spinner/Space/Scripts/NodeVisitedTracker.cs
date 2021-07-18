@@ -23,7 +23,6 @@ public class NodeVisitedTracker : MonoBehaviour
         {
             var nodeName = parameters[0];
             bool contains = _visitedNodes.Contains(nodeName.AsString) || PlayerPrefs.HasKey(nodeName.AsString);
-            print(contains);
             return contains;
         });
 
