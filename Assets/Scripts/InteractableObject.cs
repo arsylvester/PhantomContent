@@ -6,31 +6,35 @@ public class InteractableObject : MonoBehaviour
 {
     public const int NUM_ITEM_TYPES = 4;
     public enum InteractableTypes {NPC, APPLE, FISH, CAR_KEYS};
+
+    public static List<InteractableObject> allInteractable = new List<InteractableObject>();
     
 
     [Header ("Type")]
     public InteractableTypes type;
 
-    [Header ("Status")]
-    public bool isAvailable = true; //if this is false, the player will not be able to interact with this object
-
     private void Start()
     {
-        isAvailable = true;
+        allInteractable.Add(this);
     }
 
 
     public void pickUpItem()
     {
-        Debug.Log("Destroying item");
-        isAvailable = false;
-        this.gameObject.SetActive(false);
+        InventoryManager.inventoryUpdate(type, 1);
+        Debug.Log("Item picked up: " + type + " = " + InventoryManager.inventory[(int)type]);
 
         if (type == InteractableTypes.FISH)
             QuestMaster.instance.FishUpdated();
         if (type == InteractableTypes.APPLE)
             QuestMaster.instance.AppleUpdated();
-        //InventoryManager.inventoryUpdate(type, 1);
-        //Debug.Log("Item picked up: " + type + " = " + InventoryManager.inventory[(int)type]);
+
+        Debug.Log("Destroying item");
+        Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        allInteractable.Remove(this);
     }
 }

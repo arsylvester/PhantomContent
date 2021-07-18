@@ -399,7 +399,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 025da00d73bac074db4cde188bad14fb, type: 3}
   - {fileID: 8300000, guid: d210634c175107d4b82019587298a1c9, type: 3}
   playerCam: {fileID: 943743012}
-  CarCamHeightDif: 0
+  CarCamHeightDif: 0.5
   interactionRadius: 5
   carOverlay: {fileID: 0}
   carSpeed: 35
