@@ -95,7 +95,9 @@ public class MenuManager : MonoBehaviour
     {
         isEndOfDay = true;
         dayEndScreen.SetActive(true);
-        dayCount.text = "END OF DAY " + m_PlayerController.day;
+        dayCount.text = "END OF DAY " + (m_PlayerController.day - 1);
+        questCount.text = "Quests Completed: " + QuestMaster.instance.questsComplete + "/" +
+                          QuestMaster.instance.questsTotal;
         string todaysQuote = m_QuoteManager.getQuote();
         quote.text = todaysQuote;
         StartCoroutine(completeDayEndSequence(3f));

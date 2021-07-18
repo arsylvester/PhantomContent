@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour
     public float GravityModifier = 1000;
     float footstepDistanceCounter;
 
+    [Header("Skybox")] [SerializeField] private Material skyboxDay;
+    [SerializeField] private Material skyboxNight;
+    [SerializeField] private Material skyboxDawn;
+    [SerializeField] private Material skyboxDusk;
+
+
     [Header("Footsteps")] [SerializeField] float footStepInterval = 1;
     [SerializeField] float cameraBobAmplitude = 0.02f;
     [SerializeField] float stepMinVel = 2.5f;
@@ -377,17 +383,34 @@ public class PlayerController : MonoBehaviour
         {
             hours += 1;
             minutes = 0;
+            
+            switch (hours)
+            {
+                case 6:
+                    RenderSettings.skybox = skyboxDawn;
+                    break;
+                case 10:
+                    RenderSettings.skybox = skyboxDay;
+                    break;
+                case 18:
+                    RenderSettings.skybox = skyboxDusk;
+                    break;
+                case 22:
+                    RenderSettings.skybox = skyboxNight;
+                    break;
+            }
+            
+            if (hours == 24)
+            {
+                hours = 0;
+                minutes = 0;
+                day++;
+                //trigger end of day
+                m_MenuManager.RunDayEndSequence();
+                dayText.text = "day " + day;
+            }
         }
-
-        if (hours == 24)
-        {
-            //trigger end of day
-            hours = 0;
-            minutes = 0;
-            day++;
-            dayText.text = "day " + day;
-        }
-
+        
         string h = (hours < 10) ? "0" + hours : "" + hours;
         string m = (minutes < 10) ? "0" + Math.Floor(minutes) : "" + Math.Floor(minutes);
 

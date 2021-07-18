@@ -384,6 +384,10 @@ MonoBehaviour:
   maxSpeedOnGround: 10
   movementSharpnessOnGround: 15
   GravityModifier: 2
+  skyboxDay: {fileID: 2100000, guid: 7167d6d87b26e0c42a618d8d2d5665b7, type: 2}
+  skyboxNight: {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
+  skyboxDawn: {fileID: 2100000, guid: 351dcfe340c8d0e4cbcb89c4ec80f061, type: 2}
+  skyboxDusk: {fileID: 2100000, guid: e391f00234292cc4f935308c11cf0e54, type: 2}
   footStepInterval: 4.5
   cameraBobAmplitude: 10
   stepMinVel: 8
