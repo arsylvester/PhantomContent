@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
     public String characterName;
     private bool carMode = false;
     public bool isNoclip = false;
+    public bool hasKeys = false;
     
 
     [Header("Clock")]
@@ -99,7 +100,8 @@ public class PlayerController : MonoBehaviour
         else
             PlayerMovement();
         PlayerInteraction();
-        SwapCar();
+        if(hasKeys)
+            SwapCar();
         updateTime();
         
         if (m_InputHandler.GetEscDown())

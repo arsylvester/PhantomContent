@@ -319,6 +319,63 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4005441191958707118, guid: f872ef5931cdc8845b2ccd94197c2259, type: 3}
   m_PrefabInstance: {fileID: 4005441192494636097}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &681241920
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 551.22327
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.051
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 532.75494
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.69566286
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7183684
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 91.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211025, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324193646473211036, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+      propertyPath: m_Name
+      value: CarKeys
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
 --- !u!20 &701478026 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 943743012, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}

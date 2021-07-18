@@ -4,9 +4,12 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("Keys") is false>>
-    Carl: Hey there, I really need some help here.
+    Carl: Hey! Thanks for letting me borrow your car! But uhhh...
+    Carl: I might have lost your keys...
+    <<get_player_response>>
+    Carl: I'm pretty sure I lost them in an alleyway somewhere nearby.
     <<start_quest keys>>
 <<else>>
-    Carl: Sorry about that again.
+    Carl: Sorry about that again. I'm pretty sure I lost them in an alleyway somewhere nearby.
 <<endif>>
 ===
