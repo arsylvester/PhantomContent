@@ -18,10 +18,11 @@ public class QuestMaster : MonoBehaviour
     QuestStep raceQuestStep;
     QuestStep escortQuestStep;
     QuestStep deliveryQuestStep;
+    QuestStep carKeysQuestStep;
 
     //Quest variables
     //Main
-    [SerializeField] public int questsTotal = 5;
+    [SerializeField] public int questsTotal = 6;
     public int questsComplete;
     //Race
     [SerializeField] float raceTimeLimit = 30f;
@@ -38,6 +39,8 @@ public class QuestMaster : MonoBehaviour
     //Escort
     public bool isEscorting = false;
     [SerializeField] GameObject escortFinishLine;
+    //Keys
+    bool keys = false;
 
     public enum QuestStep
     {
@@ -62,6 +65,8 @@ public class QuestMaster : MonoBehaviour
         questsComplete = PlayerPrefs.GetInt("QuestsComplete");
         fish = PlayerPrefs.GetInt("fish");
         apples = PlayerPrefs.GetInt("apples");
+        keys = PlayerPrefs.GetInt("keys") == 1 ? true : false;
+        FindObjectOfType<PlayerController>().hasKeys = keys;
 
         storage = GetComponent<InMemoryVariableStorage>();
         StartCoroutine(DelaySetYarnVars());
@@ -116,6 +121,9 @@ public class QuestMaster : MonoBehaviour
             case "delivery":
                 SetDeliveryQuestStep(QuestStep.InProgress);
                 break;
+            case "keys":
+                SetKeysQuestStep(QuestStep.InProgress);
+                break;
             default:
                 break;
         }
@@ -157,6 +165,11 @@ public class QuestMaster : MonoBehaviour
                 if (deliveryQuestStep != QuestStep.Completed)
                     UpdateQuestsComplete();
                 SetDeliveryQuestStep(QuestStep.Completed);
+                break;
+            case "keys":
+                if (carKeysQuestStep != QuestStep.Completed)
+                    UpdateQuestsComplete();
+                SetKeysQuestStep(QuestStep.Completed);
                 break;
             default:
                 break;
@@ -202,6 +215,13 @@ public class QuestMaster : MonoBehaviour
     {
         deliveryQuestStep = step;
         PlayerPrefs.SetInt("DeliveryStep", (int)step);
+        PlayerPrefs.Save();
+    }
+
+    public void SetKeysQuestStep(QuestStep step)
+    {
+        carKeysQuestStep = step;
+        PlayerPrefs.SetInt("KeysStep", (int)step);
         PlayerPrefs.Save();
     }
 
@@ -322,5 +342,14 @@ public class QuestMaster : MonoBehaviour
         escortFinishLine.SetActive(false);
         FindObjectOfType<Escort>().StopMoving();
         storage.SetValue("$trip_finished", true);
+    }
+
+    public void FoundKeys()
+    {
+        FindObjectOfType<PlayerController>().hasKeys = true;
+        if (carKeysQuestStep != QuestStep.Completed)
+            UpdateQuestsComplete();
+        SetKeysQuestStep(QuestStep.Completed);
+        PlayerPrefs.SetInt("keys", 1);
     }
 }

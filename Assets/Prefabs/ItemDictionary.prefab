@@ -44,67 +44,68 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - Assets/Model/Prefab/trashcan.prefab
-  - Assets/Model/Prefab/trashbags.prefab
-  - Assets/Model/Prefab/streetlight.prefab
-  - Assets/Model/Prefab/tree-1.prefab
-  - Assets/Model/Prefab/tree-2.prefab
-  - Assets/Model/Prefab/fire-hydrant.prefab
-  - Assets/Model/Prefab/buildings/barn.prefab
-  - Assets/Model/Prefab/buildings/building1.prefab
-  - Assets/Model/Prefab/buildings/building2.prefab
-  - Assets/Model/Prefab/buildings/building3.prefab
-  - Assets/Model/Prefab/buildings/building4.prefab
-  - Assets/Model/Prefab/buildings/building5.prefab
-  - Assets/Model/Prefab/buildings/building6.prefab
-  - Assets/Model/Prefab/buildings/building7.prefab
-  - Assets/Model/Prefab/buildings/building8.prefab
-  - Assets/Model/Prefab/buildings/building9.prefab
-  - Assets/Model/Prefab/buildings/building10.prefab
-  - Assets/Model/Prefab/buildings/lake-docks.prefab
-  - Assets/Model/Prefab/buildings/lake-house.prefab
-  - Assets/Model/Prefab/buildings/player-home.prefab
-  - Assets/Model/Prefab/buildings/post-office 1.prefab
-  - Assets/Model/Prefab/buildings/post-office.prefab
-  - Assets/Model/Prefab/buildings/wood-cabin.prefab
-  - Assets/Model/Prefab/cars/npc-trueno.prefab
-  - Assets/Model/Prefab/cars/player-trueno.prefab
-  - Assets/Model/Prefab/modular/wall1.prefab
-  - Assets/Model/Prefab/modular/wall2.prefab
-  - Assets/Model/Prefab/modular/wall3.prefab
-  - Assets/Model/Prefab/modular/wall4.prefab
-  - Assets/Model/Prefab/modular/roads/intersection.prefab
-  - Assets/Model/Prefab/modular/roads/T-section.prefab
-  - Assets/Model/Prefab/modular/roads/corner/leftTurn-90Degree.prefab
-  - Assets/Model/Prefab/modular/roads/corner/leftTurn-Big.prefab
-  - Assets/Model/Prefab/modular/roads/corner/leftTurn-small.prefab
-  - Assets/Model/Prefab/modular/roads/corner/rightTurn-90Degree.prefab
-  - Assets/Model/Prefab/modular/roads/corner/rightTurn-Big.prefab
-  - Assets/Model/Prefab/modular/roads/corner/rightTurn-small.prefab
-  - Assets/Model/Prefab/modular/roads/straight/straight-extra-long.prefab
-  - Assets/Model/Prefab/modular/roads/straight/straight-long.prefab
-  - Assets/Model/Prefab/modular/roads/straight/straight-medium-empty.prefab
-  - Assets/Model/Prefab/modular/roads/straight/straight-medium.prefab
-  - Assets/Model/Prefab/modular/roads/straight/straight-short-empty.prefab
-  - Assets/Model/Prefab/modular/roads/straight/straight-short.prefab
-  - Assets/Prefabs/Ambiance.prefab
-  - Assets/Prefabs/Apple.prefab
-  - Assets/Prefabs/AppleQuestProps.prefab
-  - Assets/Prefabs/Bass.prefab
-  - Assets/Prefabs/CarKeys.prefab
-  - Assets/Prefabs/Environment.prefab
-  - Assets/Prefabs/FishQuestProps.prefab
-  - Assets/Prefabs/npcs.prefab
-  - Assets/Prefabs/The UI Prefab.prefab
-  - Assets/Prefabs/Trout.prefab
-  - Assets/Prefabs/NPCs/Alley En Variant.prefab
-  - Assets/Prefabs/NPCs/Apple NPC Variant.prefab
-  - Assets/Prefabs/NPCs/Del Variant.prefab
-  - Assets/Prefabs/NPCs/Fish NPC Variant.prefab
-  - Assets/Prefabs/NPCs/May Variant.prefab
-  - Assets/Prefabs/NPCs/NPC Base.prefab
-  - Assets/Prefabs/NPCs/Postman Variant.prefab
-  - Assets/Prefabs/NPCs/Speed Variant.prefab
+  - {fileID: 7489530897619819437, guid: 3d8f624d242aff24c88e05f9fee9f687, type: 3}
+  - {fileID: 7054536642615880751, guid: ecd3b5bf61a750d4689e977826a31cb2, type: 3}
+  - {fileID: 2618651189053713585, guid: 721fbe3af529e7e4f837ccbd2beaed63, type: 3}
+  - {fileID: 4194896250057677086, guid: e4be29d1e6d72c942b5c50b2b03abe1e, type: 3}
+  - {fileID: 862080807727618648, guid: d9ee2e4af4a68b441ac871ec98df86d1, type: 3}
+  - {fileID: 4405227680135242431, guid: 60c2956b86e54344d8d9765d4369adae, type: 3}
+  - {fileID: 5568948223909120431, guid: b631df28fe6a43c4f84dd83ffb066e8b, type: 3}
+  - {fileID: 2088873242431948217, guid: 2d059e968d809924e8141297a95ba7ea, type: 3}
+  - {fileID: 5842566637239046830, guid: 65336c59cf5562c4f91b1da5ffc9393f, type: 3}
+  - {fileID: 3704833626551226969, guid: ad5edb96c8880254db227ea5c65f6a50, type: 3}
+  - {fileID: 5224501408571949400, guid: 03b2c7f530381d4439f80c8d7f74b8fa, type: 3}
+  - {fileID: 8510252028228535607, guid: c348012b1e27f5f4a996781ddb33b738, type: 3}
+  - {fileID: 1361211694630056380, guid: 2114863c6a366564f895ef41ddbf3029, type: 3}
+  - {fileID: 3101396694264653745, guid: edc388237f37ee64f8d64ca08b60d392, type: 3}
+  - {fileID: 3289045175356081005, guid: fe3bba88190c0db4cbfb76b735de0f48, type: 3}
+  - {fileID: 2980053842016202774, guid: da31e848517933f47979c32867be4da7, type: 3}
+  - {fileID: 7059178843035595982, guid: c8de69d54a63efa4b93be8eda41da53b, type: 3}
+  - {fileID: 4807027591088749849, guid: fd0b2919d239de043bbc93d05d508445, type: 3}
+  - {fileID: 2937145826871786168, guid: da561faa4edec254798a4e3d90367c5a, type: 3}
+  - {fileID: 7478979424901098949, guid: de78c82ff5b83c846b71674a563baabe, type: 3}
+  - {fileID: 2343446647772240584, guid: 280e1d36b58207a459a21d5dc2e4b394, type: 3}
+  - {fileID: 2186419345371235008, guid: 9dab8544cbee42e45944324d38fc3d1a, type: 3}
+  - {fileID: 3723041143969872506, guid: 4875da9479a69424db8e3c17dfe5ca61, type: 3}
+  - {fileID: 3893608116670824193, guid: 658d0d25df81b6047815226ec17c0b21, type: 3}
+  - {fileID: 2127490046566862132, guid: 7b7429b6c323cff4f80adc2ca4283145, type: 3}
+  - {fileID: 6185886198797110027, guid: caabd2b1a4f1b34449e6e84a34e45e31, type: 3}
+  - {fileID: 3069050246971839102, guid: 20c77d50e29a44a4bbda7af0979d1141, type: 3}
+  - {fileID: 7893454764072385613, guid: 89885720af9668d409e1af39128afbd1, type: 3}
+  - {fileID: 7575687701559486643, guid: 517d52ca51043cd4d82da39ea4abb1ca, type: 3}
+  - {fileID: 2521774834780066688, guid: 139844551def377468f9fffeffbf0493, type: 3}
+  - {fileID: 201166966479005314, guid: 12ab0c4befdee974cb8a875feca2b99b, type: 3}
+  - {fileID: 6186515422752779484, guid: a6937888cbe4c9e4eb8f3261eb8a2969, type: 3}
+  - {fileID: 5293349405362856726, guid: d9a4660c665d99541a974c5e23ce7a5b, type: 3}
+  - {fileID: 1532622089416809864, guid: a79d1a7e7ef0252479f36d8da50d9772, type: 3}
+  - {fileID: 7998575729296914145, guid: aef9e1b285d5c8944af148a31ac09337, type: 3}
+  - {fileID: 3292514291235703359, guid: 4343de4612e595e4ba2c97f624d4e281, type: 3}
+  - {fileID: 5536571449805552076, guid: 837d8c24337dd0547b90a9bedb6e8d23, type: 3}
+  - {fileID: 1380969796264718546, guid: 6a25c687b01e94d4e8a45ed5d77cfdc9, type: 3}
+  - {fileID: 3923644722703071990, guid: 2f5ba7668167eee4d8129246aff978a3, type: 3}
+  - {fileID: 2650534465871294426, guid: 31ed57f3faf90ef4196c4084b689ae97, type: 3}
+  - {fileID: 5031702684168675729, guid: 6be596bfed158f14684b0fb8ac3f9171, type: 3}
+  - {fileID: 6904101999710442721, guid: b7169959983ba9645bfb5564e9d3d6b4, type: 3}
+  - {fileID: 7959406220042010047, guid: ae5f002dea051bb488b865656c3a2aa7, type: 3}
+  - {fileID: 2628984531552893869, guid: 340c10c17e29b9640a8cb95474b89ae4, type: 3}
+  - {fileID: 933205970424427501, guid: 367dea56ef130c242b325e9f743e1144, type: 3}
+  - {fileID: 3939741592892052421, guid: 638bd51ef40e10c48a4496c263799050, type: 3}
+  - {fileID: 3437337531264392881, guid: 8f43afa6f90acaf4c9d01e8097a62139, type: 3}
+  - {fileID: 4324193646473211036, guid: 3c6eb6c337d521b4393534175fdb7115, type: 3}
+  - {fileID: 7710591300114772388, guid: ed699d0e3fd6b314ea5bb82fe8f65568, type: 3}
+  - {fileID: 8574505355565131364, guid: c756e7b60731a8448939e9be13d2caec, type: 3}
+  - {fileID: 1642350673443544694, guid: 7a52887a0dfa96b408b317a7a90a6c90, type: 3}
+  - {fileID: 5284224109996474721, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
+  - {fileID: 3437337531264392881, guid: ae9892c80f1e9454da91da29336bc8c8, type: 3}
+  - {fileID: 1602672291427159900, guid: 31673bb51f6d7a64c80eada8793a8269, type: 3}
+  - {fileID: 9074123490857719218, guid: 67311833c73ac9143b5493f77d6ab914, type: 3}
+  - {fileID: 1836031449753395162, guid: 0f7abfa383438a943bd5b9d351791fba, type: 3}
+  - {fileID: 7983708038358914968, guid: 3a8828dc1448f1640a3cc1c43b7941ab, type: 3}
+  - {fileID: 5457529840522846468, guid: 390c0c2bfe69add45a56090594ee3350, type: 3}
+  - {fileID: 8554642678346947778, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
+  - {fileID: 4004404112047584912, guid: 7ff9bc0aba3b1c743bdcf360fbfbdbf4, type: 3}
+  - {fileID: 8161563763380405537, guid: d2a735b6295034c48b7a196e4798f3b0, type: 3}
+  - {fileID: 4005441191958707118, guid: f872ef5931cdc8845b2ccd94197c2259, type: 3}
   names:
   - trashcan
   - trashbags
@@ -167,3 +168,4 @@ MonoBehaviour:
   - NPC
   - Postman
   - Speed
+  - FinishLine
