@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
@@ -28,6 +29,7 @@ public class MenuManager : MonoBehaviour
     private readonly string[] volumeLabels = {"muted", "very quiet", "quiet", "default", "loud", "very loud"};
     private int currentVolume = 3;
     private int currentFOV = 1;
+    public int day = 1;
 
     private float previousTimeScale = 1f;
 
@@ -40,31 +42,38 @@ public class MenuManager : MonoBehaviour
         optionsMenu.SetActive(false);
         dayEndScreen.SetActive(false);
         
+        // If the playerpref doesn't exist, establish is as a default value.
         if (!PlayerPrefs.HasKey("Volume"))
             SetVolume(0);
         
         if (!PlayerPrefs.HasKey("FOV"))
             SetVolume(0);
         
+        if (!PlayerPrefs.HasKey("Day"))
+            SetDay(1);
+        
         float vol = PlayerPrefs.GetFloat("Volume");
         float fov = PlayerPrefs.GetFloat("FOV");
+        day = PlayerPrefs.GetInt("Day");
 
         currentFOV = Array.IndexOf(fovOptions, fov);
         currentVolume = Array.IndexOf(volumeOptions, vol);
         
+        // update UI to represent the current values
         volumeText.text = "volume: " + volumeLabels[currentVolume];
         fovText.text = "fov: " + fovLabels[currentFOV];
+        SetDay(day);
     }
-
-    /*
+    
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            RunDayEndSequence();
+            print("cleared day playerpref");
+            PlayerPrefs.DeleteKey("Day");
+            PlayerPrefs.Save();
         }
     }
-    */
 
     public void ToggleGamePaused()
     {
@@ -95,7 +104,9 @@ public class MenuManager : MonoBehaviour
     {
         isEndOfDay = true;
         dayEndScreen.SetActive(true);
-        dayCount.text = "END OF DAY " + m_PlayerController.day;
+        dayCount.text = "END OF DAY " + (day - 1);
+        questCount.text = "Quests Completed: " + QuestMaster.instance.questsComplete + "/" +
+                          QuestMaster.instance.questsTotal;
         string todaysQuote = m_QuoteManager.getQuote();
         quote.text = todaysQuote;
         StartCoroutine(completeDayEndSequence(3f));
@@ -106,6 +117,7 @@ public class MenuManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(f);
         isEndOfDay = false;
         dayEndScreen.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void QuitGame()
@@ -123,6 +135,20 @@ public class MenuManager : MonoBehaviour
     {
         PlayerPrefs.SetFloat("Volume", x);
         PlayerPrefs.Save();
+    }
+    
+    public void SetDay(int i)
+    {
+        day = i;
+        m_PlayerController.dayText.text = "day " + i;
+        PlayerPrefs.SetInt("Day", i);
+        PlayerPrefs.Save();
+    }
+
+    public void NextDay()
+    {
+        SetDay(day + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void ChangeVolume()

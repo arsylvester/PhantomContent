@@ -16,7 +16,6 @@ public class QuoteManager : MonoBehaviour
     public void buildQuoteList()
     {
         Quotes quoteList = JsonUtility.FromJson<Quotes>(jsonFile.text);
-//        print("number of quotes: " + quoteList.quotes.Length);
 
         foreach (var q in quoteList.quotes)
         {
