@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Material skyboxNight;
     [SerializeField] private Material skyboxDawn;
     [SerializeField] private Material skyboxDusk;
+    [SerializeField] Light directionalLight;
 
 
     [Header("Footsteps")] [SerializeField] float footStepInterval = 1;
@@ -87,6 +88,10 @@ public class PlayerController : MonoBehaviour
 
         hours = 6;
         minutes = 0;
+        RenderSettings.skybox = skyboxDawn;
+        directionalLight.color = new Vector4(0.9339623f, 0.790913f, 0.5771182f, 1);
+        directionalLight.transform.rotation = Quaternion.Euler(53.584f, 11.114f, 176.684f);
+        directionalLight.intensity = 0.75f;
     }
 
     // Update is called once per frame
@@ -376,15 +381,27 @@ public class PlayerController : MonoBehaviour
             {
                 case 6:
                     RenderSettings.skybox = skyboxDawn;
+                    directionalLight.color = new Vector4(0.9339623f, 0.790913f, 0.5771182f, 1);
+                    directionalLight.transform.rotation = Quaternion.Euler(53.584f, 11.114f, 176.684f);
+                    directionalLight.intensity = 0.75f;
                     break;
                 case 10:
                     RenderSettings.skybox = skyboxDay;
+                    directionalLight.color = new Vector4(1, 0.9568627f, 0.8392157f, 1);
+                    directionalLight.transform.rotation = Quaternion.Euler(62.242f, -162.474f, 4.228f);
+                    directionalLight.intensity = 1;
                     break;
                 case 18:
                     RenderSettings.skybox = skyboxDusk;
+                    directionalLight.color = new Vector4(0.9716981f, 0.706511f, 0.6004361f, 1);
+                    directionalLight.transform.rotation = Quaternion.Euler(35.589f, -164.808f, 2.42f);
+                    directionalLight.intensity = 0.65f;
                     break;
                 case 22:
                     RenderSettings.skybox = skyboxNight;
+                    directionalLight.color = new Vector4(0.8470589f, 0.7882354f, 0.6705883f, 1);
+                    directionalLight.transform.rotation = Quaternion.Euler(42.407f, -183.328f, -8.39f);
+                    directionalLight.intensity = 0.2f;
                     break;
             }
             
