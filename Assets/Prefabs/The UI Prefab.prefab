@@ -3861,6 +3861,7 @@ MonoBehaviour:
   dayCount: {fileID: 536092741}
   questCount: {fileID: 179421012}
   camera: {fileID: 0}
+  day: 1
 --- !u!114 &1308419911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4312,6 +4313,7 @@ MonoBehaviour:
   dialogueRunner: {fileID: 5284224110262466361}
   storage: {fileID: 0}
   questsTotal: 5
+  questsComplete: 0
   raceTimeLimit: 56
   raceTimeText: {fileID: 483975969}
   isInRace: 0

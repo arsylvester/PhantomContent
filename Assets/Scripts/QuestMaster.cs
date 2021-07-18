@@ -21,8 +21,8 @@ public class QuestMaster : MonoBehaviour
 
     //Quest variables
     //Main
-    [SerializeField] int questsTotal = 5;
-    int questsComplete;
+    [SerializeField] public int questsTotal = 5;
+    public int questsComplete;
     //Race
     [SerializeField] float raceTimeLimit = 30f;
     float currentRaceTime;
