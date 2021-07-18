@@ -970,7 +970,8 @@ PrefabInstance:
       propertyPath: CarCamHeightDif
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6111118838887757884, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
 --- !u!1 &1644786983 stripped
 GameObject:
