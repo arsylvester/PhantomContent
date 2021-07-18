@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: delete
   m_EditorClassIdentifier: 
   commandStr: delete
-  commandDesc: delete a specified object
+  commandDesc: ' [name of object] - delete a specified object'

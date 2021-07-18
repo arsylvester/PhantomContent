@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: tp
   m_EditorClassIdentifier: 
   commandStr: tp
-  commandDesc: teleport to a location?
+  commandDesc: ' [x] [y] [z] - teleport to a location'
