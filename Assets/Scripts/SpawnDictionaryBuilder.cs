@@ -15,7 +15,7 @@ public class SpawnDictionaryBuilder : MonoBehaviour
     {
         for(int i = 0; i < items.Count; i++)
         {
-            objectDictionary.Add(names[i], items[i]);
+            objectDictionary.Add(names[i].ToLower(), items[i]);
         }
     }
 
