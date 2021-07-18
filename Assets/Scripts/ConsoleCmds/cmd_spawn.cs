@@ -32,6 +32,6 @@ public class cmd_spawn : ConsoleCommand
     {
         GameObject clone = Instantiate(prefab, pos, Quaternion.identity) as GameObject;
         ConsoleManager console = GameObject.FindObjectOfType<ConsoleManager>();
-        console.UpdateLog(name + " spawned @ ["+ pos.x + ", " + pos.y + ", " + pos.z + "]");
+        console.UpdateLog(name + " spawned @ ["+ Math.Truncate(pos.x) + ", " + Math.Truncate(pos.y) + ", " + Math.Truncate(pos.z)+ "]");
     }
 }
