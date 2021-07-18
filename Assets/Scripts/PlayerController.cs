@@ -61,9 +61,9 @@ public class PlayerController : MonoBehaviour
     private bool carMode = false;
     public bool isNoclip = false;
     public bool hasKeys = false;
-    
 
-    [Header("Clock")]
+
+    [Header("Clock")] public float DEFAULT_TIMESCALE = 1;
     public int hours = 0;
     public double minutes = 0;
     [SerializeField] private Text clock;
@@ -373,7 +373,7 @@ public class PlayerController : MonoBehaviour
 
     private void updateTime()
     {
-        minutes += 5 * Time.deltaTime;
+        minutes += DEFAULT_TIMESCALE * Time.deltaTime;
         if (minutes >= 60)
         {
             hours += 1;

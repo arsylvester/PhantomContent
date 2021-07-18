@@ -918,6 +918,10 @@ PrefabInstance:
       propertyPath: directionalLight
       value: 
       objectReference: {fileID: 1689261388}
+    - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
+      propertyPath: DEFAULT_TIMESCALE
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
 --- !u!1 &1658017704
@@ -1297,10 +1301,6 @@ PrefabInstance:
       propertyPath: escortFinishLine
       value: 
       objectReference: {fileID: 1267556365}
-    - target: {fileID: 720560295, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1909587034, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
       propertyPath: camera
       value: 
