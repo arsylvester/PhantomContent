@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 2480198943629176163, guid: 72fa60dfb17e6a9438095870be3b3d14, type: 3}
     - target: {fileID: 6884376012216261031, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: characterName
-      value: FISH NPC
+      value: River
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_RootOrder
@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 516.9495
+      value: -56.311035
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.645562
+      value: 703.20917
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 526.55756
+      value: 1042.1759
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8554642678346947778, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_Name
-      value: Fish NPC Variant
+      value: River
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
