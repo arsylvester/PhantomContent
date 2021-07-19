@@ -1,0 +1,8 @@
+title: GenericNPC5
+tags: 
+colorID: 0
+position: 594,-149
+---
+<<generate_quote>>
+{$random_quote}
+===
