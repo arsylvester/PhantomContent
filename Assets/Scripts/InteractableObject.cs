@@ -25,11 +25,15 @@ public class InteractableObject : MonoBehaviour
 
         if (type == InteractableTypes.FISH)
             QuestMaster.instance.FishUpdated();
-        if (type == InteractableTypes.APPLE)
+        else if (type == InteractableTypes.APPLE)
             QuestMaster.instance.AppleUpdated();
-        if (type == InteractableTypes.BED)
-            GameObject.FindObjectOfType<MenuManager>().NextDay();
-        if (type == InteractableTypes.CAR_KEYS)
+        else if (type == InteractableTypes.BED)
+        {
+            MenuManager mm = GameObject.FindObjectOfType<MenuManager>();
+            mm.NextDay();
+            mm.RunDayEndSequence();
+        }
+        else if (type == InteractableTypes.CAR_KEYS)
             QuestMaster.instance.FoundKeys();
         Debug.Log("Destroying item");
         Destroy(this.gameObject);
