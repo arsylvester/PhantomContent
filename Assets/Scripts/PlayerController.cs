@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite rightCarSprite;
     [SerializeField] GameObject playerCar;
     [SerializeField] AudioClip carLockClip;
+    [SerializeField] GameObject carHitBox; 
 
     [Header("Quest Highlight Mode")]
     [SerializeField] NPC[] npcs;
@@ -359,8 +360,9 @@ public class PlayerController : MonoBehaviour
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y + CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(false);
                 m_audioSource.Stop();
+                carHitBox.SetActive(true);
                 
-                playerCar.SetActive(true);
+                playerCar.SetActive(false);
                 playerCar.transform.rotation = this.transform.rotation;
                 playerCar.transform.parent = gameObject.transform;
                 playerCar.transform.localPosition = new Vector3(2, -0.5f, 0);
@@ -370,6 +372,7 @@ public class PlayerController : MonoBehaviour
             else if(playerCar != null)
             {
                 carMode = true;
+                carHitBox.SetActive(true);
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y - CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(true);
                 m_audioSource.PlayOneShot(carStartupAudioClip);
