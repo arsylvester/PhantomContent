@@ -882,13 +882,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 64818635}
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
+      propertyPath: dayClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e14f3db02fe64d0479cc3c3e3ad4896c, type: 3}
+    - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: dayText
       value: 
       objectReference: {fileID: 425325273}
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
+      propertyPath: nightClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 796b549d39fd37c4bb417b763b039457, type: 3}
+    - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: carOverlay
       value: 
       objectReference: {fileID: 1741480995}
+    - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
+      propertyPath: ambinaceAudio
+      value: 
+      objectReference: {fileID: 2628984532107187144}
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: directionalLight
       value: 
@@ -1551,6 +1563,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 340c10c17e29b9640a8cb95474b89ae4, type: 3}
+--- !u!82 &2628984532107187144 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2628984531552893868, guid: 340c10c17e29b9640a8cb95474b89ae4, type: 3}
+  m_PrefabInstance: {fileID: 2628984532107187143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4005441192494636097
 PrefabInstance:
   m_ObjectHideFlags: 0

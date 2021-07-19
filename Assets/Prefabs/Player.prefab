@@ -263,6 +263,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1.6, z: 1}
   m_Children:
   - {fileID: 943743015}
+  - {fileID: 4400362697137728005}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -388,6 +389,12 @@ MonoBehaviour:
   skyboxDawn: {fileID: 2100000, guid: 351dcfe340c8d0e4cbcb89c4ec80f061, type: 2}
   skyboxDusk: {fileID: 2100000, guid: e391f00234292cc4f935308c11cf0e54, type: 2}
   directionalLight: {fileID: 0}
+  ambinaceAudio: {fileID: 0}
+  dayClip: {fileID: 8300000, guid: e14f3db02fe64d0479cc3c3e3ad4896c, type: 3}
+  nightClip: {fileID: 8300000, guid: 796b549d39fd37c4bb417b763b039457, type: 3}
+  clockTicks:
+  - {fileID: 8300000, guid: c89c312dff0453146b12b8434680d478, type: 3}
+  - {fileID: 8300000, guid: 5dab354137e4ac242b516fc3d95d0f4e, type: 3}
   footStepInterval: 4.5
   cameraBobAmplitude: 10
   stepMinVel: 8
@@ -415,6 +422,17 @@ MonoBehaviour:
   leftCarSprite: {fileID: 21300000, guid: a24c8c0bbe830514598a83f1d453099c, type: 3}
   rightCarSprite: {fileID: 21300000, guid: e0c3437d6728886458815a16bd9dbe1e, type: 3}
   playerCar: {fileID: 0}
+  carLockClip: {fileID: 8300000, guid: 486b5487c937db64798f885245cd72c0, type: 3}
+  carHitBox: {fileID: 6286171533234321582}
+  npcs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   characterName: 
   isNoclip: 0
   hasKeys: 0
@@ -447,7 +465,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: 2421e64602561c6469a4c1ce9b351153, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -531,3 +549,61 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &6286171533234321582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4400362697137728005}
+  - component: {fileID: 2876538024226389620}
+  - component: {fileID: 8143996392787949574}
+  m_Layer: 0
+  m_Name: CarhitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4400362697137728005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6286171533234321582}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3152265378839446369}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2876538024226389620
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6286171533234321582}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 1, z: 1.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8143996392787949574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6286171533234321582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d656b62906b4b4599f90f95fb4f9f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carCrashSound: {fileID: 8300000, guid: 19e9073d124d5bf42a219ebbc8f32a99, type: 3}

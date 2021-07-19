@@ -46,6 +46,7 @@ namespace Yarn.Unity.Example {
         [SerializeField] float exclamationSize = 2;
         private bool hasTalkedTo = false;
         private Transform player;
+        [SerializeField] bool isMainNPC = false;
 
         void Start () {
             if (scriptToLoad != null) {
@@ -58,10 +59,14 @@ namespace Yarn.Unity.Example {
             hasTalkedTo = PlayerPrefs.HasKey(talkToNode);
         }
 
+
         private void Update()
         {
-            float distance = Vector3.Distance(transform.position, player.position) * exclamationSize;
-            exclamationPoint.fontSize = (int)distance;
+            if (isMainNPC)
+            {
+                float distance = Vector3.Distance(transform.position, player.position) * exclamationSize;
+                exclamationPoint.fontSize = (int)distance;
+            }
         }
 
         public string GetTalkToNode()

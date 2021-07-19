@@ -11,7 +11,8 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private Text fovText;
     [SerializeField] private Text volumeText;
-    
+    [SerializeField] AudioClip ButtonClip;
+
     private readonly float[] fovOptions = {46, 60, 73};
     private readonly string[] fovLabels = {"tight", "normal", "wide"};
     private readonly float[] volumeOptions = {-80, -20, -10, 0, 10, 20}; // volume levels in db
@@ -19,12 +20,15 @@ public class StartMenu : MonoBehaviour
     private int currentVolume = 3;
     private int currentFOV = 1;
     private int day = 1;
-    
-    
+    private AudioSource audio;
+
+
     void Start()
     {
         optionsMenu.SetActive(false);
-        
+        audio = GetComponent<AudioSource>();
+        Screen.SetResolution(800, 600, true);
+
         // If the playerpref doesn't exist, establish is as a default value.
         if (!PlayerPrefs.HasKey("Volume"))
             SetVolume(0);
@@ -108,5 +112,10 @@ public class StartMenu : MonoBehaviour
         
         fovText.text = "fov: " + fovLabels[currentFOV];
         SetFOV(fovOptions[currentFOV]);
+    }
+
+    public void PlayButtonSound()
+    {
+        audio.PlayOneShot(ButtonClip);
     }
 }

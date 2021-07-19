@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Material skyboxDawn;
     [SerializeField] private Material skyboxDusk;
     [SerializeField] Light directionalLight;
+    [SerializeField] AudioSource ambinaceAudio;
+    [SerializeField] AudioClip dayClip;
+    [SerializeField] AudioClip nightClip;
+    [SerializeField] AudioClip[] clockTicks;
+    private int tickIndex = 0;
 
 
     [Header("Footsteps")] [SerializeField] float footStepInterval = 1;
@@ -54,6 +59,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite leftCarSprite;
     [SerializeField] Sprite rightCarSprite;
     [SerializeField] GameObject playerCar;
+    [SerializeField] AudioClip carLockClip;
+    [SerializeField] GameObject carHitBox; 
 
     [Header("Quest Highlight Mode")]
     [SerializeField] NPC[] npcs;
@@ -353,16 +360,19 @@ public class PlayerController : MonoBehaviour
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y + CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(false);
                 m_audioSource.Stop();
+                carHitBox.SetActive(true);
                 
-                playerCar.SetActive(true);
+                playerCar.SetActive(false);
                 playerCar.transform.rotation = this.transform.rotation;
                 playerCar.transform.parent = gameObject.transform;
                 playerCar.transform.localPosition = new Vector3(2, -0.5f, 0);
                 playerCar.transform.parent = null;
+                m_audioSource.PlayOneShot(carLockClip, .5f);
             }
             else if(playerCar != null)
             {
                 carMode = true;
+                carHitBox.SetActive(true);
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y - CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(true);
                 m_audioSource.PlayOneShot(carStartupAudioClip);
@@ -395,6 +405,9 @@ public class PlayerController : MonoBehaviour
         {
             hours += 1;
             minutes = 0;
+            ambinaceAudio.PlayOneShot(clockTicks[tickIndex]);
+            if (++tickIndex >= clockTicks.Length)
+                tickIndex = 0;
             
             switch (hours) // change the skybox at certain hours
             {
@@ -403,6 +416,8 @@ public class PlayerController : MonoBehaviour
                     directionalLight.color = new Vector4(0.9339623f, 0.790913f, 0.5771182f, 1);
                     directionalLight.transform.rotation = Quaternion.Euler(53.584f, 11.114f, 176.684f);
                     directionalLight.intensity = 0.75f;
+                    ambinaceAudio.clip = dayClip;
+                    ambinaceAudio.Play();
                     break;
                 case 10:
                     RenderSettings.skybox = skyboxDay;
@@ -415,6 +430,8 @@ public class PlayerController : MonoBehaviour
                     directionalLight.color = new Vector4(0.9716981f, 0.706511f, 0.6004361f, 1);
                     directionalLight.transform.rotation = Quaternion.Euler(35.589f, -164.808f, 2.42f);
                     directionalLight.intensity = 0.65f;
+                    ambinaceAudio.clip = nightClip;
+                    ambinaceAudio.Play();
                     break;
                 case 22:
                     RenderSettings.skybox = skyboxNight;
