@@ -1030,10 +1030,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3152265378839446369, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3152265378839446369, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 489.15
       objectReference: {fileID: 0}
@@ -1086,17 +1082,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1387758678}
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
-      propertyPath: carSpeed
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: carOverlay
       value: 
       objectReference: {fileID: 1741480995}
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
-      propertyPath: npcs.Array.size
-      value: 8
-      objectReference: {fileID: 0}
+      propertyPath: ambinaceAudio
+      value: 
+      objectReference: {fileID: 2628984532107187144}
+    - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
+      propertyPath: directionalLight
+      value: 
+      objectReference: {fileID: 1689261388}
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: npcs.Array.data[0]
       value: 
@@ -1129,10 +1125,6 @@ PrefabInstance:
       propertyPath: npcs.Array.data[7]
       value: 
       objectReference: {fileID: 158669172}
-    - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
-      propertyPath: carMovementSharpnessOnGround
-      value: 1.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
 --- !u!1 &1658017704
@@ -2127,3 +2119,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 340c10c17e29b9640a8cb95474b89ae4, type: 3}
+--- !u!82 &2628984532107187144 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2628984531552893868, guid: 340c10c17e29b9640a8cb95474b89ae4, type: 3}
+  m_PrefabInstance: {fileID: 2628984532107187143}
+  m_PrefabAsset: {fileID: 0}
