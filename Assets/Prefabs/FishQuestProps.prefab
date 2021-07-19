@@ -355,6 +355,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8574505355565131367}
     m_Modifications:
+    - target: {fileID: 3437337530953387001, guid: 8f43afa6f90acaf4c9d01e8097a62139, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437337530953387001, guid: 8f43afa6f90acaf4c9d01e8097a62139, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437337530953387001, guid: 8f43afa6f90acaf4c9d01e8097a62139, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3437337531264392881, guid: 8f43afa6f90acaf4c9d01e8097a62139, type: 3}
       propertyPath: m_Name
       value: Bass
@@ -401,6 +413,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3437337531264392884, guid: 8f43afa6f90acaf4c9d01e8097a62139, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437337531264392885, guid: 8f43afa6f90acaf4c9d01e8097a62139, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
