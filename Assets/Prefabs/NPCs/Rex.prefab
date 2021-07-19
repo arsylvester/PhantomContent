@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 2480198943629176163, guid: 5e7ca6c953c5cb24385dddcb4a2142b6, type: 3}
     - target: {fileID: 6884376012216261031, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: characterName
-      value: Speed
+      value: Rex
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_RootOrder
@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8554642678346947778, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_Name
-      value: Speed
+      value: Rex
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}

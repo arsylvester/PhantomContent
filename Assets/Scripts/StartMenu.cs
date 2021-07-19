@@ -27,6 +27,7 @@ public class StartMenu : MonoBehaviour
     {
         optionsMenu.SetActive(false);
         audio = GetComponent<AudioSource>();
+        Screen.SetResolution(800, 600, true);
 
         // If the playerpref doesn't exist, establish is as a default value.
         if (!PlayerPrefs.HasKey("Volume"))
