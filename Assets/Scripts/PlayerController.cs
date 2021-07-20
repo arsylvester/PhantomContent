@@ -245,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
         if (m_InputHandler.GetSpaceBarDown())
         {
-            Debug.Log("Space Bar Pressed");
+            //Debug.Log("Space Bar Pressed");
             if (Dialogue.IsDialogueRunning)
             {
                 DialogueUI.MarkLineComplete();
@@ -360,9 +360,9 @@ public class PlayerController : MonoBehaviour
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y + CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(false);
                 m_audioSource.Stop();
-                carHitBox.SetActive(true);
+                carHitBox.SetActive(false);
                 
-                playerCar.SetActive(false);
+                playerCar.SetActive(true);
                 playerCar.transform.rotation = this.transform.rotation;
                 playerCar.transform.parent = gameObject.transform;
                 playerCar.transform.localPosition = new Vector3(2, -0.5f, 0);
@@ -441,7 +441,7 @@ public class PlayerController : MonoBehaviour
                     break;
             }
             
-            if (hours == 24)
+            if (hours >= 24)
             {
                 // trigger end of day
                 hours = 0;
