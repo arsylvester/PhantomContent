@@ -13,6 +13,8 @@ public class PlayerResponseHandler : MonoBehaviour {
     [SerializeField] private InputField inputBox;
     [SerializeField] private GameObject inputContainer;
 
+    public static bool gettingDialogueResponse = false;
+
     public void Awake() {
         dialogueRunner.AddCommandHandler(
             "get_player_response",
@@ -41,7 +43,7 @@ public class PlayerResponseHandler : MonoBehaviour {
     }
 
     private IEnumerator WaitForEnter(System.Action onComplete) {
-        
+        gettingDialogueResponse = true;
         while (!Input.GetKeyDown(KeyCode.Return))
             yield return null;
 
@@ -49,7 +51,9 @@ public class PlayerResponseHandler : MonoBehaviour {
         
         inputContainer.SetActive(false);
         dialogueText.gameObject.SetActive(true);
-        
+
+        gettingDialogueResponse = false;
+
         // Call the completion handler
         onComplete();
     }

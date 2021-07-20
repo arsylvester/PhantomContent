@@ -351,7 +351,7 @@ public class PlayerController : MonoBehaviour
         {
             playerCar = GameObject.FindGameObjectWithTag("playerCar");
         }
-        if (m_InputHandler.GetCarModeDown() && !m_Console.isActive)
+        if (m_InputHandler.GetCarModeDown() && !m_Console.isActive && !PlayerResponseHandler.gettingDialogueResponse)
         {
             CharacterVelocity = Vector3.zero;
             if (carMode)
