@@ -245,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
         if (m_InputHandler.GetSpaceBarDown())
         {
-            Debug.Log("Space Bar Pressed");
+            //Debug.Log("Space Bar Pressed");
             if (Dialogue.IsDialogueRunning)
             {
                 DialogueUI.MarkLineComplete();
@@ -441,7 +441,7 @@ public class PlayerController : MonoBehaviour
                     break;
             }
             
-            if (hours == 24)
+            if (hours >= 24)
             {
                 // trigger end of day
                 hours = 0;

@@ -42,6 +42,12 @@ public class QuestMaster : MonoBehaviour
     //Keys
     bool keys = false;
 
+    [Header("Hud Elements")] 
+    [SerializeField] private GameObject fishUI;
+    [SerializeField] private GameObject appleUI;
+    [SerializeField] private GameObject carkeyUI;
+    [SerializeField] private GameObject packageUI;
+
     public enum QuestStep
     {
         NotStarted,
@@ -67,6 +73,12 @@ public class QuestMaster : MonoBehaviour
         apples = PlayerPrefs.GetInt("apples");
         keys = PlayerPrefs.GetInt("keys") == 1 ? true : false;
         FindObjectOfType<PlayerController>().hasKeys = keys;
+        
+        fishUI.SetActive(fish > 0);
+        fishUI.GetComponentInChildren<Text>().text = (fish == 0) ? "" : "" + fish;
+        appleUI.SetActive(apples > 0);
+        appleUI.GetComponentInChildren<Text>().text = (apples == 0) ? "" : "" + apples;
+        carkeyUI.SetActive(keys);
 
         storage = GetComponent<InMemoryVariableStorage>();
         StartCoroutine(DelaySetYarnVars());
@@ -150,7 +162,10 @@ public class QuestMaster : MonoBehaviour
                 break;
             case "apple":
                 if (appleQuestStep != QuestStep.Completed)
+                {
+                    AppleQuestComplete();
                     UpdateQuestsComplete();
+                }
                 SetAppleQuestStep(QuestStep.Completed);
                 break;
             case "race":
@@ -218,6 +233,7 @@ public class QuestMaster : MonoBehaviour
         deliveryQuestStep = step;
         PlayerPrefs.SetInt("DeliveryStep", (int)step);
         PlayerPrefs.Save();
+        packageUI.SetActive(true);
     }
 
     public void SetKeysQuestStep(QuestStep step)
@@ -264,6 +280,7 @@ public class QuestMaster : MonoBehaviour
     public void FailDeliveryQuest()
     {
         storage.SetValue("$delivery_failed", true);
+        packageUI.SetActive(false);
     }
 
     public void StartRace()
@@ -314,10 +331,30 @@ public class QuestMaster : MonoBehaviour
         fish++;
         PlayerPrefs.SetInt("fish", fish);
         PlayerPrefs.Save();
+
+        if (fish > 0)
+        {
+            fishUI.SetActive(true);
+            if (fish == 0)
+                fishUI.GetComponentInChildren<Text>().text = "";
+            else
+                fishUI.GetComponentInChildren<Text>().text = "" + fish;
+        }
+
         if (fish >= fishNeeded)
         {
             storage.SetValue("$fish_completed", true);
         }
+    }
+    
+    public void SetFish(int x)
+    {
+        fish = x;
+        fishUI.SetActive(fish > 0);
+        PlayerPrefs.SetInt("fish", fish);
+        PlayerPrefs.Save();
+        fishUI.GetComponentInChildren<Text>().text = fish == 0 ? "" : "" + fish;
+        storage.SetValue("$fish_completed", fish >= fishNeeded);
     }
 
     public void AppleUpdated()
@@ -325,10 +362,34 @@ public class QuestMaster : MonoBehaviour
         apples++;
         PlayerPrefs.SetInt("apples", apples);
         PlayerPrefs.Save();
+        
+        if (apples > 0)
+        {
+            appleUI.SetActive(true);
+            appleUI.GetComponentInChildren<Text>().text = apples == 0 ? "" : "" + apples;
+        }
+        
         if (apples >= applesNeeded)
         {
             storage.SetValue("$apple_completed", true);
         }
+    }
+
+    public void SetApples(int x)
+    {
+        apples = x;
+        appleUI.SetActive(apples > 0);
+        PlayerPrefs.SetInt("apples", apples);
+        PlayerPrefs.Save();
+        appleUI.GetComponentInChildren<Text>().text = apples == 0 ? "" : "" + apples;
+        storage.SetValue("$apple_completed", apples >= applesNeeded);
+    }
+
+    public void AppleQuestComplete()
+    {
+        apples -= applesNeeded;
+        PlayerPrefs.SetInt("apples", apples);
+        PlayerPrefs.Save();
     }
 
     public void StartEscort()
@@ -353,5 +414,7 @@ public class QuestMaster : MonoBehaviour
             UpdateQuestsComplete();
         SetKeysQuestStep(QuestStep.Completed);
         PlayerPrefs.SetInt("keys", 1);
+        PlayerPrefs.Save();
+        carkeyUI.SetActive(true);
     }
 }
