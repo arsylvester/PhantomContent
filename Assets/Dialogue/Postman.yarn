@@ -5,11 +5,7 @@ position: 594,-149
 ---
 Postman: Hi. Welcome to the Post Office. If you have a package we can deliver it.
 <<if $isDelivering is true>>
-    <<if $delivery_failed is true>>
-        [[DeliveryFailed]]
-    <<else>>
-        [[DeliveryComplete]]
-    <<endif>>
+    [[DeliveryComplete]]
 <<endif>>
 ===
 title: DeliveryFailed

@@ -4,9 +4,11 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("Del") is false>>
-    Del: This is the delivery quest. Go deliver this package.
+    Del: Hey, could you do me a favor? Can you deliver this package to the post office?
+    <<get_player_response>>
+    Del: Great, pick up the package beside me and please don't get it wet otherwise it will get ruined.
     <<start_quest delivery>>
-    <<set $isDelivering to true>>
+    <<spawn_package>>
     [[DelExplains]]
 <<elseif $delivery_failed is true>>
     [[DelFailed]]
@@ -28,8 +30,9 @@ tags:
 colorID: 0
 position: 722,129
 ---
-Del: You got it wet?? It's fine, I have another. Don't get it wet this time.
+<<spawn_package>>
 <<set $delivery_failed to false>>
+Del: You got it wet?? It's fine, I have another. Don't get it wet this time.
 ===
 title: DelHappy
 tags: 
