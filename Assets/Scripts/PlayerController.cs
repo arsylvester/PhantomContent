@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite rightCarSprite;
     [SerializeField] GameObject playerCar;
     [SerializeField] AudioClip carLockClip;
+    [SerializeField] GameObject carHitBox; 
 
     [Header("Quest Highlight Mode")]
     [SerializeField] NPC[] npcs;
@@ -244,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
         if (m_InputHandler.GetSpaceBarDown())
         {
-            Debug.Log("Space Bar Pressed");
+            //Debug.Log("Space Bar Pressed");
             if (Dialogue.IsDialogueRunning)
             {
                 DialogueUI.MarkLineComplete();
@@ -359,6 +360,7 @@ public class PlayerController : MonoBehaviour
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y + CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(false);
                 m_audioSource.Stop();
+                carHitBox.SetActive(false);
                 
                 playerCar.SetActive(true);
                 playerCar.transform.rotation = this.transform.rotation;
@@ -370,6 +372,7 @@ public class PlayerController : MonoBehaviour
             else if(playerCar != null)
             {
                 carMode = true;
+                carHitBox.SetActive(true);
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y - CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(true);
                 m_audioSource.PlayOneShot(carStartupAudioClip);
@@ -438,7 +441,7 @@ public class PlayerController : MonoBehaviour
                     break;
             }
             
-            if (hours == 24)
+            if (hours >= 24)
             {
                 // trigger end of day
                 hours = 0;
