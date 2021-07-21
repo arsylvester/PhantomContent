@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
 
         hours = 6;
         minutes = 0;
+        dayText.text = "day " + m_MenuManager.day;
         RenderSettings.skybox = skyboxDawn;
         directionalLight.color = new Vector4(0.9339623f, 0.790913f, 0.5771182f, 1);
         directionalLight.transform.rotation = Quaternion.Euler(53.584f, 11.114f, 176.684f);
@@ -351,7 +352,7 @@ public class PlayerController : MonoBehaviour
         {
             playerCar = GameObject.FindGameObjectWithTag("playerCar");
         }
-        if (m_InputHandler.GetCarModeDown() && !m_Console.isActive)
+        if (m_InputHandler.GetCarModeDown() && !m_Console.isActive && !PlayerResponseHandler.gettingDialogueResponse)
         {
             CharacterVelocity = Vector3.zero;
             if (carMode)
