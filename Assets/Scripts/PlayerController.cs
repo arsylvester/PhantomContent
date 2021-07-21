@@ -47,7 +47,11 @@ public class PlayerController : MonoBehaviour
     public Vector3 CharacterVelocity { get; set; }
     public bool IsGrounded { get; private set; }
 
+    [Header("Interaction")]
     [SerializeField] float interactionRadius = 5;
+    [SerializeField] GameObject statueLookAtPoint;
+    [SerializeField] GameObject statueWarpPoint;
+    private bool movementAllowed = true;
 
     [Header("Car")] [SerializeField] Image carOverlay; //Move this later
     [SerializeField] float carSpeed = 20f;
@@ -101,10 +105,18 @@ public class PlayerController : MonoBehaviour
 
         hours = 6;
         minutes = 0;
+        dayText.text = "day " + m_MenuManager.day;
         RenderSettings.skybox = skyboxDawn;
         directionalLight.color = new Vector4(0.9339623f, 0.790913f, 0.5771182f, 1);
         directionalLight.transform.rotation = Quaternion.Euler(53.584f, 11.114f, 176.684f);
         directionalLight.intensity = 0.75f;
+
+        movementAllowed = true;
+
+        if (m_MenuManager.day > 1)
+        {
+            m_Console.UpdateLog("Are you having fun?");
+        }
     }
 
     // Update is called once per frame
@@ -112,10 +124,13 @@ public class PlayerController : MonoBehaviour
     {
         IsGrounded = m_Controller.isGrounded;
 
-        if (carMode)
-            CarMovement();
-        else
-            PlayerMovement();
+        if (movementAllowed)
+        {
+            if (carMode)
+                CarMovement();
+            else
+                PlayerMovement();
+        }
         PlayerInteraction();
         if(hasKeys)
             SwapCar();
@@ -124,6 +139,15 @@ public class PlayerController : MonoBehaviour
         
         if (m_InputHandler.GetEscDown())
             m_MenuManager.ToggleGamePaused();
+        
+        if (transform.position.y < -200)
+            playerCam.transform.LookAt(statueLookAtPoint.transform);
+        
+        if (transform.position.y < -1000)
+            m_MenuManager.NextDay();
+        
+        if (transform.position.y < -1200)
+            m_MenuManager.RunDayEndSequence();
     }
 
     void PlayerMovement()
@@ -253,7 +277,19 @@ public class PlayerController : MonoBehaviour
             }
             if (lookingAt != null)
             {
-                if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
+                if(lookingAt.type == InteractableObject.InteractableTypes.BALDMAN)
+                {
+                    movementAllowed = false;
+                    transform.position = new Vector3(statueWarpPoint.transform.position.x, transform.position.y, statueWarpPoint.transform.position.z);
+                    Quaternion previousCamAngle = playerCam.transform.rotation;
+                    playerCam.transform.LookAt(statueLookAtPoint.transform);
+
+                    // activate dialogue
+
+                    playerCam.transform.rotation = previousCamAngle;
+                    movementAllowed = true;
+                }
+                else if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
                 {
                     characterName = lookingAt.GetComponent<NPC>().characterName;
                     Dialogue.StartDialogue(lookingAt.GetComponent<NPC>().GetTalkToNode());
@@ -452,7 +488,7 @@ public class PlayerController : MonoBehaviour
         }
         
         string h = (hours < 10) ? "0" + hours : "" + hours;
-        string m = (minutes < 10) ? "0" + Math.Floor(minutes) : "" + Math.Floor(minutes);
+        string m = (minutes < 10) ? "00" : "" + (Math.Floor(minutes/10)) + "0";
 
 
         clock.text = h + ":" + m;
@@ -471,6 +507,7 @@ public class PlayerController : MonoBehaviour
         if (m_InputHandler.GetQuestModeDown() && !m_Console.isActive)
         {
             inQuestMode = true;
+            m_MenuManager.ShowQuests();
             foreach(NPC npc in npcs)
             {
                 npc.SetExclamationPoint(true);
@@ -479,6 +516,7 @@ public class PlayerController : MonoBehaviour
         else if(m_InputHandler.GetQuestModeUp() && inQuestMode)
         {
             inQuestMode = false;
+            m_MenuManager.HideQuests();
             foreach (NPC npc in npcs)
             {
                 npc.SetExclamationPoint(false);
