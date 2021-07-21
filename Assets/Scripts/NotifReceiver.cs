@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class NotifReceiver : MonoBehaviour//, INotificationReceiver
 {
@@ -47,6 +48,11 @@ public class NotifReceiver : MonoBehaviour//, INotificationReceiver
         directionalLight.color = new Vector4(0.8470589f, 0.7882354f, 0.6705883f, 1);
         directionalLight.transform.rotation = Quaternion.Euler(42.407f, -183.328f, -8.39f);
         directionalLight.intensity = 0.2f;
+    }
+
+    public void startMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
 
