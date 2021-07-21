@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
 
         hours = 6;
         minutes = 0;
+        dayText.text = "day " + m_MenuManager.day;
         RenderSettings.skybox = skyboxDawn;
         directionalLight.color = new Vector4(0.9339623f, 0.790913f, 0.5771182f, 1);
         directionalLight.transform.rotation = Quaternion.Euler(53.584f, 11.114f, 176.684f);

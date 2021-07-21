@@ -436,6 +436,7 @@ public class QuestMaster : MonoBehaviour
     public void AppleQuestComplete()
     {
         apples -= applesNeeded;
+        appleUI.GetComponentInChildren<Text>().text = apples == 0 ? "" : "" + apples;
         PlayerPrefs.SetInt("apples", apples);
         PlayerPrefs.Save();
     }
