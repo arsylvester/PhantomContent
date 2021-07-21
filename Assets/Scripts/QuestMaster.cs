@@ -220,13 +220,13 @@ public class QuestMaster : MonoBehaviour
         switch (quest)
         {
             case "main":
-                return (mainQuestStep == QuestStep.InProgress && mainQuestStep != QuestStep.Completed);
+                return (mainQuestStep == QuestStep.InProgress);
                 break;
             case "fish":
-                return (fishQuestStep == QuestStep.InProgress && fishQuestStep != QuestStep.Completed);
+                return (fishQuestStep == QuestStep.InProgress);
                 break;
             case "apple":
-                return (appleQuestStep == QuestStep.InProgress && appleQuestStep != QuestStep.Completed);
+                return (appleQuestStep == QuestStep.InProgress);
                 break;
             case "race":
                 return (raceQuestStep == QuestStep.InProgress);

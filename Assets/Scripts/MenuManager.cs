@@ -88,17 +88,17 @@ public class MenuManager : MonoBehaviour
  
         string output = "quests complete: " + QuestMaster.instance.questsComplete + "/" + QuestMaster.instance.questsTotal;
         output += "\n\ncurrent quests:\n";
-        if (!QuestMaster.instance.isQuestStarted("race"))
+        if (QuestMaster.instance.isQuestStarted("race"))
             output += "\n race to the post office";
-        if (!QuestMaster.instance.isQuestStarted("fish"))
+        if (QuestMaster.instance.isQuestStarted("fish"))
             output += "\n get five (5) fish";
-        if (!QuestMaster.instance.isQuestStarted("apple"))
+        if (QuestMaster.instance.isQuestStarted("apple"))
             output += "\n get seven (7) apples";
-        if (!QuestMaster.instance.isQuestStarted("escort"))
+        if (QuestMaster.instance.isQuestStarted("escort"))
             output += "\n escort alley to field";
-        if (!QuestMaster.instance.isQuestStarted("delivery"))
+        if (QuestMaster.instance.isQuestStarted("delivery"))
             output += "\n deliver the package without getting wet";
-        if (!QuestMaster.instance.isQuestStarted("keys"))
+        if (QuestMaster.instance.isQuestStarted("keys"))
             output += "\n find your car keys";
         
         questTracker.text = output;
@@ -164,7 +164,11 @@ public class MenuManager : MonoBehaviour
         quote.gameObject.SetActive(false);
         quoteHeader.gameObject.SetActive(false);
         dayEndScreen.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        if (QuestMaster.instance.questsComplete >= QuestMaster.instance.questsTotal)
+            SceneManager.LoadScene(2);
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void QuitGame()

@@ -12,6 +12,7 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private Text fovText;
     [SerializeField] private Text volumeText;
     [SerializeField] AudioClip ButtonClip;
+    [SerializeField] private GameObject continueButton;
 
     private readonly float[] fovOptions = {46, 60, 73};
     private readonly string[] fovLabels = {"tight", "normal", "wide"};
@@ -35,10 +36,13 @@ public class StartMenu : MonoBehaviour
         
         if (!PlayerPrefs.HasKey("FOV"))
             SetVolume(0);
-        
+
         if (!PlayerPrefs.HasKey("Day"))
+        {
+            continueButton.SetActive(false);
             SetDay(1);
-        
+        }
+
         float vol = PlayerPrefs.GetFloat("Volume");
         float fov = PlayerPrefs.GetFloat("FOV");
         day = PlayerPrefs.GetInt("Day");
@@ -50,6 +54,7 @@ public class StartMenu : MonoBehaviour
         volumeText.text = "volume: " + volumeLabels[currentVolume];
         fovText.text = "fov: " + fovLabels[currentFOV];
         SetDay(day);
+        
     }
     
     public void StartNewGame()
