@@ -5,8 +5,8 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     public static List<InteractableObject> allInteractable = new List<InteractableObject>();
-    public const int NUM_ITEM_TYPES = 5;
-    public enum InteractableTypes {NPC, APPLE, FISH, CAR_KEYS, BED, PACKAGE};
+    public const int NUM_ITEM_TYPES = 6;
+    public enum InteractableTypes {NPC, APPLE, FISH, CAR_KEYS, BED, PACKAGE, BALDMAN};
     
 
     [Header ("Type")]
