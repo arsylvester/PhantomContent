@@ -22,6 +22,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject dayEndScreen;
+    [SerializeField] private Text questTracker;
     [SerializeField] private Text fovText;
     [SerializeField] private Text volumeText;
     [SerializeField] private Text quoteHeader;
@@ -77,6 +78,36 @@ public class MenuManager : MonoBehaviour
         volumeText.text = "volume: " + volumeLabels[currentVolume];
         fovText.text = "fov: " + fovLabels[currentFOV];
         SetDay(day);
+        
+        HideQuests();
+    }
+
+    public void ShowQuests()
+    {
+        questTracker.gameObject.SetActive(true);
+ 
+        string output = "quests complete: " + QuestMaster.instance.questsComplete + "/" + QuestMaster.instance.questsTotal;
+        output += "\n\ncurrent quests:\n";
+        if (!QuestMaster.instance.isQuestStarted("race"))
+            output += "\n race to the post office";
+        if (!QuestMaster.instance.isQuestStarted("fish"))
+            output += "\n get five (5) fish";
+        if (!QuestMaster.instance.isQuestStarted("apple"))
+            output += "\n get seven (7) apples";
+        if (!QuestMaster.instance.isQuestStarted("escort"))
+            output += "\n escort alley to field";
+        if (!QuestMaster.instance.isQuestStarted("delivery"))
+            output += "\n deliver the package without getting wet";
+        if (!QuestMaster.instance.isQuestStarted("keys"))
+            output += "\n find your car keys";
+        
+        questTracker.text = output;
+    }
+
+    public void HideQuests()
+    {
+        questTracker.text = "";
+        questTracker.gameObject.SetActive(false);
     }
 
     public void ToggleGamePaused()
