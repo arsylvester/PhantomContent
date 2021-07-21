@@ -297,6 +297,9 @@ public class QuestMaster : MonoBehaviour
         storage.SetValue("$isDelivering", package);
         if(deliveryQuestStep == QuestStep.Completed)
             storage.SetValue("$delivery_complete", package);
+        //Escort
+        if (escortQuestStep == QuestStep.Completed)
+            storage.SetValue("$trip_finished", true);
     }
 
     public void FailDeliveryQuest()
