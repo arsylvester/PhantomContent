@@ -1868,10 +1868,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cinemachine
       objectReference: {fileID: 0}
-    - target: {fileID: 4754228045796258953, guid: 4045884529a47de48a7a6397825d855f, type: 3}
-      propertyPath: field of view
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 7135665860246665389, guid: 4045884529a47de48a7a6397825d855f, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -1915,34 +1911,6 @@ PrefabInstance:
     - target: {fileID: 7135665860246665389, guid: 4045884529a47de48a7a6397825d855f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529197091120887441, guid: 4045884529a47de48a7a6397825d855f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -564.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529197091120887441, guid: 4045884529a47de48a7a6397825d855f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -36.899994
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529197091120887441, guid: 4045884529a47de48a7a6397825d855f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -485.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529197091120887441, guid: 4045884529a47de48a7a6397825d855f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8724843
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529197091120887441, guid: 4045884529a47de48a7a6397825d855f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.20863572
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529197091120887441, guid: 4045884529a47de48a7a6397825d855f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.43525863
-      objectReference: {fileID: 0}
-    - target: {fileID: 7529197091120887441, guid: 4045884529a47de48a7a6397825d855f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.07610647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4045884529a47de48a7a6397825d855f, type: 3}
