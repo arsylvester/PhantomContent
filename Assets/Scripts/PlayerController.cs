@@ -472,6 +472,7 @@ public class PlayerController : MonoBehaviour
         if (m_InputHandler.GetQuestModeDown() && !m_Console.isActive)
         {
             inQuestMode = true;
+            m_MenuManager.ShowQuests();
             foreach(NPC npc in npcs)
             {
                 npc.SetExclamationPoint(true);
@@ -480,6 +481,7 @@ public class PlayerController : MonoBehaviour
         else if(m_InputHandler.GetQuestModeUp() && inQuestMode)
         {
             inQuestMode = false;
+            m_MenuManager.HideQuests();
             foreach (NPC npc in npcs)
             {
                 npc.SetExclamationPoint(false);
