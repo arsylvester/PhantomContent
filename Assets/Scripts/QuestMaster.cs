@@ -220,13 +220,13 @@ public class QuestMaster : MonoBehaviour
         switch (quest)
         {
             case "main":
-                return (mainQuestStep == QuestStep.InProgress && mainQuestStep != QuestStep.Completed);
+                return (mainQuestStep == QuestStep.InProgress);
                 break;
             case "fish":
-                return (fishQuestStep == QuestStep.InProgress && fishQuestStep != QuestStep.Completed);
+                return (fishQuestStep == QuestStep.InProgress);
                 break;
             case "apple":
-                return (appleQuestStep == QuestStep.InProgress && appleQuestStep != QuestStep.Completed);
+                return (appleQuestStep == QuestStep.InProgress);
                 break;
             case "race":
                 return (raceQuestStep == QuestStep.InProgress);
@@ -331,6 +331,8 @@ public class QuestMaster : MonoBehaviour
         //Escort
         if (escortQuestStep == QuestStep.Completed)
             storage.SetValue("$trip_finished", true);
+        //Keys
+        storage.SetValue("$hasKeys", keys);
     }
 
     public void FailDeliveryQuest()
@@ -493,9 +495,8 @@ public class QuestMaster : MonoBehaviour
     public void FoundKeys()
     {
         FindObjectOfType<PlayerController>().hasKeys = true;
-        if (carKeysQuestStep != QuestStep.Completed)
-            UpdateQuestsComplete();
-        SetKeysQuestStep(QuestStep.Completed);
+        keys = true;
+        storage.SetValue("$hasKeys", true);
         PlayerPrefs.SetInt("keys", 1);
         PlayerPrefs.Save();
         carkeyUI.SetActive(true);

@@ -479,7 +479,7 @@ public class PlayerController : MonoBehaviour
         }
         
         string h = (hours < 10) ? "0" + hours : "" + hours;
-        string m = (minutes < 10) ? "0" + Math.Floor(minutes) : "" + Math.Floor(minutes);
+        string m = (minutes < 10) ? "00" : "" + (Math.Floor(minutes/10)) + "0";
 
 
         clock.text = h + ":" + m;
