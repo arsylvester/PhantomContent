@@ -139,6 +139,15 @@ public class PlayerController : MonoBehaviour
         
         if (m_InputHandler.GetEscDown())
             m_MenuManager.ToggleGamePaused();
+        
+        if (transform.position.y < -200)
+            playerCam.transform.LookAt(statueLookAtPoint.transform);
+        
+        if (transform.position.y < -1000)
+            m_MenuManager.NextDay();
+        
+        if (transform.position.y < -1200)
+            m_MenuManager.RunDayEndSequence();
     }
 
     void PlayerMovement()
