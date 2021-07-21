@@ -26,7 +26,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2999
+  m_CustomRenderQueue: 3001
   stringTagMap: {}
   disabledShaderPasses:
   - SHADOWCASTER
@@ -103,10 +103,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Boolean_7fc742fd63414e6b95063c42adf34ec8: 0
-    - Vector1_289d8a37c749475380b726e44b2b0645: 3.2
-    - Vector1_4e76f53648674f1ea9ebb6fe2da921e3: 2
+    - Vector1_289d8a37c749475380b726e44b2b0645: 4.97
+    - Vector1_4e76f53648674f1ea9ebb6fe2da921e3: 2.275
     - Vector1_6d0dfb78101a45a5b03ef03402e9b11b: 0.002
-    - Vector1_de45b599f3fe4889bae277796391f553: 10
+    - Vector1_de45b599f3fe4889bae277796391f553: 182.12
     - Vector1_df0431de1dcd4e459d3780ca15d9ae1a: 0.5
     - _AlphaClip: 0
     - _Blend: 0
