@@ -3265,8 +3265,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253854265868865271}
-  m_LocalRotation: {x: 0.023732916, y: 0.99830997, z: -0.052709658, w: 0.0059742816}
-  m_LocalPosition: {x: -424.25, y: -237.33, z: -249.40002}
+  m_LocalRotation: {x: 0.00035019292, y: 0.9916746, z: -0.12864965, w: 0.005538136}
+  m_LocalPosition: {x: -302.34497, y: -236.67, z: -241.53998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7135665860246665389}
@@ -3297,7 +3297,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 70
+  field of view: 67
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3720,7 +3720,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005863415159483291}
-  m_LocalRotation: {x: -0.009947336, y: 0.90769833, z: -0.021551853, w: -0.41895145}
+  m_LocalRotation: {x: 0.009458834, y: 0.938465, z: -0.025783569, w: 0.3442807}
   m_LocalPosition: {x: -423.94, y: -240.17, z: -235.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3775,6 +3775,7 @@ GameObject:
   - component: {fileID: 6085529766808656942}
   - component: {fileID: 425314849}
   - component: {fileID: 425314848}
+  - component: {fileID: 416736909}
   m_Layer: 0
   m_Name: Timeline
   m_TagString: Untagged
@@ -3897,6 +3898,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 747dfdcc9e938494e89e731dbe5c7c58, type: 2}
     - {fileID: 11400000, guid: 118b4735570c82448999b706dbad6791, type: 2}
     - {fileID: 11400000, guid: 76ba8e339625bbd4c8431e8adf4b79a8, type: 2}
+    - {fileID: 11400000, guid: d8c9b1365595cee43a7aa8e934eb45f1, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -3954,6 +3956,32 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 1
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 425314849}
+          m_TargetAssemblyTypeName: NotifReceiver, Assembly-CSharp
+          m_MethodName: startMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 1
+--- !u!114 &416736909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2323924596344634753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af866e4bf624a0344a2e3c86fda3626d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3967493907803595906
 GameObject:
   m_ObjectHideFlags: 0
@@ -4300,7 +4328,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4662178995263280070}
-  m_LocalRotation: {x: -0.020879677, y: 0.8775219, z: -0.03836801, w: -0.47754297}
+  m_LocalRotation: {x: 0.021646943, y: 0.9105653, z: -0.048076816, w: 0.4099888}
   m_LocalPosition: {x: -424.25, y: -237.33, z: -249.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4963,13 +4991,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a711f8b7003eb34391e7f60bc7597a8, type: 3}
---- !u!4 &2118061520339877335 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8a711f8b7003eb34391e7f60bc7597a8, type: 3}
-  m_PrefabInstance: {fileID: 1940599292804028988}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1598510787573868397 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a711f8b7003eb34391e7f60bc7597a8, type: 3}
+  m_PrefabInstance: {fileID: 1940599292804028988}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2118061520339877335 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8a711f8b7003eb34391e7f60bc7597a8, type: 3}
   m_PrefabInstance: {fileID: 1940599292804028988}
   m_PrefabAsset: {fileID: 0}
