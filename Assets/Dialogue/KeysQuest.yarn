@@ -7,9 +7,18 @@ position: 594,-149
     Carl: Hey! Thanks for letting me borrow your car! But uhhh...
     Carl: I might have lost your keys...
     <<get_player_response>>
-    Carl: I'm pretty sure I lost them in an alleyway somewhere nearby.
-    <<start_quest keys>>
+    <<if $hasKeys is true>>
+        Carl: Oh what really? You already found them? Oh thank goodness! Really glad you did!
+        <<complete_quest keys>>
+    <<else>>
+        Carl: I'm pretty sure I lost them in an alleyway somewhere nearby.
+        <<start_quest keys>>
+    <<endif>>
+<<elseif $hasKeys is true>>
+    Carl: You found them? Oh thank goodness! Really glad you did!
+    <<complete_quest keys>>
 <<else>>
     Carl: Sorry about that again. I'm pretty sure I lost them in an alleyway somewhere nearby.
 <<endif>>
 ===
+

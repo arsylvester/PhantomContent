@@ -12,13 +12,19 @@ public class NPCQuoteGenerator : MonoBehaviour {
     public PlayerController playerController;
     public InMemoryVariableStorage storage;
     public TextAsset jsonFile;
+    public TextAsset jsonTips;
     public ArrayList uniqueQuotes = new ArrayList();
+    public ArrayList tipLists = new ArrayList();
 
 
     public void Awake() {
         dialogueRunner.AddCommandHandler(
             "generate_quote",
             GenerateQuote
+        );
+        dialogueRunner.AddCommandHandler(
+            "generate_tip",
+            GenerateTip
         );
 
         storage = GetComponent<InMemoryVariableStorage>();
@@ -33,6 +39,13 @@ public class NPCQuoteGenerator : MonoBehaviour {
         foreach (var q in quoteList.quotes)
         {
             uniqueQuotes.Add(q);
+        }
+
+        GameTips tipsList = JsonUtility.FromJson<GameTips>(jsonTips.text);
+
+        foreach (var t in tipsList.tips)
+        {
+            tipLists.Add(t);
         }
     }
 
@@ -50,6 +63,22 @@ public class NPCQuoteGenerator : MonoBehaviour {
 
         storage.SetValue("$random_quote", quote);
     }
+
+    private void GenerateTip(string[] parameters)
+    {
+        string tip = "";
+
+        if (tipLists.Count <= 0)
+            buildQuoteList();
+
+        int index = Random.Range(0, tipLists.Count);
+        randTips q = (randTips)tipLists[index];
+        uniqueQuotes.RemoveAt(index);
+
+        tip = playerController.characterName + ": " + q.tip;
+
+        storage.SetValue("$current_tip", tip);
+    }
 }
 
 [System.Serializable]
@@ -62,5 +91,18 @@ public class NPCQuotes
 public class randQuote
 {
     public string quote;
+    public string author;
+}
+
+[System.Serializable]
+public class GameTips
+{
+    public randQuote[] tips;
+}
+
+[System.Serializable]
+public class randTips
+{
+    public string tip;
     public string author;
 }
