@@ -132,6 +132,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterPlane: {fileID: 0}
   fogDensity: 0.02
+  Bass: {fileID: 2100000, guid: 15d5bbd400eed74429546620dd9d207a, type: 2}
+  Trout: {fileID: 2100000, guid: 415a2909a7f60a94ba4e5cf088b53e49, type: 2}
 --- !u!82 &943743017
 AudioSource:
   m_ObjectHideFlags: 0
@@ -436,7 +438,7 @@ MonoBehaviour:
   characterName: 
   isNoclip: 0
   hasKeys: 0
-  DEFAULT_TIMESCALE: 1
+  DEFAULT_TIMESCALE: 1.5
   hours: 0
   minutes: 0
   clock: {fileID: 0}
