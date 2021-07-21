@@ -12,6 +12,9 @@ public class Underwater : MonoBehaviour
     private AudioSource audioSource;
     private QuestMaster questMaster;
 
+    [SerializeField] Material Bass;
+    [SerializeField] Material Trout;
+
     // Use this for initialization
     void Start()
     {
@@ -36,6 +39,8 @@ public class Underwater : MonoBehaviour
     {
         RenderSettings.fog = false;
         audioSource.Stop();
+        Bass.renderQueue = 2999;
+        Trout.renderQueue = 2999;
     }
 
     void SetUnderwater()
@@ -44,6 +49,9 @@ public class Underwater : MonoBehaviour
         RenderSettings.fogColor = underwaterColor;
         RenderSettings.fogDensity = fogDensity;
         audioSource.Play();
+        Bass.renderQueue = 3001;
+        Trout.renderQueue = 3001;
+
         //Fail quest
         questMaster.FailDeliveryQuest();
     }
