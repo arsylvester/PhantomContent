@@ -31,7 +31,7 @@ public class ConsoleManager : MonoBehaviour
         if(currentEntry != entryField.text)
         {
             currentEntry = entryField.text;
-            Debug.Log(getCommandAutofill(currentEntry));
+            //Debug.Log(getCommandAutofill(currentEntry));
             autofillText.text = getCommandAutofill(currentEntry);
         }
 

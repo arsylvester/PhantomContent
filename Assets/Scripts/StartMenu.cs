@@ -57,9 +57,10 @@ public class StartMenu : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
         SetDay(1);
-        SetVolume(volumeOptions[currentVolume]);
-        SetFOV(fovOptions[currentFOV]);
+        //SetVolume(volumeOptions[currentVolume]);
+        //SetFOV(fovOptions[currentFOV]);
         SceneManager.LoadScene(1);
+        //ContinueGame();
     }
 
     public void ContinueGame()

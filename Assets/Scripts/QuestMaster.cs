@@ -40,7 +40,17 @@ public class QuestMaster : MonoBehaviour
     public bool isEscorting = false;
     [SerializeField] GameObject escortFinishLine;
     //Keys
-    bool keys = false;
+    //Delivering
+    bool package = false;
+    [SerializeField] GameObject packageObject;
+    [SerializeField] Transform packageLocation;
+    public bool keys = false;
+
+    [Header("Hud Elements")] 
+    [SerializeField] private GameObject fishUI;
+    [SerializeField] private GameObject appleUI;
+    [SerializeField] private GameObject carkeyUI;
+    [SerializeField] private GameObject packageUI;
 
     public enum QuestStep
     {
@@ -66,7 +76,15 @@ public class QuestMaster : MonoBehaviour
         fish = PlayerPrefs.GetInt("fish");
         apples = PlayerPrefs.GetInt("apples");
         keys = PlayerPrefs.GetInt("keys") == 1 ? true : false;
+        package = PlayerPrefs.GetInt("package") == 1 ? true : false;
         FindObjectOfType<PlayerController>().hasKeys = keys;
+        
+        fishUI.SetActive(fish > 0);
+        fishUI.GetComponentInChildren<Text>().text = (fish == 0) ? "" : "" + fish;
+        appleUI.SetActive(apples > 0);
+        appleUI.GetComponentInChildren<Text>().text = (apples == 0) ? "" : "" + apples;
+        carkeyUI.SetActive(keys);
+        packageUI.SetActive(package);
 
         storage = GetComponent<InMemoryVariableStorage>();
         StartCoroutine(DelaySetYarnVars());
@@ -79,12 +97,16 @@ public class QuestMaster : MonoBehaviour
             "complete_quest",
             CompleteQuest
         );
+        dialogueRunner.AddCommandHandler(
+            "spawn_package",
+            SpawnPackage
+        );
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         //TESTING AND DO ACTUALLY REMOVE THIS LATER
         if(Input.GetKeyDown(KeyCode.F6))
         {
@@ -96,7 +118,7 @@ public class QuestMaster : MonoBehaviour
             UpdateQuestsComplete();
             Debug.Log("Quest Complete");
         }
-        */
+        
     }
 
     private void StartQuest(string[] parameters, System.Action onComplete)
@@ -104,27 +126,34 @@ public class QuestMaster : MonoBehaviour
         switch (parameters[0])
         {
             case "main":
-                SetMainQuestStep(QuestStep.InProgress);
+                if (mainQuestStep == QuestStep.NotStarted)
+                    SetMainQuestStep(QuestStep.InProgress);
                 break;
             case "fish":
-                SetFishQuestStep(QuestStep.InProgress);
+                if (mainQuestStep == QuestStep.NotStarted)
+                    SetFishQuestStep(QuestStep.InProgress);
                 break;
             case "apple":
-                SetAppleQuestStep(QuestStep.InProgress);
+                if (mainQuestStep == QuestStep.NotStarted)
+                    SetAppleQuestStep(QuestStep.InProgress);
                 break;
             case "race":
-                SetRaceQuestStep(QuestStep.InProgress);
+                if (mainQuestStep == QuestStep.NotStarted)
+                    SetRaceQuestStep(QuestStep.InProgress);
                 StartRace();
                 break;
             case "escort":
-                SetEscortQuestStep(QuestStep.InProgress);
+                if (mainQuestStep == QuestStep.NotStarted)
+                    SetEscortQuestStep(QuestStep.InProgress);
                 StartEscort();
                 break;
             case "delivery":
-                SetDeliveryQuestStep(QuestStep.InProgress);
+                if (mainQuestStep == QuestStep.NotStarted)
+                    SetDeliveryQuestStep(QuestStep.InProgress);
                 break;
             case "keys":
-                SetKeysQuestStep(QuestStep.InProgress);
+                if (mainQuestStep == QuestStep.NotStarted)
+                    SetKeysQuestStep(QuestStep.InProgress);
                 break;
             default:
                 break;
@@ -150,7 +179,10 @@ public class QuestMaster : MonoBehaviour
                 break;
             case "apple":
                 if (appleQuestStep != QuestStep.Completed)
+                {
+                    AppleQuestComplete();
                     UpdateQuestsComplete();
+                }
                 SetAppleQuestStep(QuestStep.Completed);
                 break;
             case "race":
@@ -167,6 +199,8 @@ public class QuestMaster : MonoBehaviour
                 if (deliveryQuestStep != QuestStep.Completed)
                     UpdateQuestsComplete();
                 SetDeliveryQuestStep(QuestStep.Completed);
+                packageUI.SetActive(false);
+                package = false;
                 break;
             case "keys":
                 if (carKeysQuestStep != QuestStep.Completed)
@@ -179,6 +213,37 @@ public class QuestMaster : MonoBehaviour
 
         // Call the completion handler
         onComplete();
+    }
+
+    public bool isQuestStarted(string quest)
+    {
+        switch (quest)
+        {
+            case "main":
+                return (mainQuestStep == QuestStep.InProgress && mainQuestStep != QuestStep.Completed);
+                break;
+            case "fish":
+                return (fishQuestStep == QuestStep.InProgress && fishQuestStep != QuestStep.Completed);
+                break;
+            case "apple":
+                return (appleQuestStep == QuestStep.InProgress && appleQuestStep != QuestStep.Completed);
+                break;
+            case "race":
+                return (raceQuestStep == QuestStep.InProgress);
+                break;
+            case "escort":
+                return (escortQuestStep == QuestStep.InProgress);
+                break;
+            case "delivery":
+                return (deliveryQuestStep == QuestStep.InProgress);
+                break;
+            case "keys":
+                return (carKeysQuestStep == QuestStep.InProgress);
+                break;
+            default:
+                return false;
+                break;
+        }
     }
 
     public void SetMainQuestStep(QuestStep step)
@@ -259,11 +324,47 @@ public class QuestMaster : MonoBehaviour
             storage.SetValue("$apple_completed", true);
             print("Apples: " + storage.GetValue("$apple_completed").AsBool);
         }
+        //Delivery
+        storage.SetValue("$isDelivering", package);
+        if(deliveryQuestStep == QuestStep.Completed)
+            storage.SetValue("$delivery_complete", package);
+        //Escort
+        if (escortQuestStep == QuestStep.Completed)
+            storage.SetValue("$trip_finished", true);
+        //Keys
+        storage.SetValue("$hasKeys", keys);
     }
 
     public void FailDeliveryQuest()
     {
         storage.SetValue("$delivery_failed", true);
+        package = false;
+        packageUI.SetActive(false);
+        storage.SetValue("$isDelivering", false);
+        PlayerPrefs.SetInt("package", 0);
+        PlayerPrefs.Save();
+    }
+
+    public void PickupPackage()
+    {
+        package = true;
+        packageUI.SetActive(true);
+        storage.SetValue("$isDelivering", true);
+        PlayerPrefs.SetInt("package", 1);
+        PlayerPrefs.Save();
+    }
+
+    private void SpawnPackage(string[] parameters, System.Action onComplete)
+    {
+        Instantiate(packageObject, packageLocation.position, packageLocation.rotation);
+        string objectList = "";
+        foreach(InteractableObject var in InteractableObject.allInteractable)
+        {
+            objectList += var + ", ";
+        }
+        print(objectList);
+        // Call the completion handler
+        onComplete();
     }
 
     public void StartRace()
@@ -314,10 +415,30 @@ public class QuestMaster : MonoBehaviour
         fish++;
         PlayerPrefs.SetInt("fish", fish);
         PlayerPrefs.Save();
+
+        if (fish > 0)
+        {
+            fishUI.SetActive(true);
+            if (fish == 0)
+                fishUI.GetComponentInChildren<Text>().text = "";
+            else
+                fishUI.GetComponentInChildren<Text>().text = "" + fish;
+        }
+
         if (fish >= fishNeeded)
         {
             storage.SetValue("$fish_completed", true);
         }
+    }
+    
+    public void SetFish(int x)
+    {
+        fish = x;
+        fishUI.SetActive(fish > 0);
+        PlayerPrefs.SetInt("fish", fish);
+        PlayerPrefs.Save();
+        fishUI.GetComponentInChildren<Text>().text = fish == 0 ? "" : "" + fish;
+        storage.SetValue("$fish_completed", fish >= fishNeeded);
     }
 
     public void AppleUpdated()
@@ -325,10 +446,35 @@ public class QuestMaster : MonoBehaviour
         apples++;
         PlayerPrefs.SetInt("apples", apples);
         PlayerPrefs.Save();
+        
+        if (apples > 0)
+        {
+            appleUI.SetActive(true);
+            appleUI.GetComponentInChildren<Text>().text = apples == 0 ? "" : "" + apples;
+        }
+        
         if (apples >= applesNeeded)
         {
             storage.SetValue("$apple_completed", true);
         }
+    }
+
+    public void SetApples(int x)
+    {
+        apples = x;
+        appleUI.SetActive(apples > 0);
+        PlayerPrefs.SetInt("apples", apples);
+        PlayerPrefs.Save();
+        appleUI.GetComponentInChildren<Text>().text = apples == 0 ? "" : "" + apples;
+        storage.SetValue("$apple_completed", apples >= applesNeeded);
+    }
+
+    public void AppleQuestComplete()
+    {
+        apples -= applesNeeded;
+        appleUI.GetComponentInChildren<Text>().text = apples == 0 ? "" : "" + apples;
+        PlayerPrefs.SetInt("apples", apples);
+        PlayerPrefs.Save();
     }
 
     public void StartEscort()
@@ -349,9 +495,10 @@ public class QuestMaster : MonoBehaviour
     public void FoundKeys()
     {
         FindObjectOfType<PlayerController>().hasKeys = true;
-        if (carKeysQuestStep != QuestStep.Completed)
-            UpdateQuestsComplete();
-        SetKeysQuestStep(QuestStep.Completed);
+        keys = true;
+        storage.SetValue("$hasKeys", true);
         PlayerPrefs.SetInt("keys", 1);
+        PlayerPrefs.Save();
+        carkeyUI.SetActive(true);
     }
 }

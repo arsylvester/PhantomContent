@@ -22,7 +22,6 @@ public class Escort : MonoBehaviour
     {
         if(isMoving && Vector3.Distance(transform.position, player.position) <= playerDistanceMax)
         {
-            print(Vector3.Distance(transform.position, player.position));
             if (Vector3.Distance(pathPoints[currentPoint].position, transform.position) <= 2f)
             {
                 if (++currentPoint >= pathPoints.Length)

@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
 
         hours = 6;
         minutes = 0;
+        dayText.text = "day " + m_MenuManager.day;
         RenderSettings.skybox = skyboxDawn;
         directionalLight.color = new Vector4(0.9339623f, 0.790913f, 0.5771182f, 1);
         directionalLight.transform.rotation = Quaternion.Euler(53.584f, 11.114f, 176.684f);
@@ -245,7 +246,7 @@ public class PlayerController : MonoBehaviour
 
         if (m_InputHandler.GetSpaceBarDown())
         {
-            Debug.Log("Space Bar Pressed");
+            //Debug.Log("Space Bar Pressed");
             if (Dialogue.IsDialogueRunning)
             {
                 DialogueUI.MarkLineComplete();
@@ -351,7 +352,7 @@ public class PlayerController : MonoBehaviour
         {
             playerCar = GameObject.FindGameObjectWithTag("playerCar");
         }
-        if (m_InputHandler.GetCarModeDown() && !m_Console.isActive)
+        if (m_InputHandler.GetCarModeDown() && !m_Console.isActive && !PlayerResponseHandler.gettingDialogueResponse)
         {
             CharacterVelocity = Vector3.zero;
             if (carMode)
@@ -360,9 +361,9 @@ public class PlayerController : MonoBehaviour
                 playerCam.transform.position = new Vector3(playerCam.transform.position.x, playerCam.transform.position.y + CarCamHeightDif, playerCam.transform.position.z);
                 carOverlay.gameObject.SetActive(false);
                 m_audioSource.Stop();
-                carHitBox.SetActive(true);
+                carHitBox.SetActive(false);
                 
-                playerCar.SetActive(false);
+                playerCar.SetActive(true);
                 playerCar.transform.rotation = this.transform.rotation;
                 playerCar.transform.parent = gameObject.transform;
                 playerCar.transform.localPosition = new Vector3(2, -0.5f, 0);
@@ -441,7 +442,7 @@ public class PlayerController : MonoBehaviour
                     break;
             }
             
-            if (hours == 24)
+            if (hours >= 24)
             {
                 // trigger end of day
                 hours = 0;
@@ -471,6 +472,7 @@ public class PlayerController : MonoBehaviour
         if (m_InputHandler.GetQuestModeDown() && !m_Console.isActive)
         {
             inQuestMode = true;
+            m_MenuManager.ShowQuests();
             foreach(NPC npc in npcs)
             {
                 npc.SetExclamationPoint(true);
@@ -479,6 +481,7 @@ public class PlayerController : MonoBehaviour
         else if(m_InputHandler.GetQuestModeUp() && inQuestMode)
         {
             inQuestMode = false;
+            m_MenuManager.HideQuests();
             foreach (NPC npc in npcs)
             {
                 npc.SetExclamationPoint(false);
