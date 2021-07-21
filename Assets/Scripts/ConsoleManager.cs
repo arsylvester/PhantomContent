@@ -28,7 +28,7 @@ public class ConsoleManager : MonoBehaviour
 
     void Update()
     {
-        if(currentEntry != entryField.text)
+        if(currentEntry != entryField.text) // if entryField has been changed
         {
             currentEntry = entryField.text;
             //Debug.Log(getCommandAutofill(currentEntry));
@@ -131,7 +131,7 @@ public class ConsoleManager : MonoBehaviour
 
     private string getCommandAutofill(string input)
     {
-        if (input == "")
+        if (input == "") // if input is empty
         {
             //return "help";
             return "";
@@ -140,7 +140,8 @@ public class ConsoleManager : MonoBehaviour
         string[] commandItems = input.Split(' ');
         string autoFill = "";
 
-        if (commandItems.Length == 1)
+        
+        if (commandItems.Length == 1) // if typing first word, autofill cmd statement
         {
             foreach (var x in cmds)
             {
@@ -156,16 +157,16 @@ public class ConsoleManager : MonoBehaviour
                 }
             }
         }
-        else
+        else // if typing more than one word, autofill arguments
         {
             string command = commandItems[0];
             string[] arguments = commandItems.Skip(1).ToArray();
 
-            if(command == "spawn")
+            if(command == "spawn") // if cmd is spawn, autofill spawnable objects
             {
                 foreach (string x in SpawnDictionaryBuilder.objectDictionary.Keys)
                 {
-                    // check if command key word matches any existing commands
+                    // check if argument matches any items in the itemDictionary
                     if (x.IndexOf(arguments[0].ToLower()) != 0)
                     {
                         continue;
@@ -177,6 +178,13 @@ public class ConsoleManager : MonoBehaviour
                     }
                 }
             }
+
+            /*
+            else if(command == "delete")
+            {
+                // fill in delete autofill here
+            }
+            */
         }
 
         return autoFill;
