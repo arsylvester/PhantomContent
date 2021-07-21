@@ -11,11 +11,8 @@ public class ConsoleRedirect : MonoBehaviour
     private void Start()
     {
         cm = GameObject.FindObjectOfType<ConsoleManager>();
+        Application.logMessageReceived += Log;
     }
-
-    void OnEnable() { Application.logMessageReceived += Log; }
-    
-    void OnDisable() { Application.logMessageReceived -= Log; }
 
     public void Log(string logString, string stackTrace, LogType type)
     {

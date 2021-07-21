@@ -1190,7 +1190,7 @@ PrefabInstance:
       objectReference: {fileID: 1689261388}
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: DEFAULT_TIMESCALE
-      value: 1.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3152265378839446372, guid: 63dc16723f796e440a4b22b3f160ac9e, type: 3}
       propertyPath: statueLookAtPoint
@@ -1636,17 +1636,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3419b57eb638f44db88701b5b33b8af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1963880932 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3429056159043692694, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-  m_PrefabInstance: {fileID: 2083630774}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1971871820 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3009844337639242083, guid: 7a52887a0dfa96b408b317a7a90a6c90, type: 3}
@@ -1693,30 +1682,10 @@ PrefabInstance:
       propertyPath: escortFinishLine
       value: 
       objectReference: {fileID: 1267556365}
-    - target: {fileID: 1393358354, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1393358354, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1393358354, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1393358354, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1909587034, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 701478026}
-    - target: {fileID: 1909587034, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: questTracker
-      value: 
-      objectReference: {fileID: 1963880932}
     - target: {fileID: 2096245938, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
       propertyPath: playerController
       value: 
@@ -1856,18 +1825,6 @@ PrefabInstance:
     - target: {fileID: 5284224110121178611, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5740708560421866473, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: m_Name
-      value: quest list
-      objectReference: {fileID: 0}
-    - target: {fileID: 6698662397410990196, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -20.100124
-      objectReference: {fileID: 0}
-    - target: {fileID: 6698662397410990196, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 2.0499268
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}

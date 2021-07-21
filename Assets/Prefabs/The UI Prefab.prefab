@@ -5034,7 +5034,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 602560897}
   optionsMenu: {fileID: 175623426}
   dayEndScreen: {fileID: 720560295}
-  questTracker: {fileID: 0}
+  questTracker: {fileID: 3429056159043692694}
   fovText: {fileID: 1046821710}
   volumeText: {fileID: 1051679}
   quoteHeader: {fileID: 1542799616}
@@ -5604,6 +5604,8 @@ MonoBehaviour:
   fishNeeded: 5
   isEscorting: 0
   escortFinishLine: {fileID: 0}
+  packageObject: {fileID: 0}
+  packageLocation: {fileID: 0}
   keys: 0
   fishUI: {fileID: 1393358353}
   appleUI: {fileID: 1340843626}
@@ -5891,12 +5893,12 @@ GameObject:
   - component: {fileID: 565114586685687372}
   - component: {fileID: 4970745536341584596}
   m_Layer: 5
-  m_Name: Text
+  m_Name: quest list
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6698662397410990196
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5913,8 +5915,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 33.04, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -4.000001, y: 0}
-  m_SizeDelta: {x: -7.999998, y: 256}
+  m_AnchoredPosition: {x: 2.0499268, y: 0}
+  m_SizeDelta: {x: -20.100124, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &904819176493817924
 CanvasRenderer:
