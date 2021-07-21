@@ -1,0 +1,11 @@
+title: Statue
+tags: 
+colorID: 0
+position: 594,-149
+---
+<<if visited("Statue") is false>>
+    The Wise Old Statue of The Lanes: Welcome.
+<<endif>>
+<<generate_quote>>
+{$random_quote}
+===

@@ -331,6 +331,8 @@ public class QuestMaster : MonoBehaviour
         //Escort
         if (escortQuestStep == QuestStep.Completed)
             storage.SetValue("$trip_finished", true);
+        //Keys
+        storage.SetValue("$hasKeys", keys);
     }
 
     public void FailDeliveryQuest()
@@ -493,9 +495,8 @@ public class QuestMaster : MonoBehaviour
     public void FoundKeys()
     {
         FindObjectOfType<PlayerController>().hasKeys = true;
-        if (carKeysQuestStep != QuestStep.Completed)
-            UpdateQuestsComplete();
-        SetKeysQuestStep(QuestStep.Completed);
+        keys = true;
+        storage.SetValue("$hasKeys", true);
         PlayerPrefs.SetInt("keys", 1);
         PlayerPrefs.Save();
         carkeyUI.SetActive(true);
