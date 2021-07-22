@@ -115,7 +115,7 @@ public class QuestMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        /*
         //TESTING AND DO ACTUALLY REMOVE THIS LATER
         if(Input.GetKeyDown(KeyCode.F6))
         {
@@ -127,7 +127,7 @@ public class QuestMaster : MonoBehaviour
             UpdateQuestsComplete();
             Debug.Log("Quest Complete");
         }
-        
+        */
     }
 
     private void StartQuest(string[] parameters, System.Action onComplete)
