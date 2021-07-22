@@ -8,6 +8,7 @@ TagManager:
   - playerResponseContainer
   - playerInputField
   - playerCar
+  - Ally
   layers:
   - Default
   - TransparentFX

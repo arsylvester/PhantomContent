@@ -10,16 +10,16 @@ position: 594,-149
 	Rex: Race to the post office at the top of the mountain and beat my time of <i>{$time_to_beat}</i> seconds!
     Rex: Ready. Set. GO!
     <<start_quest race>>
-<<endif>>
-
-<<if $race_win is true>>
-    [[RaceWin]]
-<<endif>>
-
-<<if $tryAgain is true>>
-    [[RaceTryAgain]]
 <<else>>
-    [[RaceFailed]]
+    <<if $race_win is true>>
+        [[RaceWin]]
+    <<endif>>
+
+    <<if $tryAgain is true>>
+        [[RaceTryAgain]]
+    <<else>>
+        [[RaceFailed]]
+    <<endif>>
 <<endif>>
 ===
 title: RaceWin
