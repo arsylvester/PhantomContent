@@ -1,6 +1,12 @@
 SceneLight
 SceneLight
 SceneLight
+spawn
+Apple
+Trout
+Bass
+key
+car
 Water ambiance (3)
 Water ambiance (2)
 Water ambiance (1)
@@ -15,10 +21,8 @@ Item Image
 car keys
 Item Count
 Item Image
-apple
 Item Count
 Item Image
-fish
 hud
 Death Quote
 Horiscope header
@@ -1088,21 +1092,6 @@ Bone
 Armature
 May
 npcs
-ApplePNG
-Apple
-ApplePNG
-Apple
-ApplePNG
-Apple
-ApplePNG
-Apple
-ApplePNG
-Apple
-ApplePNG
-Apple
-ApplePNG
-Apple
-ApplePNG
 Apple
 AppleQuestProps
 CarhitBox
