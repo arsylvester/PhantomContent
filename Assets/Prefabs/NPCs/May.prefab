@@ -35,6 +35,10 @@ PrefabInstance:
       value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 6884376012216261031, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
+      propertyPath: isMainNPC
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6884376012216261031, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: talkToNode
       value: May
       objectReference: {fileID: 0}
@@ -44,7 +48,7 @@ PrefabInstance:
       objectReference: {fileID: 2480198943629176163, guid: 833fcaed5e0ae3943b0e0a1f4bf7c7d4, type: 3}
     - target: {fileID: 6884376012216261031, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: characterName
-      value: May
+      value: May N.
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_RootOrder
@@ -92,7 +96,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8554642678346947778, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_Name
-      value: May
+      value: May N.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
