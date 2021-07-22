@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!95 &7178114710662250775
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4830630538678021111}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fd0b5360a93232248a3523fc3bb83e6c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8554642678346947778
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +208,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0e514331f5e1ec34882e8d2b4f2188e4, type: 3}
   exclamationPoint: {fileID: 358708727825700739}
   exclamationSize: 8
+  isMainNPC: 0
 --- !u!114 &1760957097833749013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +304,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4fdc794480b7c740b4632b137cc7ca0, type: 3}
+--- !u!1 &4830630538678021111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8027173624250823746, guid: a4fdc794480b7c740b4632b137cc7ca0, type: 3}
+  m_PrefabInstance: {fileID: 3202031848156061621}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5206733246162727245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7218688892766695160, guid: a4fdc794480b7c740b4632b137cc7ca0, type: 3}
