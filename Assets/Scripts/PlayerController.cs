@@ -457,6 +457,9 @@ public class PlayerController : MonoBehaviour
             switch (hours) // change the skybox at certain hours
             {
                 case 6:
+                case 7:
+                case 8:
+                case 9:
                     RenderSettings.skybox = skyboxDawn;
                     directionalLight.color = new Vector4(0.9339623f, 0.790913f, 0.5771182f, 1);
                     directionalLight.transform.rotation = Quaternion.Euler(53.584f, 11.114f, 176.684f);
@@ -465,12 +468,22 @@ public class PlayerController : MonoBehaviour
                     ambinaceAudio.Play();
                     break;
                 case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
                     RenderSettings.skybox = skyboxDay;
                     directionalLight.color = new Vector4(1, 0.9568627f, 0.8392157f, 1);
                     directionalLight.transform.rotation = Quaternion.Euler(62.242f, -162.474f, 4.228f);
                     directionalLight.intensity = 1;
                     break;
                 case 18:
+                case 19:
+                case 20:
+                case 21:
                     RenderSettings.skybox = skyboxDusk;
                     directionalLight.color = new Vector4(0.9716981f, 0.706511f, 0.6004361f, 1);
                     directionalLight.transform.rotation = Quaternion.Euler(35.589f, -164.808f, 2.42f);
@@ -479,6 +492,14 @@ public class PlayerController : MonoBehaviour
                     ambinaceAudio.Play();
                     break;
                 case 22:
+                case 23:
+                case 24:
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
                     RenderSettings.skybox = skyboxNight;
                     directionalLight.color = new Vector4(0.8470589f, 0.7882354f, 0.6705883f, 1);
                     directionalLight.transform.rotation = Quaternion.Euler(42.407f, -183.328f, -8.39f);
