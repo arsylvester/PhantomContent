@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject statueLookAtPoint;
     [SerializeField] GameObject statueWarpPoint;
     private bool movementAllowed = true;
+    Quaternion previousCamAngle;
 
     [Header("Car")] [SerializeField] Image carOverlay; //Move this later
     [SerializeField] float carSpeed = 20f;
@@ -281,13 +282,14 @@ public class PlayerController : MonoBehaviour
                 {
                     movementAllowed = false;
                     transform.position = new Vector3(statueWarpPoint.transform.position.x, transform.position.y, statueWarpPoint.transform.position.z);
-                    Quaternion previousCamAngle = playerCam.transform.rotation;
+                    previousCamAngle = playerCam.transform.rotation;
                     playerCam.transform.LookAt(statueLookAtPoint.transform);
 
                     // activate dialogue
-
-                    playerCam.transform.rotation = previousCamAngle;
-                    movementAllowed = true;
+                    characterName = lookingAt.GetComponentInParent<NPC>().characterName;
+                    Dialogue.StartDialogue(lookingAt.GetComponentInParent<NPC>().GetTalkToNode());
+                    interactionText.SetText("");
+                    interactionText.enabled = false;
                 }
                 else if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
                 {
@@ -522,5 +524,11 @@ public class PlayerController : MonoBehaviour
                 npc.SetExclamationPoint(false);
             }
         }
+    }
+
+    public void ReturnToNormalCam()
+    {
+        playerCam.transform.rotation = previousCamAngle;
+        movementAllowed = true;
     }
 }

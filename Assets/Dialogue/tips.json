@@ -1,20 +1,20 @@
 {
-    "quotes":
+    "tips":
     [
         {
-            "quote": "Are you having fun? Dont forget <b>~</b> for even more fun!",
+            "quote": "Are you having fun? Dont forget <i>~</i> for even more fun!",
             "author": "Sun Tzu"
         },
         {
-            "quote": "Need something and can't get it right away? Consider <b>spawning</b> it yourself.",
+            "quote": "Need something and can't get it right away? Consider <i>spawning</i> it yourself.",
             "author": "Sun Tzu"
         },
         {
-            "quote": "Why go around when you can just <b>delete</b> your way forward.",
+            "quote": "Why go around when you can just <i>delete</i> your way forward.",
             "author": "Sun Tzu"
         },
         {
-            "quote": "Something take a bit long to complete? If only <b>time</b> could be <b>scaled</b>.",
+            "quote": "Something take a bit long to complete? If only <i>time</i> could be <b>scaled</b>.",
             "author": "Sun Tzu"
         }
     ]
