@@ -179,12 +179,25 @@ public class ConsoleManager : MonoBehaviour
                 }
             }
 
-            /*
-            else if(command == "delete")
+            
+            else if(command == "delete" || command == "tp")
             {
                 // fill in delete autofill here
+                foreach (string x in SpawnDictionaryBuilder.activeDictionary)
+                {
+                    // check if argument matches any items in the itemDictionary
+                    if (x.IndexOf(arguments[0]) != 0)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        autoFill = command + " " + x;
+                        break;
+                    }
+                }
             }
-            */
+            
         }
 
         return autoFill;
