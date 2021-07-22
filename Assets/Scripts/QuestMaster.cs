@@ -11,6 +11,7 @@ public class QuestMaster : MonoBehaviour
     public DialogueRunner dialogueRunner;
     public InMemoryVariableStorage storage;
     PlayerController player;
+    ConsoleManager console;
 
     QuestStep mainQuestStep;
     QuestStep fishQuestStep;
@@ -51,6 +52,8 @@ public class QuestMaster : MonoBehaviour
     [SerializeField] private GameObject appleUI;
     [SerializeField] private GameObject carkeyUI;
     [SerializeField] private GameObject packageUI;
+    [SerializeField] GameObject allQuestsDoneUI;
+    [SerializeField] float QuestDisplayTime = 8;
 
     public enum QuestStep
     {
@@ -64,6 +67,7 @@ public class QuestMaster : MonoBehaviour
     {
         instance = this;
         player = FindObjectOfType<PlayerController>();
+        console = GameObject.FindObjectOfType<ConsoleManager>();
 
         mainQuestStep = (QuestStep)PlayerPrefs.GetInt("MainStep");
         fishQuestStep = (QuestStep)PlayerPrefs.GetInt("FishStep");
@@ -304,6 +308,7 @@ public class QuestMaster : MonoBehaviour
         {
             print("ALL QUESTS COMPLETED!");
             storage.SetValue("$all_quests_complete", true);
+            StartCoroutine(DisplayFinishedText());
         }
         //print("Storage has: " + storage.GetValue("$all_quests_complete").AsBool);
         PlayerPrefs.SetInt("QuestsComplete", questsComplete);
@@ -408,6 +413,7 @@ public class QuestMaster : MonoBehaviour
         raceTimeText.color = Color.green;
         RaceFinishLine.SetActive(false);
         StartCoroutine(DelayTextDisappear());
+        console.UpdateLog("Unbeknownst to player, Rex was secretly his older brother who ran away from home.");
     }
 
     IEnumerator DelayTextDisappear()
@@ -513,5 +519,12 @@ public class QuestMaster : MonoBehaviour
     {
         player.ReturnToNormalCam();
         onComplete();
+    }
+
+    IEnumerator DisplayFinishedText()
+    {
+        allQuestsDoneUI.SetActive(true);
+        yield return new WaitForSecondsRealtime(QuestDisplayTime);
+        allQuestsDoneUI.SetActive(false);
     }
 }

@@ -1704,6 +1704,17 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 2628984531552893868, guid: 340c10c17e29b9640a8cb95474b89ae4, type: 3}
   m_PrefabInstance: {fileID: 2628984532107187143}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1768504780 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1768504780, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
+  m_PrefabInstance: {fileID: 2083630774}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1793055343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1935,18 +1946,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1926344656}
     - target: {fileID: 634787076, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: questsTotal
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 634787076, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: packageObject
-      value: 
-      objectReference: {fileID: 933205970424427501, guid: 58536f5c37cda264ebe32a38a61f0901, type: 3}
-    - target: {fileID: 634787076, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
-      propertyPath: raceTimeLimit
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 634787076, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
       propertyPath: RaceFinishLine
       value: 
       objectReference: {fileID: 540436463}
@@ -1978,6 +1977,14 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 701478026}
+    - target: {fileID: 1909587034, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
+      propertyPath: delayTwo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1909587034, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
+      propertyPath: keyPressPrompt
+      value: 
+      objectReference: {fileID: 1768504780}
     - target: {fileID: 2096245938, guid: 75ca05b963fa6ec4a8de9019a2984111, type: 3}
       propertyPath: playerController
       value: 

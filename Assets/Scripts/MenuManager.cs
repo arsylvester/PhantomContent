@@ -29,6 +29,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Text quote;
     [SerializeField] private Text dayCount;
     [SerializeField] private Text questCount;
+    [SerializeField] private Text keyPressPrompt;
     [SerializeField] private Camera camera;
     [SerializeField] AudioClip FirstDrumClip;
     [SerializeField] AudioClip YoooClip;
@@ -145,7 +146,11 @@ public class MenuManager : MonoBehaviour
         dayCount.gameObject.SetActive(true);
         quote.gameObject.SetActive(false); // too lazy to put this in start
         quoteHeader.gameObject.SetActive(false);
-        dayCount.text = "END OF DAY " + (day - 1);
+        keyPressPrompt.gameObject.SetActive(false);
+        if (QuestMaster.instance.questsComplete >= QuestMaster.instance.questsTotal)
+            dayCount.text = "END OF FINAL DAY";
+        else
+            dayCount.text = "END OF DAY " + (day - 1);
         questCount.text = "Quests Completed: " + QuestMaster.instance.questsComplete + "/" +
                           QuestMaster.instance.questsTotal;
         audio.PlayOneShot(FirstDrumClip);
@@ -158,15 +163,26 @@ public class MenuManager : MonoBehaviour
         string todaysQuote = m_QuoteManager.getQuote();
         quote.gameObject.SetActive(true);
         quoteHeader.gameObject.SetActive(true);
-        quote.text = todaysQuote;
+        if (QuestMaster.instance.questsComplete >= QuestMaster.instance.questsTotal)
+            quote.text = "good job";
+        else
+            quote.text = todaysQuote;
         audio.PlayOneShot(YoooClip);
         
         yield return new WaitForSecondsRealtime(delayTwo);
+        keyPressPrompt.gameObject.SetActive(true);
+        
+        while(!Input.anyKeyDown)
+        {
+            yield return null;
+        }
+        
         isEndOfDay = false;
         dayCount.gameObject.SetActive(false);
         quote.gameObject.SetActive(false);
         quoteHeader.gameObject.SetActive(false);
         dayEndScreen.SetActive(false);
+        keyPressPrompt.gameObject.SetActive(false);
 
         if (QuestMaster.instance.questsComplete >= QuestMaster.instance.questsTotal)
             SceneManager.LoadScene(2);

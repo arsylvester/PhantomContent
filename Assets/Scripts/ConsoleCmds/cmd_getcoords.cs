@@ -5,8 +5,11 @@ public class cmd_getcoords : ConsoleCommand
 {
     public override bool Process(string[] args)
     {
-        Debug.Log("thank you gamers");
-        GameObject.FindObjectOfType<ConsoleManager>().UpdateLog("thank you gamers");
+        PlayerController player = GameObject.FindObjectOfType<PlayerController>();
+        ConsoleManager console = GameObject.FindObjectOfType<ConsoleManager>();
+
+        console.UpdateLog("player's coordinates: " + player.transform.position);
+
         return true;
     }
 }
