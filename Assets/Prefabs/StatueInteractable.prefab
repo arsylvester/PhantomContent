@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3419b57eb638f44db88701b5b33b8af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Statue
+  characterName: Pontiff of the Lanes
   talkToNode: Statue
   scriptToLoad: {fileID: 2480198943629176163, guid: 2a7989b0fd3b18b4f943b5595b8ba141, type: 3}
   speakToClips:
