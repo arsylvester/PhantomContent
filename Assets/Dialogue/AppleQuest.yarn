@@ -4,7 +4,8 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("Apple") is false>>
-    Clementine: Hello! Please help me out here. My apple supply has run out, and I need them for self defense. 
+    Clementine: Hello! Please help me out here. My apple supply has run out. Can you get some for me?
+    <<get_player_response>>
 	Clementine: I knew you'd understand. 
     <<start_quest apple>>
     [[AppleExplained]]

@@ -140,14 +140,17 @@ public class PlayerController : MonoBehaviour
         if (m_InputHandler.GetEscDown())
             m_MenuManager.ToggleGamePaused();
         
-        if (transform.position.y < -200)
+        if (transform.position.y < -150)
             playerCam.transform.LookAt(statueLookAtPoint.transform);
-        
-        if (transform.position.y < -1000)
-            m_MenuManager.NextDay();
-        
-        if (transform.position.y < -1200)
+
+        if (transform.position.y < -1100 && !m_MenuManager.isEndOfDay)
+        {
             m_MenuManager.RunDayEndSequence();
+            return;
+        }
+        
+        if (transform.position.y < -800  && !m_MenuManager.isEndOfDay)
+            m_MenuManager.NextDay();
     }
 
     void PlayerMovement()
@@ -326,7 +329,7 @@ public class PlayerController : MonoBehaviour
             {
                 Transform objectHit = hit.transform;
                 var position = hit.transform.position;
-                m_Console.UpdateLog(objectHit.name + " [" + position.x + ", " + position.y + ", " + position.z + "]");
+                m_Console.UpdateLog("\"" + objectHit.name + "\" @ [" + Math.Truncate(position.x) + ", " + Math.Truncate(position.y) + ", " + Math.Truncate(position.z) + "]");
             }
         }
 

@@ -5,8 +5,8 @@ position: 594,-149
 ---
 <<if visited("Fish") is false>>
     River: Hey you, can you do me a favor?
-	<<get_player_response>>
 	River: Great, so my family is having a big cookout this weekend. We’d love to roll the dice on some sushi. Think you can bring us 5 fish?
+	<<get_player_response>>
     River: Wonderful! 
     <<start_quest fish>>
     [[FishExplained]]
