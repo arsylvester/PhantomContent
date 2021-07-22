@@ -3,7 +3,8 @@ tags:
 colorID: 0
 position: 594,-149
 ---
-Postman: Hi. Welcome to the Post Office. If you have a package we can deliver it.
+Postman: Hi. Welcome to the Post Office, where our motto is: "We'll deliver anything as long as it's not wet."
+Postman: If you have a package, we can deliver it.
 <<if $isDelivering is true>>
     [[DeliveryComplete]]
 <<endif>>
@@ -13,14 +14,14 @@ tags:
 colorID: 0
 position: 467,126
 ---
-Postman: Sorry this package is all wet. We can't deliver that.
+Postman: Sorry, this package is all wet--that goes against our company values. We can't deliver that.
 ===
 title: DeliveryComplete
 tags: 
 colorID: 0
 position: 467,126
 ---
-Postman: Great we can deliver that for Del.
+Postman: Great, this non-wet package is adequate. We'll deliver that for Del.
 <<set $isDelivering to false>>
 <<set $delivery_complete to true>>
 <<complete_quest delivery>>

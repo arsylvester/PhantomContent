@@ -6,7 +6,8 @@ position: 594,-149
 <<if visited("Race") is false>>
     Rex: I'm the fastest racer around! There is no one who can beat my time!
     <<get_player_response>>
-    Rex: Oh really? You think you can beat me? Fine, race to the top of the mountain with the post office and beat my time of <i>{$time_to_beat}</i> seconds!
+    Rex: Oh really? You think you can beat me? Fine.
+	Rex: Race to the post office at the top of the mountain and beat my time of <i>{$time_to_beat}</i> seconds!
     Rex: Ready. Set. GO!
     <<start_quest race>>
 <<endif>>
@@ -26,7 +27,7 @@ tags:
 colorID: 0
 position: 722,129
 ---
-Rex: I can't believe you beat my time!
+Rex: I can't believe you beat my time! I'm proud of you, champ. I guess I'll settle for second fastest.
 ===
 title: RaceFailed
 tags: 
@@ -41,9 +42,9 @@ tags:
 colorID: 0
 position: 467,126
 ---
-Rex: You couldn't beat my time. Want to try again?
+Rex: You couldn't beat my time before. Want to try again?
 <<get_player_response>>
-Rex: Race to the top of the mountain with the post office and beat my time of <i>{$time_to_beat}</i>!
+Rex: Let's see if you improved. Race to the post office at the top of the mountain and beat my time of <i>{$time_to_beat}</i> seconds!
 Rex: Ready. Set. GO!
 <<set $tryAgain to false>>
 <<start_quest race>>
