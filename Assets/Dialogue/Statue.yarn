@@ -4,7 +4,7 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("Statue") is false>>
-    Pontiff of the Lanes: Ahhh welcome! You have finally come to me for <b>help</b>. But did you know you can also use <b>~</b> to also get <b>help</b>.
+    Pontiff of the Lanes: Ahhh welcome! You have finally come to me for <b>help</b>. But you could have used <b>~</b> to get <b>help</b> too.
 <<endif>>
 <<generate_tip>>
 {$current_tip}

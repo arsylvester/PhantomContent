@@ -6,7 +6,7 @@ position: 594,-149
 <<if visited("Del") is false>>
     Del: Hey, could you do me a favor? Can you deliver this package to the post office?
     <<get_player_response>>
-    Del: Great, pick up the package beside me and please don't get it wet otherwise it will get ruined.
+    Del: Great! Pick up the package beside me.
     <<start_quest delivery>>
     <<spawn_package>>
     [[DelExplains]]
@@ -23,7 +23,7 @@ tags:
 colorID: 0
 position: 722,129
 ---
-Del: Deliver it to the post office in the mountains. Remember don't get it wet.
+Del: You can deliver it to the post office in the mountains. Please don't get it wet or the box will get ruined!
 ===
 title: DelFailed
 tags: 
@@ -32,12 +32,12 @@ position: 722,129
 ---
 <<spawn_package>>
 <<set $delivery_failed to false>>
-Del: You got it wet?? It's fine, I have another. Don't get it wet this time.
+Del: You got the box wet?? It's fine, I can send you off with a new box. Don't get it wet this time!
 ===
 title: DelHappy
 tags: 
 colorID: 0
 position: 467,126
 ---
-Del: Thanks for delivering that!
+Del: Thank you for delivering that! My old joints struggle to make it up the mountain these days. 
 ===

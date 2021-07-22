@@ -4,8 +4,8 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("Fish") is false>>
-    River: Hey you, can you do me a favor?
-	River: Great, so my family is having a big cookout this weekend. We’d love to roll the dice on some sushi. Think you can bring us 5 fish?
+    River: Hey there, I need a favor!
+	River: My family is having a big cookout this weekend, and we’d love to roll the dice on some sushi. Think you can bring us 5 fish?
 	<<get_player_response>>
     River: Wonderful! 
     <<start_quest fish>>
@@ -28,6 +28,6 @@ tags:
 colorID: 0
 position: 467,126
 ---
-River: You brought the fish! Thank you!
+River: You brought the fish! Thank you, my family is going to love these!
 <<complete_quest fish>>
 ===

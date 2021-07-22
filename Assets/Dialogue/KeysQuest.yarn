@@ -4,21 +4,21 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("Keys") is false>>
-    Carl: Hey! Thanks for letting me borrow your car! But uhhh...
-    Carl: I might have lost your keys...
+    Carl: Hey, thanks for letting me borrow your car! But uhhh...
+    Carl: I MAY have lost your keys...
     <<get_player_response>>
     <<if $hasKeys is true>>
-        Carl: Oh what really? You already found them? Oh thank goodness! Really glad you did!
+        Carl: Oh wait, really? You already found them?? Thank goodness! I'm glad all is well!
         <<complete_quest keys>>
     <<else>>
-        Carl: I'm pretty sure I lost them in an alleyway somewhere nearby.
+        Carl: I'm pretty sure I lost them in an alleyway somewhere nearby. Can you let me know if you find them?
         <<start_quest keys>>
     <<endif>>
 <<elseif $hasKeys is true>>
-    Carl: You found them? Oh thank goodness! Really glad you did!
+    Carl: You found the keys? That's awesome, I'm glad you can drive now!
     <<complete_quest keys>>
 <<else>>
-    Carl: Sorry about that again. I'm pretty sure I lost them in an alleyway somewhere nearby.
+    Carl: Sorry again for losing your keys. I'm pretty sure I lost them in an alley nearby.
 <<endif>>
 ===
 
