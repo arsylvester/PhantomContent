@@ -71,6 +71,7 @@ public class QuestMaster : MonoBehaviour
         raceQuestStep = (QuestStep)PlayerPrefs.GetInt("RaceStep");
         escortQuestStep = (QuestStep)PlayerPrefs.GetInt("EscortStep");
         deliveryQuestStep = (QuestStep)PlayerPrefs.GetInt("DeliveryStep");
+        carKeysQuestStep = (QuestStep)PlayerPrefs.GetInt("KeysStep");
 
         questsComplete = PlayerPrefs.GetInt("QuestsComplete");
         fish = PlayerPrefs.GetInt("fish");
@@ -100,6 +101,10 @@ public class QuestMaster : MonoBehaviour
         dialogueRunner.AddCommandHandler(
             "spawn_package",
             SpawnPackage
+        );
+        dialogueRunner.AddCommandHandler(
+            "return_camera",
+            ReturnCameraView
         );
     }
 
@@ -313,6 +318,8 @@ public class QuestMaster : MonoBehaviour
             storage.SetValue("$all_quests_complete", true);
         //Race
         storage.SetValue("$time_to_beat", raceTimeLimit);
+        if (raceQuestStep == QuestStep.Completed)
+            storage.SetValue("$race_win", true);
         //Fish
         if (fish >= fishNeeded)
         {
@@ -500,5 +507,11 @@ public class QuestMaster : MonoBehaviour
         PlayerPrefs.SetInt("keys", 1);
         PlayerPrefs.Save();
         carkeyUI.SetActive(true);
+    }
+
+    private void ReturnCameraView(string[] parameters, System.Action onComplete)
+    {
+        player.ReturnToNormalCam();
+        onComplete();
     }
 }

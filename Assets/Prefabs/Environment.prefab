@@ -1147,7 +1147,7 @@ GameObject:
   - component: {fileID: 881369324}
   - component: {fileID: 881369327}
   m_Layer: 0
-  m_Name: Terrain by Cam
+  m_Name: terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7772,14 +7772,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bd45346fa6e4a8439d1eae662f91cfe, type: 3}
---- !u!4 &543450653505778265 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4bd45346fa6e4a8439d1eae662f91cfe, type: 3}
-  m_PrefabInstance: {fileID: 228005298}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &919132149248567523 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4bd45346fa6e4a8439d1eae662f91cfe, type: 3}
+  m_PrefabInstance: {fileID: 228005298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &543450653505778265 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4bd45346fa6e4a8439d1eae662f91cfe, type: 3}
   m_PrefabInstance: {fileID: 228005298}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &229577117
@@ -9808,14 +9808,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93ea8e6a3ce7d05409dc0be80becc5fa, type: 3}
---- !u!1 &919132149476943932 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 93ea8e6a3ce7d05409dc0be80becc5fa, type: 3}
-  m_PrefabInstance: {fileID: 322688365}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &543450653411160710 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 93ea8e6a3ce7d05409dc0be80becc5fa, type: 3}
+  m_PrefabInstance: {fileID: 322688365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &919132149476943932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 93ea8e6a3ce7d05409dc0be80becc5fa, type: 3}
   m_PrefabInstance: {fileID: 322688365}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &326614023

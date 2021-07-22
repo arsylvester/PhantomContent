@@ -14,7 +14,7 @@ public class NPCQuoteGenerator : MonoBehaviour {
     public TextAsset jsonFile;
     public TextAsset jsonTips;
     public ArrayList uniqueQuotes = new ArrayList();
-    public ArrayList tipLists = new ArrayList();
+    public ArrayList tips = new ArrayList();
 
 
     public void Awake() {
@@ -45,7 +45,7 @@ public class NPCQuoteGenerator : MonoBehaviour {
 
         foreach (var t in tipsList.tips)
         {
-            tipLists.Add(t);
+            tips.Add(t);
         }
     }
 
@@ -68,14 +68,14 @@ public class NPCQuoteGenerator : MonoBehaviour {
     {
         string tip = "";
 
-        if (tipLists.Count <= 0)
+        if (tips.Count <= 0)
             buildQuoteList();
 
-        int index = Random.Range(0, tipLists.Count);
-        randTips q = (randTips)tipLists[index];
+        int index = Random.Range(0, tips.Count);
+        randTips q = (randTips)tips[index];
         uniqueQuotes.RemoveAt(index);
 
-        tip = playerController.characterName + ": " + q.tip;
+        tip = playerController.characterName + ": " + q.quote;
 
         storage.SetValue("$current_tip", tip);
     }
@@ -97,12 +97,12 @@ public class randQuote
 [System.Serializable]
 public class GameTips
 {
-    public randQuote[] tips;
+    public randTips[] tips;
 }
 
 [System.Serializable]
 public class randTips
 {
-    public string tip;
+    public string quote;
     public string author;
 }

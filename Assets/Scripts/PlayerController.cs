@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject statueLookAtPoint;
     [SerializeField] GameObject statueWarpPoint;
     private bool movementAllowed = true;
+    Quaternion previousCamAngle;
 
     [Header("Car")] [SerializeField] Image carOverlay; //Move this later
     [SerializeField] float carSpeed = 20f;
@@ -113,9 +114,13 @@ public class PlayerController : MonoBehaviour
 
         movementAllowed = true;
 
-        if (m_MenuManager.day > 1)
+        if (m_MenuManager.day > 1 && m_MenuManager.day < 500)
         {
             m_Console.UpdateLog("Are you having fun?");
+        }
+        else if(m_MenuManager.day >= 500)
+        {
+            m_Console.UpdateLog("Are you satisfied with your actions?");
         }
     }
 
@@ -140,14 +145,17 @@ public class PlayerController : MonoBehaviour
         if (m_InputHandler.GetEscDown())
             m_MenuManager.ToggleGamePaused();
         
-        if (transform.position.y < -200)
+        if (transform.position.y < -150)
             playerCam.transform.LookAt(statueLookAtPoint.transform);
-        
-        if (transform.position.y < -1000)
-            m_MenuManager.NextDay();
-        
-        if (transform.position.y < -1200)
+
+        if (transform.position.y < -1100 && !m_MenuManager.isEndOfDay)
+        {
             m_MenuManager.RunDayEndSequence();
+            return;
+        }
+        
+        if (transform.position.y < -800  && !m_MenuManager.isEndOfDay)
+            m_MenuManager.NextDay();
     }
 
     void PlayerMovement()
@@ -281,13 +289,14 @@ public class PlayerController : MonoBehaviour
                 {
                     movementAllowed = false;
                     transform.position = new Vector3(statueWarpPoint.transform.position.x, transform.position.y, statueWarpPoint.transform.position.z);
-                    Quaternion previousCamAngle = playerCam.transform.rotation;
+                    previousCamAngle = playerCam.transform.rotation;
                     playerCam.transform.LookAt(statueLookAtPoint.transform);
 
                     // activate dialogue
-
-                    playerCam.transform.rotation = previousCamAngle;
-                    movementAllowed = true;
+                    characterName = lookingAt.GetComponentInParent<NPC>().characterName;
+                    Dialogue.StartDialogue(lookingAt.GetComponentInParent<NPC>().GetTalkToNode());
+                    interactionText.SetText("");
+                    interactionText.enabled = false;
                 }
                 else if (lookingAt.type == InteractableObject.InteractableTypes.NPC)
                 {
@@ -326,7 +335,7 @@ public class PlayerController : MonoBehaviour
             {
                 Transform objectHit = hit.transform;
                 var position = hit.transform.position;
-                m_Console.UpdateLog(objectHit.name + " [" + position.x + ", " + position.y + ", " + position.z + "]");
+                m_Console.UpdateLog("\"" + objectHit.name + "\" @ [" + Math.Truncate(position.x) + ", " + Math.Truncate(position.y) + ", " + Math.Truncate(position.z) + "]");
             }
         }
 
@@ -522,5 +531,11 @@ public class PlayerController : MonoBehaviour
                 npc.SetExclamationPoint(false);
             }
         }
+    }
+
+    public void ReturnToNormalCam()
+    {
+        playerCam.transform.rotation = previousCamAngle;
+        movementAllowed = true;
     }
 }

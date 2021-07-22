@@ -35,7 +35,7 @@ public class StartMenu : MonoBehaviour
             SetVolume(0);
         
         if (!PlayerPrefs.HasKey("FOV"))
-            SetVolume(0);
+            SetFOV(60);
 
         if (!PlayerPrefs.HasKey("Day"))
         {

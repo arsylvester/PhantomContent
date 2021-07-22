@@ -4,8 +4,9 @@ colorID: 0
 position: 594,-149
 ---
 <<if visited("Statue") is false>>
-    The Wise Old Statue of The Lanes: Ahhh welcome! You have finally come to me for <b>help</b>. But did you know you can also use <b>~</b> to also get <b>help</b>.
+    Pontiff of the Lanes: Ahhh welcome! You have finally come to me for <b>help</b>. But did you know you can also use <b>~</b> to also get <b>help</b>.
 <<endif>>
 <<generate_tip>>
 {$current_tip}
+<<return_camera>>
 ===

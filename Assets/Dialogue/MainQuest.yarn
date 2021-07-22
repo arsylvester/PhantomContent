@@ -9,6 +9,7 @@ position: 594,-149
 	May N.: Can you please check in on your neighbors around the area and see what they need?
 	<<get_player_response>>
 	May N.: Amazing, I knew I could count on you!
+    May N.: If you ever feel stuck I found that the statue at the base of the mountain always gave me inspiration. 
     <<start_quest main>>
     [[MayExplains]]
 <<endif>>
