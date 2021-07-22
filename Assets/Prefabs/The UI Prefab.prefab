@@ -5627,6 +5627,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   storage: {fileID: 5284224110262466363}
   jsonFile: {fileID: 4900000, guid: 6bdeb0e8bfbb590438de9cc199b064eb, type: 3}
+  jsonTips: {fileID: 4900000, guid: 0f1dac60f7356b6438f5d9323330b3b5, type: 3}
 --- !u!1 &5284224110295204157
 GameObject:
   m_ObjectHideFlags: 0
