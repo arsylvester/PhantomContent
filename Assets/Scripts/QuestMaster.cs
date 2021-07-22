@@ -51,6 +51,8 @@ public class QuestMaster : MonoBehaviour
     [SerializeField] private GameObject appleUI;
     [SerializeField] private GameObject carkeyUI;
     [SerializeField] private GameObject packageUI;
+    [SerializeField] GameObject allQuestsDoneUI;
+    [SerializeField] float QuestDisplayTime = 8;
 
     public enum QuestStep
     {
@@ -304,6 +306,7 @@ public class QuestMaster : MonoBehaviour
         {
             print("ALL QUESTS COMPLETED!");
             storage.SetValue("$all_quests_complete", true);
+            StartCoroutine(DisplayFinishedText());
         }
         //print("Storage has: " + storage.GetValue("$all_quests_complete").AsBool);
         PlayerPrefs.SetInt("QuestsComplete", questsComplete);
@@ -513,5 +516,12 @@ public class QuestMaster : MonoBehaviour
     {
         player.ReturnToNormalCam();
         onComplete();
+    }
+
+    IEnumerator DisplayFinishedText()
+    {
+        allQuestsDoneUI.SetActive(true);
+        yield return new WaitForSecondsRealtime(QuestDisplayTime);
+        allQuestsDoneUI.SetActive(false);
     }
 }
