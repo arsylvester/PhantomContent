@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "set command", menuName = "Assets/Scripts/ConsoleCmds/set")]
 public class cmd_set : ConsoleCommand
 {
+    public static List<string> cmd_set_arguments = new List<string> { "time", "apples", "fish", "keys", "questscomplete"}; // this is hard coded and shouldn't be, but it's a game jam soooooo
     public override bool Process(string[] args)
     {
         ConsoleManager console = GameObject.FindObjectOfType<ConsoleManager>();

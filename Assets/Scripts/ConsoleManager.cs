@@ -178,11 +178,9 @@ public class ConsoleManager : MonoBehaviour
                     }
                 }
             }
-
             
             else if(command == "delete" || command == "tp")
             {
-                // fill in delete autofill here
                 foreach (string x in SpawnDictionaryBuilder.activeDictionary)
                 {
                     // check if argument matches any items in the itemDictionary
@@ -197,7 +195,23 @@ public class ConsoleManager : MonoBehaviour
                     }
                 }
             }
-            
+
+            else if(command == "set")
+            {
+                foreach (string x in cmd_set.cmd_set_arguments)
+                {
+                    // check if argument matches any items in the cmd_set_arguments
+                    if (x.IndexOf(arguments[0]) != 0)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        autoFill = command + " " + x;
+                        break;
+                    }
+                }
+            }
         }
 
         return autoFill;
