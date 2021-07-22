@@ -951,7 +951,7 @@ Bone.006
 Bone.001
 Bone
 Armature
-Alley
+Alley Yen
 Exclamation
 CharacterModel.001
 Bone.010_end
