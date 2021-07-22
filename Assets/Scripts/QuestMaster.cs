@@ -318,6 +318,8 @@ public class QuestMaster : MonoBehaviour
             storage.SetValue("$all_quests_complete", true);
         //Race
         storage.SetValue("$time_to_beat", raceTimeLimit);
+        if (raceQuestStep == QuestStep.Completed)
+            storage.SetValue("$race_win", true);
         //Fish
         if (fish >= fishNeeded)
         {
