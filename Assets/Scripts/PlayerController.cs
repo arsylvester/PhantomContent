@@ -275,7 +275,7 @@ public class PlayerController : MonoBehaviour
     {
         InteractableObject lookingAt = GetLookingAt();
 
-        if (m_InputHandler.GetSpaceBarDown())
+        if (m_InputHandler.GetSpaceBarDown() && !m_Console.isActive)
         {
             //Debug.Log("Space Bar Pressed");
             if (Dialogue.IsDialogueRunning)
@@ -345,22 +345,6 @@ public class PlayerController : MonoBehaviour
             m_Console.toggleFocus();
         }
     }
-    /*
-    public void CheckForNearbyNPC()
-    {
-        NPC target = allParticipants.Find(delegate (NPC p) {
-            return string.IsNullOrEmpty(p.talkToNode) == false && // has a conversation node?
-            (p.transform.position - this.transform.position).magnitude <= interactionRadius && // is in range?
-            true;
-        });
-        if (target != null)
-        {
-            Debug.Log("target not null");
-            // Kick off the dialogue at this node.
-            Dialogue.StartDialogue(target.talkToNode);
-        }
-    }
-    */
 
     public InteractableObject GetLookingAt()
     {

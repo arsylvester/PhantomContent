@@ -11,6 +11,7 @@ public class QuestMaster : MonoBehaviour
     public DialogueRunner dialogueRunner;
     public InMemoryVariableStorage storage;
     PlayerController player;
+    ConsoleManager console;
 
     QuestStep mainQuestStep;
     QuestStep fishQuestStep;
@@ -66,6 +67,7 @@ public class QuestMaster : MonoBehaviour
     {
         instance = this;
         player = FindObjectOfType<PlayerController>();
+        console = GameObject.FindObjectOfType<ConsoleManager>();
 
         mainQuestStep = (QuestStep)PlayerPrefs.GetInt("MainStep");
         fishQuestStep = (QuestStep)PlayerPrefs.GetInt("FishStep");
@@ -411,6 +413,7 @@ public class QuestMaster : MonoBehaviour
         raceTimeText.color = Color.green;
         RaceFinishLine.SetActive(false);
         StartCoroutine(DelayTextDisappear());
+        console.UpdateLog("Unbeknownst to player, Rex was secretly his older brother who ran away from home.");
     }
 
     IEnumerator DelayTextDisappear()
