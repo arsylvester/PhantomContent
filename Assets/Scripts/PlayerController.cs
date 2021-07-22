@@ -114,9 +114,13 @@ public class PlayerController : MonoBehaviour
 
         movementAllowed = true;
 
-        if (m_MenuManager.day > 1)
+        if (m_MenuManager.day > 1 && m_MenuManager.day < 500)
         {
             m_Console.UpdateLog("Are you having fun?");
+        }
+        else if(m_MenuManager.day >= 500)
+        {
+            m_Console.UpdateLog("Are you satisfied with your actions?");
         }
     }
 
