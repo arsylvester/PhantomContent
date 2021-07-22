@@ -5,11 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "set command", menuName = "Assets/Scripts/ConsoleCmds/set")]
 public class cmd_set : ConsoleCommand
 {
-    public static List<string> cmd_set_arguments = new List<string> { "time", "apples", "fish", "keys", "questscomplete"}; // this is hard coded and shouldn't be, but it's a game jam soooooo
+    public static List<string> cmd_set_arguments = new List<string> { "time", "apples", "fish", "keys", "questscomplete", "day"}; // this is hard coded and shouldn't be, but it's a game jam soooooo
     public override bool Process(string[] args)
     {
         ConsoleManager console = GameObject.FindObjectOfType<ConsoleManager>();
         PlayerController player = GameObject.FindObjectOfType<PlayerController>();
+        MenuManager mm = GameObject.FindObjectOfType<MenuManager>();
 
         if (args.Length < 2)
         {
@@ -17,7 +18,7 @@ public class cmd_set : ConsoleCommand
             return true;
         }
 
-        switch (args[0])
+        switch (args[0].ToLower())
         {
             case "apples":
                 QuestMaster.instance.SetApples(int.Parse(args[1]));
@@ -39,6 +40,10 @@ public class cmd_set : ConsoleCommand
                 int t = int.Parse(args[1]);
                 player.hours = t / 100;
                 player.minutes = t % 100;
+                break;
+            case "day":
+                int d = int.Parse(args[1]);
+                mm.SetDay(d);
                 break;
             default:
                 console.UpdateLog("variable " + args[0] + " not found.");

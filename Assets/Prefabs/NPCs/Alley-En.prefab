@@ -54,6 +54,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 67d8c3ac5a3f3d4438f2d555a8404c72, type: 2}
     - target: {fileID: 6884376012216261031, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
+      propertyPath: isMainNPC
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6884376012216261031, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: talkToNode
       value: Escort
       objectReference: {fileID: 0}
@@ -63,7 +67,7 @@ PrefabInstance:
       objectReference: {fileID: 2480198943629176163, guid: 8079133db02c580429d60a69b06ef35b, type: 3}
     - target: {fileID: 6884376012216261031, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: characterName
-      value: Alley-En
+      value: Ally Yen
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_RootOrder
@@ -71,15 +75,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.394653
+      value: 36.114
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 705.3641
+      value: 704.76
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 599.92035
+      value: 533.92
       objectReference: {fileID: 0}
     - target: {fileID: 8552605452453262970, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -111,7 +115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8554642678346947778, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
       propertyPath: m_Name
-      value: Alley-En
+      value: Ally Yen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 284e3ba574c0bdb4d99773ee6d516fe8, type: 3}
