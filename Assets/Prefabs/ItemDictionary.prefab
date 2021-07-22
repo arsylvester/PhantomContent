@@ -114,6 +114,7 @@ MonoBehaviour:
   - {fileID: 4005441191958707118, guid: f872ef5931cdc8845b2ccd94197c2259, type: 3}
   - {fileID: 966227514888949845, guid: 68532779857714c449282653fa1792d5, type: 3}
   - {fileID: 7810273875295336427, guid: 49f1fbea5cc64dd4eac622eb00372247, type: 3}
+  - {fileID: 933205970424427501, guid: 58536f5c37cda264ebe32a38a61f0901, type: 3}
   names:
   - trashcan
   - trashbags
@@ -185,3 +186,4 @@ MonoBehaviour:
   - FinishLine
   - Water
   - bed
+  - package

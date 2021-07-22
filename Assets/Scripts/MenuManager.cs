@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 
 public class MenuManager : MonoBehaviour
 {
-    private bool isEndOfDay = false;
+    public bool isEndOfDay = false;
     private bool isPaused = false;
 
     private QuoteManager m_QuoteManager;
@@ -62,7 +62,7 @@ public class MenuManager : MonoBehaviour
             SetVolume(0);
         
         if (!PlayerPrefs.HasKey("FOV"))
-            SetVolume(0);
+            SetFOV(60);
         
         if (!PlayerPrefs.HasKey("Day"))
             SetDay(1);
@@ -87,19 +87,22 @@ public class MenuManager : MonoBehaviour
         questTracker.gameObject.SetActive(true);
  
         string output = "quests complete: " + QuestMaster.instance.questsComplete + "/" + QuestMaster.instance.questsTotal;
-        output += "\n\ncurrent quests:\n";
+        string quests = "";
+        
         if (QuestMaster.instance.isQuestStarted("race"))
-            output += "\n race to the post office";
+            quests += "\n race to the post office";
         if (QuestMaster.instance.isQuestStarted("fish"))
-            output += "\n get five (5) fish";
+            quests += "\n get five (5) fish";
         if (QuestMaster.instance.isQuestStarted("apple"))
-            output += "\n get seven (7) apples";
+            quests += "\n get seven (7) apples";
         if (QuestMaster.instance.isQuestStarted("escort"))
-            output += "\n escort alley to field";
+            quests += "\n escort alley to field";
         if (QuestMaster.instance.isQuestStarted("delivery"))
-            output += "\n deliver the package without getting wet";
+            quests += "\n deliver the package without getting wet";
         if (QuestMaster.instance.isQuestStarted("keys"))
-            output += "\n find your car keys";
+            quests += "\n find your car keys";
+        if (quests != "")
+            output += ("\n\ncurrent quests:\n" + quests);
         
         questTracker.text = output;
     }
